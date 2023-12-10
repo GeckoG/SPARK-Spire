@@ -48,11 +48,11 @@ def register_user(request):
         return render(request, 'register.html', {'form':form})
     return render(request, 'register.html', {'form':form})
 
-def customer_record(request, pk):
+def individual_record(request, pk):
     if request.user.is_authenticated:
         # Lookup record
-        customer_record = Record.objects.get(id=pk)
-        return render(request, 'record.html', {'customer_record':customer_record})
+        individual_record = Record.objects.get(id=pk)
+        return render(request, 'record.html', {'individual_record':individual_record})
     else:
         messages.success(request, "You do not have permission to view that")
         return redirect('home')

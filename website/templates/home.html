@@ -11,10 +11,12 @@
     <thead class="table-dark">
       <tr>
         <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Phone</th>
-        <th scope="col">Address</th>
-        <th scope="col">Created At</th>
+        <th scope="col">Sport</th>
+        <th scope="col">Position</th>
+        <th scope="col">Assessment</th>
+        <th scope="col">Result</th>
+        <th scope="col">Notes</th>
+        <th scope="col">Date</th>
         <th scope="col">ID</th>
       </tr>
     </thead>
@@ -24,12 +26,11 @@
             <tr>
                 <td>{{ record.first_name }}
                 {{ record.last_name }}</td>
-                <td>{{ record.email }}</td>
-                <td>{{ record.phone }}</td>
-                <td>{{ record.address }}
-                {{ record.city }}
-                {{ record.state }}
-                {{ record.zipcode }}</td>
+                <td>{{ record.sport }}</td>
+                <td>{{ record.position }}</td>
+                <td>{{ record.assessment }}</td>
+                <td>{{ record.assessment_result }} {{ record.assessment_units }}</td>
+                <td>{{ record.assessment_notes }}</td>
                 <td>{{ record.created_at }}</td>
                 <td><a href="{% url 'record' record.id%}">{{ record.id }}</a></td>
             </tr>
