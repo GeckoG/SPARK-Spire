@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm, AddRecordForm
-from .models import Record
+from .models import Record, Position
 
 def home(request):
     records = Record.objects.all()
@@ -93,3 +93,8 @@ def update_record(request, pk):
     else:
         messages.success(request, "You do not have permission to do that")
         return redirect('home')
+    
+def load_positions(request):
+    sport_id = request.GET.get("sport")
+    positions = Position.objects.filter(sport_id=sport_id)
+    return render(request, "load_positions.html", {"positions": positions})

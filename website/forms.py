@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Record
+from .models import Record, Sport, Position
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Email Address'}))
@@ -33,8 +33,8 @@ class SignUpForm(UserCreationForm):
 class AddRecordForm(forms.ModelForm):
     first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "First Name", "class":"form-control"}), label="")
     last_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "Last Name", "class":"form-control"}), label="")
-    sport = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "Sport", "class":"form-control"}), label="")
-    position = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "Position", "class":"form-control"}), label="")
+    sport = forms.ModelChoiceField(required=True, queryset=Sport.objects.all(), widget=forms.Select(attrs={"hx-get": "/load_positions/", "hx-target": "#id_position"}))
+    position = forms.ModelChoiceField(required=False, queryset=Position.objects.none())
     assessment = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "Assessment", "class":"form-control"}), label="")
     assessment_result = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "Result", "class":"form-control"}), label="")
     assessment_units = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "Units", "class":"form-control"}), label="")
@@ -44,3 +44,10 @@ class AddRecordForm(forms.ModelForm):
         model = Record
         exclude = ("user",)
 
+    def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['position'].queryset = Position.objects.none()
+            
+            if 'sport' in self.data:
+                sport_id = int(self.data.get('sport'))
+                self.fields['position'].queryset = Position.objects.filter(sport_id=sport_id)
