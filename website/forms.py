@@ -51,3 +51,18 @@ class AddRecordForm(forms.ModelForm):
             if 'sport' in self.data:
                 sport_id = int(self.data.get('sport'))
                 self.fields['position'].queryset = Position.objects.filter(sport_id=sport_id)
+
+class AddSportForm(forms.ModelForm):
+    name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "Sport Name", "class":"form-control"}), label="")
+
+    class Meta:
+        model = Sport
+        exclude = ("user",)
+
+class AddPositionForm(forms.ModelForm):
+    sport = forms.ModelChoiceField(required=True, queryset=Sport.objects.all())
+    name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "Position Name", "class":"form-control"}), label="")
+
+    class Meta:
+        model = Position
+        exclude = ("user",)

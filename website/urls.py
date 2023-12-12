@@ -11,4 +11,5 @@ urlpatterns = [
     path('add_record/', views.add_record, name='add_record'),
     path('update_record/<int:pk>', views.update_record, name='update_record'),
     path('load_positions/', views.load_positions, name="load_positions"),
+    path('add_sport_position/', views.add_sport_position, name="add_sport_position"),
 ]

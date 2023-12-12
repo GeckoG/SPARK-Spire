@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-md-6 offset-md-3">
+    <br/>
+    <h2>Add a New Sport to the Database</h2>
+    <form method="POST" action="{% url 'add_sport_position' %}">
+        {% csrf_token %}
+        {{ form1.as_p }}
+    <br/>
+        <button class="btn btn-secondary">Add Sport</button>
+    </form>
+    <br/><br/>
+    <h2>Add a New Position to the Database</h2>
+    <form method="POST" action="{% url 'add_sport_position' %}">
+        {% csrf_token %}
+        {{ form2.as_p }}
+    <br/>
+        <button class="btn btn-secondary">Add Position</button>
+    </form>
+
+</div>
+{% endblock %}

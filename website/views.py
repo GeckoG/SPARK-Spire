@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import SignUpForm, AddRecordForm
+from .forms import SignUpForm, AddRecordForm, AddSportForm, AddPositionForm
 from .models import Record, Position
 
 def home(request):
@@ -98,3 +98,21 @@ def load_positions(request):
     sport_id = request.GET.get("sport")
     positions = Position.objects.filter(sport_id=sport_id)
     return render(request, "load_positions.html", {"positions": positions})
+
+def add_sport_position(request):
+    form1 = AddSportForm(request.POST, prefix='form1')
+    form2 = AddPositionForm(request.POST, prefix='form2')
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            if form1.is_valid():
+                add_sport = form1.save()
+                messages.success(request, "Sport Added")
+                return redirect('add_sport_position')
+            if form2.is_valid():
+                add_position = form2.save()
+                messages.success(request, "Position Added")
+                return redirect('add_sport_position')
+        return render(request, 'add_sport_position.html', {'form1':form1, 'form2':form2})
+    else:
+        messages.success(request, "You do not have permission to do that")
+        return redirect('home')
