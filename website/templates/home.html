@@ -43,21 +43,9 @@
 
 {% else %}
 
-<h1>Login</h1>
+<h1><center>Welcome to SPARK</center></h1>
+<h6><center>Spire Performance Assessment Record Keeper</center></h6>
 <br/>
-<form method="POST" action="{% url 'home' %}">
-    {% csrf_token %}
-        <div class="mb-3">
-          <input type="text" class="form-control" name="username" placeholder="Username" required>
-        </div>
-        <br/>
-        <div class="mb-3">
-          <input type="password" class="form-control" name="password" placeholder="Password" required>
-        </div>
-        <br/>
-        <button type="Login" class="btn btn-secondary">Submit</button>
-</form>
-</div>
-
+<h2><center>Please Log In</center></h2>
 {% endif %}
 {% endblock %}

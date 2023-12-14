@@ -23,8 +23,21 @@ def home(request):
     else:
         return render(request, 'home.html', {'records':records})
 
-#def login_user(request):
-#    pass
+def login_user(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        # Authenticate
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, "You have been logged in!")
+            return redirect('home')
+        else:
+            messages.success(request, "Incorrect username or password")
+            return redirect('home')
+    else:
+        return render(request, 'login.html')
 
 def logout_user(request):
     logout(request)
@@ -47,6 +60,8 @@ def register_user(request):
         form = SignUpForm()
         return render(request, 'register.html', {'form':form})
     return render(request, 'register.html', {'form':form})
+
+
 
 def individual_record(request, pk):
     if request.user.is_authenticated:
