@@ -1,0 +1,130 @@
+<!-- https://www.sliderrevolution.com/resources/bootstrap-profile/ -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+    <style>
+    body {
+        margin: 0 auto;
+        padding: 0;
+        background: #222;
+    }
+    
+    .left {
+        left: 25px;
+    }
+    
+    .right {
+        right: 25px;
+    }
+    
+    .center {
+        text-align: center;
+    }
+    
+    .bottom {
+        position: absolute;
+        bottom: 25px;
+    }
+    
+    #gradient {
+        background: #999955;
+        background-image: linear-gradient(#dad7cd 20%, #a3b18a 20%, #a3b18a 40%, #588157 40%, #588157 60%, #3a5a40 60%, #3a5a40 80%, #344e41 80%);
+        /* background-image: linear-gradient(#9F917D 20%, #7E8569 20%, #7E8569 40%, #5D7855 40%, #5D7855 60%, #3B6C41 60%, #3B6C41 80%, #1A5F2D 80%); */
+        /* background-image: linear-gradient(#A87F4D 20%, #7D8235 20%, #7D8235 40%, #537147 40%, #537147 60%, #264027 60%, #264027 80%, #0D1F22 80%); */
+        margin: 0 auto;
+        margin-top: 100px;
+        width: 100%;
+        height: 150px;
+    }
+    
+    #gradient:after {
+        content: "";
+        position: absolute;
+        background: #E9E2D0;
+        left: 50%;
+        margin-top: -67.5px;
+        margin-left: -270px;
+        padding-left: 20px;
+        border-radius: 5px;
+        width: 520px;
+        height: 275px;
+        z-index: -1;
+    }
+    
+    #card {
+        position: absolute;
+        width: 450px;
+        height: 225px;
+        padding: 25px;
+        padding-top: 0;
+        padding-bottom: 0;
+        left: 50%;
+        top: 137.5px;
+        margin-left: -237.5px;
+        background: #E9E2D0;
+        box-shadow: -20px 0 35px -25px black, 20px 0 35px -25px black;
+        z-index: 5;
+    }
+    
+    #card img {
+        width: 150px;
+        float: left;
+        border-radius: 5px;
+        margin-right: 20px;
+        -webkit-filter: sepia(1);
+        -moz-filter: sepia(1);
+        filter: sepia(1);
+    }
+    
+    #card h2 {
+
+        color: #333;
+        margin: 0 auto;
+        padding: 0;
+        font-size: 15pt;
+    }
+    
+    #card p {
+
+        color: #555;
+        font-size: 13px;
+    }
+    
+
+  </style>
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+    <div class="'container">
+    <br/>
+    {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+    {% endif %}
+
+    {% block content %}
+        <div id="gradient"></div>
+        <div id="card">
+        <!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/43604/profile/profile-512_1.jpg"/> -->
+        <h1><center>{{ profile.user.username }}</center></h1>
+        <p>{{ profile.bio }}</p>
+        <p>Interested in Web technologies like HTML5, CSS3, JavaScript, PHP, MySQL, etc.</p>
+        <p>Love Codepen.io and respect Chris Coyier. ;)</p>
+        <span class="left bottom">tel: 731 366 ***</span>
+        <span class="right bottom">adress: Czech Republic</span>
+        </div>
+    {% endblock %}
+    </div>
+  </body>
+</html>

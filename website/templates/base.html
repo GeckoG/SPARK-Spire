@@ -9,7 +9,10 @@
     <script src="https://unpkg.com/htmx.org@1.9.2"></script>
     <style>
       body {
-          background: linear-gradient( rgb(103, 143, 102), rgb(20, 16, 16));
+          /* background: linear-gradient( rgb(103, 143, 102), rgb(20, 16, 16)); */
+          background-image: url('{% static "Spire.jpg" %}');
+            background-repeat: no-repeat;
+            background-size: cover;
           justify-content: center;
           align-items: center;
           height: 100vh;
@@ -65,6 +68,20 @@
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
+        }
+        .mainContent {
+          /* margin-right: 277px; */
+          background-color: rgb(173, 187, 173);
+          border: 1px solid rgb(15, 15, 15);
+          -webkit-border-radius: 6px;
+          -moz-border-radius: 6px;
+          -khtml-border-radius: 6px;
+          border-radius: 6px;
+          -webkit-box-shadow: 0 0 12px rgba(0,0,0,.1);
+          -moz-box-shadow: 0 0 12px rgba(0,0,0,.1);
+          -khtml-box-shadow: 0 0 12px rgba(0,0,0,.1);
+          box-shadow: 0 0 12px rgba(0,0,0,.1);
+          padding: 0 20px;
         }
   </style>
   </head>

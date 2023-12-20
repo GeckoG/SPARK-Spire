@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import SignUpForm, AddRecordForm, AddSportForm, AddPositionForm
-from .models import Record, Position
+from .models import Record, Position, UserProfile
 
 def home(request):
     records = Record.objects.all()
-
     # Check to see if logging in
     if request.method == "POST":
         username = request.POST['username']
@@ -22,6 +22,11 @@ def home(request):
             return redirect('home')
     else:
         return render(request, 'home.html', {'records':records})
+
+def profile(request, username):
+    user = User.objects.get(username=username)
+    profile = user.userprofile  # Adjust the attribute based on your model structure
+    return render(request, 'profile.html', {'profile': profile})
 
 def login_user(request):
     if request.method == "POST":
@@ -39,16 +44,22 @@ def login_user(request):
     else:
         return render(request, 'login.html')
 
+
 def logout_user(request):
     logout(request)
     messages.success(request, "You have been logged out successfully")
     return redirect('home')
 
+
 def register_user(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+
+            # Create a user profile for the registered user
+            user_profile = UserProfile.objects.create(user=user)
+
             # Authenticate & login
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
@@ -63,6 +74,7 @@ def register_user(request):
 
 
 
+
 def individual_record(request, pk):
     if request.user.is_authenticated:
         # Lookup record
@@ -71,6 +83,7 @@ def individual_record(request, pk):
     else:
         messages.success(request, "You do not have permission to view that")
         return redirect('home')
+
 
 def delete_record(request, pk):
     if request.user.is_authenticated:
@@ -81,6 +94,7 @@ def delete_record(request, pk):
     else:
         messages.success(request, "You do not have permission to do that")
         return redirect('home')
+
 
 def add_record(request):
     form = AddRecordForm(request.POST or None)
@@ -95,6 +109,7 @@ def add_record(request):
         messages.success(request, "You do not have permission to do that")
         return redirect('home')
 
+
 def update_record(request, pk):
     if request.user.is_authenticated:
         current_record = Record.objects.get(id=pk)
@@ -108,11 +123,14 @@ def update_record(request, pk):
     else:
         messages.success(request, "You do not have permission to do that")
         return redirect('home')
-    
+
+
+
 def load_positions(request):
     sport_id = request.GET.get("sport")
     positions = Position.objects.filter(sport_id=sport_id)
     return render(request, "load_positions.html", {"positions": positions})
+
 
 def add_sport_position(request):
     form1 = AddSportForm(request.POST, prefix='form1')
