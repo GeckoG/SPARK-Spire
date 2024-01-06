@@ -16,6 +16,6 @@ dataBase = mysql.connector.connect(
 cursorObject = dataBase.cursor()
 
 # Create db
-cursorObject.execute("CREATE DATABASE backtrackstats")
+cursorObject.execute("CREATE DATABASE spark_spire")
 
-print("Database 'backtrackstats' Created")
+print("Database 'spark-spire' Created")

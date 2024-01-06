@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'dcrm.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'backtrackstats',
+        'NAME': 'spark_spire',
         'USER': 'root',
         'PASSWORD': 'Eequalsmc^2',
         'HOST': 'localhost',

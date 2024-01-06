@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .forms import SignUpForm, AddRecordForm, AddSportForm, AddPositionForm
+from .forms import SignUpForm, AddRecordForm, AddSportForm, AddPositionForm, ProfileForm
 from .models import Record, Position, UserProfile
 
 def home(request):
@@ -57,20 +57,34 @@ def register_user(request):
         if form.is_valid():
             user = form.save()
 
-            # Create a user profile for the registered user
-            user_profile = UserProfile.objects.create(user=user)
-
             # Authenticate & login
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
             login(request, user)
             messages.success(request, "You have successfully registered!")
-            return redirect('home')
+            return redirect('register2')
     else:
         form = SignUpForm()
         return render(request, 'register.html', {'form':form})
     return render(request, 'register.html', {'form':form})
+
+def register_userProfile(request):
+    if request.method == "POST":
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            messages.success(request, "Profile Created!")
+            return redirect('home')
+        else:
+            print("The form did not validate")
+            print(form.errors)
+    else:
+        form = ProfileForm()
+        return render(request, 'register2.html', {'form': form})
+    return render(request, 'register2.html', {'form': form})
 
 
 

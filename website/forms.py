@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Record, Sport, Position
+from .models import Record, Sport, Position, UserProfile
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Email Address'}))
@@ -30,27 +30,50 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].label = ''
         self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'	
 
-class AddRecordForm(forms.ModelForm):
-    first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "First Name", "class":"form-control"}), label="")
-    last_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "Last Name", "class":"form-control"}), label="")
+class ProfileForm(forms.ModelForm):
     sport = forms.ModelChoiceField(required=True, queryset=Sport.objects.all(), widget=forms.Select(attrs={"hx-get": "/load_positions/", "hx-target": "#id_position"}))
     position = forms.ModelChoiceField(required=False, queryset=Position.objects.none())
-    assessment = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "Assessment", "class":"form-control"}), label="")
-    assessment_result = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "Result", "class":"form-control"}), label="")
-    assessment_units = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "Units", "class":"form-control"}), label="")
-    assessment_notes = forms.CharField(required=False, widget=forms.widgets.TextInput(attrs={"placeholder": "Note", "class":"form-control"}), label="")
+    bio = forms.CharField(label="", max_length=500, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Bio'}))
+
+    class Meta:
+        model = UserProfile
+        fields = ('bio', 'sport', 'position')
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['position'].queryset = Position.objects.none()
+        
+        if 'sport' in self.data:
+            sport_id = int(self.data.get('sport'))
+            self.fields['position'].queryset = Position.objects.filter(sport_id=sport_id)
+
+class AddRecordForm(forms.ModelForm):
+    profile_username = forms.CharField(required=True, widget=forms.TextInput(attrs={"placeholder": "Username", "class": "form-control"}), label="")
+
+    assessment = forms.CharField(required=True, widget=forms.TextInput(attrs={"placeholder": "Assessment", "class": "form-control"}), label="")
+    assessment_result = forms.CharField(required=True, widget=forms.TextInput(attrs={"placeholder": "Result", "class": "form-control"}), label="")
+    assessment_units = forms.CharField(required=True, widget=forms.TextInput(attrs={"placeholder": "Units", "class": "form-control"}), label="")
+    assessment_notes = forms.CharField(required=False, widget=forms.TextInput(attrs={"placeholder": "Note", "class": "form-control"}), label="")
 
     class Meta:
         model = Record
-        exclude = ("user",)
+        exclude = ("user", "profile")
 
-    def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
-            self.fields['position'].queryset = Position.objects.none()
-            
-            if 'sport' in self.data:
-                sport_id = int(self.data.get('sport'))
-                self.fields['position'].queryset = Position.objects.filter(sport_id=sport_id)
+    def clean_profile_username(self):
+        username = self.cleaned_data.get('profile_username')
+        try:
+            user_profile = UserProfile.objects.get(user__username=username)
+        except UserProfile.DoesNotExist:
+            raise forms.ValidationError("User with this username does not exist.")
+        return user_profile
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.profile = self.cleaned_data['profile_username']
+        if commit:
+            instance.save()
+        return instance
+
 
 class AddSportForm(forms.ModelForm):
     name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "Sport Name", "class":"form-control"}), label="")
