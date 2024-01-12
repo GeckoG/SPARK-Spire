@@ -25,7 +25,7 @@ def home(request):
 
 def profile(request, username):
     user = User.objects.get(username=username)
-    profile = user.userprofile  # Adjust the attribute based on your model structure
+    profile = user.profile  # Adjust the attribute based on your model structure
     return render(request, 'profile.html', {'profile': profile})
 
 def login_user(request):

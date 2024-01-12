@@ -1,43 +1,145 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'home' %}">SPARK Dashboard</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+{% load static %}
+<style>
+		.nav-link {
+			color: lightgrey;
+		}
+
+
+		.hoverable{
+		display:inline-block;
+		backface-visibility: hidden;
+		vertical-align: middle;
+		position:relative;
+		box-shadow: 0 0 1px rgba(0,0,0,0);
+		tranform: translateZ(0);
+		transition-duration: .3s;
+		transition-property:transform;
+		}
+
+		.hoverable:before{
+		position:absolute;
+		pointer-events: none;
+		z-index:-1;
+		content: '';
+		top: 100%;
+		left: 5%;
+		height:10px;
+		width:90%;
+		opacity:0;
+		background: -webkit-radial-gradient(center, ellipse, rgba(255, 0, 0, 0.35) 0%, rgba(255, 0, 0, 0) 80%);
+		background: radial-gradient(ellipse at center, rgba(255, 0, 0, 0.35) 0%, rgba(255, 0, 0, 0) 80%);
+		/* W3C */
+		transition-duration: 0.3s;
+		transition-property: transform, opacity;
+		}
+
+		.hoverable:hover, .hoverable:active, .hoverable:focus{
+		transform: translateY(-5px);
+		}
+		.hoverable:hover, .hoverable:active {
+	    color: rgb(202, 0, 0);
+		}
+
+		.hoverable:hover:before, .hoverable:active:before, .hoverable:focus:before{
+		opacity: 1;
+		transform: translateY(-5px);
+		}
+
+
+
+		@keyframes bounce-animation {
+		16.65% {
+			-webkit-transform: translateY(8px);
+			transform: translateY(8px);
+		}
+
+		33.3% {
+			-webkit-transform: translateY(-6px);
+			transform: translateY(-6px);
+		}
+
+		49.95% {
+			-webkit-transform: translateY(4px);
+			transform: translateY(4px);
+		}
+
+		66.6% {
+			-webkit-transform: translateY(-2px);
+			transform: translateY(-2px);
+		}
+
+		83.25% {
+			-webkit-transform: translateY(1px);
+			transform: translateY(1px);
+		}
+
+		100% {
+			-webkit-transform: translateY(0);
+			transform: translateY(0);
+		}
+		}
+
+		.bounce {
+		animation-name: bounce-animation;
+		animation-duration: 2s;
+		}
+</style>
+
+
+
+
+<!-- <div>
+<nav class="navbar navbar-expand-lg custom-navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand mx-auto" href="{% url 'home' %}">
+      <img src="{% static 'logo.png' %}" alt="Logo">
+    </a>  
+    <div class="navbar-nav mr-auto">
           {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'add_record' %}">Add Record</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'add_sport_position' %}">Add Sport/Position</a>
-            </li>
-            <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Full Assessment Forms
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Energize (General)</a></li>
-              <li><a class="dropdown-item" href="#">Basketball</a></li>
-              <li><a class="dropdown-item" href="#">Swimming</a></li>
-              <li><a class="dropdown-item" href="#">Soccer</a></li>
-              <li><a class="dropdown-item" href="#">Wrestling</a></li>
-              <li><a class="dropdown-item" href="#">Lacrosse</a></li>
-            </ul>
-          </li>
+              <a id="len1" class="nav-link hoverable" href="{% url 'logout' %}">Logout</a>
+              <a id="len2" class="nav-link hoverable" href="{% url 'add_record' %}">Add Record</a>
+              <a id="len3" class="nav-link hoverable" href="{% url 'add_sport_position' %}">Add Sport/Position</a>
+              </div>
           {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'login' %}">Login</a>
-            </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="{% url 'register' %}">Register</a>
-            </li> -->
+              <a id="len5" class="nav-link hoverable" href="{% url 'login' %}">Login</a>
           {% endif %}
-        </ul>
       </div>
+  </div>
+</nav>
+</div> -->
+<div>
+  <a class="navbar-brand mx-auto" href="{% url 'home' %}">
+  <img src="{% static 'logo.png' %}" alt="Logo" style="height: 180px; display: block; margin-left: auto; margin-right: auto;">
+  </a>  
+  <div style="display: flex; justify-content: center;">
+    <div style="display: flex; ">
+      {% if user.is_authenticated %}
+        <a id="len1" class="nav-link hoverable" href="{% url 'logout' %}" style="margin-right: 20px;margin-top: 10px; margin-bottom: 10px;">Logout</a>
+        <a id="len2" class="nav-link hoverable" href="{% url 'add_record' %}" style="margin-right: 20px;margin-top: 10px; margin-bottom: 10px;">Add Record</a>
+        <a id="len3" class="nav-link hoverable" href="{% url 'add_sport_position' %}" style="margin-right: 20px;margin-top: 10px; margin-bottom: 10px;">Add Sport/Position</a>
+      {% else %}
+        <a id="len5" class="nav-link hoverable" href="{% url 'login' %}" style="margin-right: 20px;">Login</a>
+      {% endif %}
     </div>
-  </nav>
+  </div>
+</div>
+
+
+
+
+<script>
+  $(function(){
+    var str = '#len'; //increment by 1 up to 1-nelemnts
+    $(document).ready(function(){
+      var i, stop;
+      i = 1;
+      stop = 5; //num elements
+      setInterval(function(){
+        if (i > stop){
+          return;
+        }
+        $('#len'+(i++)).toggleClass('bounce');
+      }, 500)
+    });
+  });
+  </script>

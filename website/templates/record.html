@@ -6,8 +6,8 @@
         Individual Test Information
     </div>
     <div class="card-body">
-      <h5 class="card-title">{{ individual_record.first_name }} {{ individual_record.last_name }}</h5>
-      <p class="list-group-item">{{ individual_record.sport }} / {{ individual_record.position }} <br/>Test ID #{{ individual_record.id }}</p>
+      <h5 class="card-title">{{ individual_record.profile.user.first_name }} {{ individual_record.profile.user.last_name }}</h5>
+      <p class="list-group-item">{{ individual_record.profile.sport }} / {{ individual_record.profile.position }} <br/>Test ID #{{ individual_record.id }}</p>
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">This test was performed on {{ individual_record.created_at }}. </li>
