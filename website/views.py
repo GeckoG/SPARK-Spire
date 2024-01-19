@@ -40,7 +40,7 @@ def login_user(request):
             return redirect('home')
         else:
             messages.success(request, "Incorrect username or password")
-            return redirect('home')
+            return render(request, 'login.html')
     else:
         return render(request, 'login.html')
 

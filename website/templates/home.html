@@ -12,19 +12,16 @@
       body {
           /* background: linear-gradient( rgb(103, 143, 102), rgb(20, 16, 16)); */
           background: #100000;
+		  color: white;
           justify-content: center;
           align-items: center;
           height: 100vh;
       }
-      h1 {
-		  color: white;
-	  }
 	  p {
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 10px;
-            color: white;
         }
         /* <option> colors */
         option {
@@ -50,6 +47,18 @@
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
+        }
+
+        hr.gradient {
+          height: 3px;
+          border: none;
+          border-radius: 6px;
+          background: linear-gradient(
+            90deg,
+            rgb(255, 0, 0) 0%,
+            rgb(255, 255, 255) 51%,
+            rgb(255, 0, 0) 100%
+            );
         }
 
 		.nav-link {
@@ -250,6 +259,7 @@
 			</div>
 		</div>
     </div>
+
     <div class="container">
     <br/>
     {% if messages %}
@@ -266,6 +276,7 @@
 	<div>
 	
 	{% if user.is_authenticated %}
+	<hr class="gradient">
 	<h1>Recent Records</h1>
 	
 	<table class="table table-striped table-hover table-bordered">
@@ -285,7 +296,7 @@
 			{% if records %}
 				{% for record in records %}
 				<tr>
-					<td>{{ record.profile.user.first_name }} {{ record.profile.user.last_name }}</td>
+					<td><a href="{% url 'profile' record.profile.user.username%}">{{ record.profile.user.first_name }} {{ record.profile.user.last_name }}</a></td>
 					<td>{{ record.profile.sport }}</td>
 					<td>{{ record.profile.position }}</td>
 					<td>{{ record.assessment }}</td>
@@ -305,8 +316,8 @@
 	<h1><center>Welcome to SPARK</center></h1>
 	<h6><center>Sport Performance Assessment Record Keeper</center></h6>
 	<br/>
-	<h2><center>Only Approved Users can View Records</center></h2>
-	<center><a href="{% url 'login' %}"><button class="custom-btn btn-7"><span>Log In</span></button></a></center>
+	<center><a href="{% url 'login' %}"><button class="custom-btn btn-7"><span>Athlete Log In</span></button></a></center>
+	<center><a href=""><button class="custom-btn btn-7"><span>Coach Log In</span></button></a></center>
 
 	{% endif %}
 	{% endblock %}
