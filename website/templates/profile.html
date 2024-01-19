@@ -38,6 +38,7 @@
         /* background-image: linear-gradient(#dad7cd 20%, #a3b18a 20%, #a3b18a 40%, #588157 40%, #588157 60%, #3a5a40 60%, #3a5a40 80%, #344e41 80%); */
         /* background-image: linear-gradient(#9F917D 20%, #7E8569 20%, #7E8569 40%, #5D7855 40%, #5D7855 60%, #3B6C41 60%, #3B6C41 80%, #1A5F2D 80%); */
         /* background-image: linear-gradient(#A87F4D 20%, #7D8235 20%, #7D8235 40%, #537147 40%, #537147 60%, #264027 60%, #264027 80%, #0D1F22 80%); */
+        /* background-image: linear-gradient(#E8CFCF 20%, #EC9E9E 20%, #EC9E9E 40%, #EF6E6E 40%, #EF6E6E 60%, #F33D3D 60%, #F33D3D 80%, #F60C0C 80%); */
         background-image: linear-gradient(#E8CFCF 20%, #E09B9B 20%, #E09B9B 40%, #D86868 40%, #D86868 60%, #CF3434 60%, #CF3434 80%, #C70000 80%);
         margin: 0 auto;
         margin-top: 100px;
@@ -98,12 +99,23 @@
         font-size: 13px;
     }
     
+    .columns-container {
+    display: flex;
+    justify-content: space-between;
+    width: 80%; /* Adjust this value as needed */
+    margin: 0 auto;
+    }
 
+    .column {
+        flex: 1;
+        background-color: #E8CFCF; /* This will make the background of each column white */
+        border: 1px solid red; /* This will add a blue border around each column */
+    }
   </style>
   </head>
   <body>
     {% include 'navbar.html' %}
-    <div class="'container">
+    <div>
     <br/>
     {% if messages %}
       {% for message in messages %}
@@ -125,7 +137,43 @@
         <!-- <span class="left bottom">Sport: {{ profile.sport }}</span> -->
         <span class="right bottom">{{ profile.sport }} / {{ profile.position }}</span>
         </div>
+<br/><br/><br/><br/>
+        <div class="columns-container">
+            <div class="column">
+                <div class="content">
+                    <!-- Content for the first column -->
+                    <h2>Teams</h2>
+                    <br/><br/><br/>
+                </div>
+            </div>
+            <div class="column">
+                <div class="content">
+                    <!-- Content for the second column -->
+                    <h2>Recent Results</h2>
+                    <br/><br/><br/>
+                </div>
+            </div>
+            <div class="column">
+                <div class="content">
+                    <!-- Content for the third column -->
+                    <h2>Sport Stats</h2>
+                    <br/><br/><br/><br/><p>graph</p><br/><br/><br/><br/><br/><br/><br/><p>graph</p><br/><br/><br/><br/><br/><br/><p>graph</p><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                </div>
+            </div>
+        </div>
+        <div class="columns-container">
+            <div class="column" style="flex: 2;">
+                <!-- Content for the first column -->
+                <h2>Bigger Colunm</h2>
+            </div>
+            <div class="column">
+                <!-- Content for the second column -->
+                <h2>More Stats</h2>
+                <br/><br/><br/>
+            </div>
+        </div>
     {% endblock %}
     </div>
-  </body>
+    {% include 'footer.html' %}
+</body>
 </html>
