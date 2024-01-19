@@ -245,7 +245,7 @@
 </head>
 
 <body>
-    <div>
+    <!-- <div>
 		<a class="navbar-brand mx-auto" href="{% url 'home' %}">
 			<img src="{% static 'logo.png' %}" alt="Logo" style="height: 180px; display: block; margin-left: auto; margin-right: auto;">
 		</a>  
@@ -258,7 +258,20 @@
 				{% endif %}
 			</div>
 		</div>
-    </div>
+    </div> -->
+
+	
+	{% if user.is_authenticated %}
+		{% include 'navbar.html' %}
+		<hr class="gradient">
+	{% else %}
+		<div>
+			<a class="navbar-brand mx-auto" href="{% url 'home' %}">
+				<img src="{% static 'logo.png' %}" alt="Logo" style="height: 180px; display: block; margin-left: auto; margin-right: auto;">
+			</a>
+		</div>
+	{% endif %}
+	
 
     <div class="container">
     <br/>
@@ -276,7 +289,6 @@
 	<div>
 	
 	{% if user.is_authenticated %}
-	<hr class="gradient">
 	<h1>Recent Records</h1>
 	
 	<table class="table table-striped table-hover table-bordered">
