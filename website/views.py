@@ -126,14 +126,16 @@ def add_record(request):
 
 def update_record(request, pk):
     if request.user.is_authenticated:
-        current_record = Record.objects.get(id=pk)
-        form = AddRecordForm(request.POST or None, instance=current_record)
-        if form.is_valid():
-            form.save()
-            messages.info(request, "Record has been updated!")
-            newthing = str(current_record.id)
-            return redirect('/record/' + newthing)
-        return render(request, 'update_record.html', {'form':form})
+        record = Record.objects.get(pk=pk)
+        if request.method == 'POST':
+            form = AddRecordForm(request.POST, instance=record)
+            if form.is_valid():
+                form.save()
+                return redirect('record_list')
+        else:
+            form = AddRecordForm(instance=record)
+            form.fields['profile_username'].initial = record.profile.user.username
+            return render(request, 'update_record.html', {'form':form})
     else:
         messages.success(request, "You do not have permission to do that")
         return redirect('home')

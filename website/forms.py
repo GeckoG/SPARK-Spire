@@ -49,7 +49,6 @@ class ProfileForm(forms.ModelForm):
 
 class AddRecordForm(forms.ModelForm):
     profile_username = forms.CharField(required=True, widget=forms.TextInput(attrs={"placeholder": "Username", "class": "form-control"}), label="")
-
     assessment = forms.CharField(required=True, widget=forms.TextInput(attrs={"placeholder": "Assessment", "class": "form-control"}), label="")
     assessment_result = forms.CharField(required=True, widget=forms.TextInput(attrs={"placeholder": "Result", "class": "form-control"}), label="")
     assessment_units = forms.CharField(required=True, widget=forms.TextInput(attrs={"placeholder": "Units", "class": "form-control"}), label="")
