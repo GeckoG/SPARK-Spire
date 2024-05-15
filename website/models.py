@@ -25,12 +25,18 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+class Assessment(models.Model):
+    name = models.CharField(max_length=50)
+    units = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
 class Record(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
-    assessment = models.CharField(max_length=150)
+    assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE)
     assessment_result = models.CharField(max_length=50)
-    assessment_units = models.CharField(max_length=50)
     assessment_notes = models.CharField(max_length=500)
 
     def __str__(self):

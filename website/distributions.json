@@ -1,0 +1,42 @@
+{
+    "Height": {
+        "average": 166,
+        "stdev": 9.4
+    },
+    "Weight": {
+        "average": 62.7,
+        "stdev": 13.7
+    },
+    "Grip Strength": {
+        "average": 31.4,
+        "stdev": 8.6
+    },
+    "Sit & Reach": {
+        "average": 21.3,
+        "stdev": 8.2
+    },
+    "Vertical Jump": {
+        "average": 40.3,
+        "stdev": 7.1
+    },
+    "Peak Power Output": {
+        "average": 44.1,
+        "stdev": 8.7
+    },
+    "Isometric Mid-Thigh Pull": {
+        "average": 1688.6,
+        "stdev": 291.1
+    },
+    "40-Yard Dash": {
+        "average": 5.8,
+        "stdev": -0.4
+    },
+    "1.5 Mile Run": {
+        "average": 621,
+        "stdev": -92
+    },
+    "Pro Agility Drill": {
+        "average": 5.9,
+        "stdev": -0.4
+    }
+}

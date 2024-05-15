@@ -13,4 +13,30 @@
         <br/>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(function() {
+    $("#username").autocomplete({
+        source: "{% url 'get_usernames' %}"
+    });
+});
+</script>
+<script>
+    $(document).ready(function() {
+        $('#id_assessment').change(function() {
+            var selectedAssessmentId = $(this).val();
+            $.ajax({
+                url: '/get_assessment_units/',  // URL of your view that returns units for a given assessment id
+                data: {
+                    'assessment_id': selectedAssessmentId
+                },
+                success: function(data) {
+                    $('#id_assessment_units').val(data.units);
+                }
+            });
+        });
+    });
+    </script>
 {% endblock %}

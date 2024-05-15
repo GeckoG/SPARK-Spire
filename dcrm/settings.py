@@ -79,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'spark_spire',
         'USER': 'root',
-        'PASSWORD': 'Eequalsmc^2',
+        'PASSWORD': 'gecko9245',
         'HOST': 'localhost',
         'PORT': '3306',
             }

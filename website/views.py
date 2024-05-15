@@ -3,7 +3,25 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import SignUpForm, AddRecordForm, AddSportForm, AddPositionForm, ProfileForm
-from .models import Record, Position, UserProfile
+from .models import Record, Position, UserProfile, Assessment
+from django.http import JsonResponse
+from django.contrib.auth.models import User
+from django.views import View
+import json, os
+import scipy.stats as stats
+
+class GetAssessmentUnitsView(View):
+    def get(self, request, *args, **kwargs):
+        assessment_id = request.GET.get('assessment_id')
+        print(f"Received assessment_id: {assessment_id}")  # Debugging line
+        try:
+            assessment = Assessment.objects.get(id=assessment_id)
+            print(f"Found assessment: {assessment}")  # Debugging line
+            return JsonResponse({'units': assessment.units})
+        except Assessment.DoesNotExist:
+            print(f"No assessment found with id: {assessment_id}")  # Debugging line
+            return JsonResponse({'error': 'Invalid assessment id'}, status=400)
+
 
 def home(request):
     records = Record.objects.all()
@@ -26,7 +44,79 @@ def home(request):
 def profile(request, username):
     user = User.objects.get(username=username)
     profile = user.profile  # Adjust the attribute based on your model structure
-    return render(request, 'profile.html', {'profile': profile})
+    all_records = Record.objects.filter(profile=profile)
+
+    assessments = Assessment.objects.values('id', 'name', 'units').distinct()
+    assessments_requiring_min_value = [8, 9, 10]
+    data = []
+    for assessment in assessments:
+        records = Record.objects.filter(assessment=assessment['id'], profile=profile)
+        oldest = records.order_by('created_at').first()
+        newest = records.order_by('-created_at').first()
+        if assessment['id'] in assessments_requiring_min_value:
+            extreme = records.order_by('assessment_result').first()
+        else:
+            extreme = records.order_by('-assessment_result').first()
+        data.append({
+            'type': assessment['name'],
+            'units': assessment['units'],
+            'oldest': oldest,
+            'newest': newest,
+            'extreme': extreme,
+        })
+    
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    distributions_path = os.path.join(script_dir, 'distributions.json')
+    with open(distributions_path, 'r') as file:
+        distributions = json.load(file)
+
+    spirescore_current = []
+    for assessment in assessments:
+        if assessment['id'] not in [1, 2, 5, 7]:
+            # Extract average and standard deviation for the assessment distribution
+            average = distributions[assessment["name"]]["average"]
+            stdev = distributions[assessment["name"]]["stdev"]
+
+            # Given assessment value
+            current_value = 0
+            for item in data:
+                if item['type'] == assessment["name"]:
+                    current_value = item['newest'].assessment_result
+                    current_value = float(current_value)
+                    break
+
+            # Calculate z-score
+            z_score = (current_value - average) / stdev
+
+            # Calculate percentile using CDF
+            percentile = stats.norm.cdf(z_score) * 100
+            spirescore_current.append(percentile)
+
+    spirescore_baseline = []
+    for assessment in assessments:
+        if assessment['id'] not in [1, 2, 5, 7]:
+            # Extract average and standard deviation for the assessment distribution
+            average = distributions[assessment["name"]]["average"]
+            stdev = distributions[assessment["name"]]["stdev"]
+
+            # Given assessment value
+            baseline_value = 0
+            for item in data:
+                if item['type'] == assessment["name"]:
+                    baseline_value = item['oldest'].assessment_result
+                    baseline_value = float(baseline_value)
+                    break
+
+            # Calculate z-score
+            z_score = (baseline_value - average) / stdev
+
+            # Calculate percentile using CDF
+            percentile = stats.norm.cdf(z_score) * 100
+            spirescore_baseline.append(percentile)
+
+    return render(request, 'profile.html', {'profile': profile, 'records': data, 'spirescore_current': spirescore_current, 'spirescore_baseline': spirescore_baseline})
+
+
 
 def login_user(request):
     if request.method == "POST":
@@ -50,6 +140,9 @@ def logout_user(request):
     messages.success(request, "You have been logged out successfully")
     return redirect('home')
 
+def get_usernames(request):
+    usernames = User.objects.values_list('username', flat=True)
+    return JsonResponse(list(usernames), safe=False)
 
 def register_user(request):
     if request.method == "POST":
@@ -131,7 +224,7 @@ def update_record(request, pk):
             form = AddRecordForm(request.POST, instance=record)
             if form.is_valid():
                 form.save()
-                return redirect('record_list')
+                return redirect('/record/'+str(pk))
         else:
             form = AddRecordForm(instance=record)
             form.fields['profile_username'].initial = record.profile.user.username
@@ -140,7 +233,23 @@ def update_record(request, pk):
         messages.success(request, "You do not have permission to do that")
         return redirect('home')
 
-
+def add_battery(request):
+    form1 = AddSportForm(request.POST, prefix='form1')
+    form2 = AddPositionForm(request.POST, prefix='form2')
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            if form1.is_valid():
+                add_sport = form1.save()
+                messages.success(request, "Sport Added")
+                return redirect('add_sport_position')
+            if form2.is_valid():
+                add_position = form2.save()
+                messages.success(request, "Position Added")
+                return redirect('add_sport_position')
+        return render(request, 'add_sport_position.html', {'form1':form1, 'form2':form2})
+    else:
+        messages.success(request, "You do not have permission to do that")
+        return redirect('home')
 
 def load_positions(request):
     sport_id = request.GET.get("sport")
