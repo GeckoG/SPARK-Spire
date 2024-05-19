@@ -2,6 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from .models import Record, Sport, Position, UserProfile, Assessment
+from datetime import date
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Email Address'}))
@@ -58,8 +59,8 @@ class AddRecordForm(forms.ModelForm):
 
     class Meta:
         model = Record
-        fields = ('profile_username', 'assessment', 'assessment_result', 'assessment_units', 'assessment_notes')
-        exclude = ("user", "profile")
+        fields = ('profile_username', 'assessment', 'assessment_result', 'assessment_units', 'assessment_notes', 'age')
+        exclude = ("user", "profile", "age")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -67,7 +68,6 @@ class AddRecordForm(forms.ModelForm):
             assessment_id = int(self.data.get('assessment'))
             assessment = Assessment.objects.get(id=assessment_id)
             self.fields['assessment_units'].initial = assessment.units
-
 
     def clean_profile_username(self):
         username = self.cleaned_data.get('profile_username')
@@ -80,6 +80,14 @@ class AddRecordForm(forms.ModelForm):
     def save(self, commit=True):
         instance = super().save(commit=False)
         instance.profile = self.cleaned_data['profile_username']
+
+        # Calculate age based on birthdate and today's date
+        birthdate = instance.profile.birthdate
+        today = date.today()
+        age = today.year - birthdate.year - ((today.month, today.day) < (birthdate.month, birthdate.day))
+        
+        instance.age = age  # set the age
+
         if commit:
             instance.save()
         return instance

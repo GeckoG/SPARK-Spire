@@ -57,6 +57,10 @@ def profile(request, username):
             extreme = records.order_by('assessment_result').first()
         else:
             extreme = records.order_by('-assessment_result').first()
+        if oldest == None:
+            oldest = Record(assessment_result=0, id=0)
+            newest = Record(assessment_result=0, id=0)
+            extreme = Record(assessment_result=0, id=0)
         data.append({
             'type': assessment['name'],
             'units': assessment['units'],
@@ -184,6 +188,15 @@ def register_userProfile(request):
 
 def individual_record(request, pk):
     if request.user.is_authenticated:
+        if pk == 0:
+            messages.success(request, "Record does not exist")
+            referer = request.META.get('HTTP_REFERER')
+            # If there's a referring URL, redirect to it
+            if referer is not None:
+                return redirect(referer)
+            # If there's no referring URL, redirect to 'home'
+            else:
+                return redirect('home')
         # Lookup record
         individual_record = Record.objects.get(id=pk)
         return render(request, 'record.html', {'individual_record':individual_record})
@@ -193,7 +206,7 @@ def individual_record(request, pk):
 
 
 def delete_record(request, pk):
-    if request.user.is_authenticated:
+    if request.user.is_staff:
         delete_it = Record.objects.get(id=pk)
         delete_it.delete()
         messages.success(request, "Record has been deleted")
@@ -205,12 +218,12 @@ def delete_record(request, pk):
 
 def add_record(request):
     form = AddRecordForm(request.POST or None)
-    if request.user.is_authenticated:
+    if request.user.is_staff:
         if request.method == "POST":
             if form.is_valid():
                 add_record = form.save()
                 messages.success(request, "Record Added")
-                return redirect('home')
+                return redirect('add_record')
         return render(request, 'add_record.html', {'form':form})
     else:
         messages.success(request, "You do not have permission to do that")
@@ -218,7 +231,7 @@ def add_record(request):
 
 
 def update_record(request, pk):
-    if request.user.is_authenticated:
+    if request.user.is_staff:
         record = Record.objects.get(pk=pk)
         if request.method == 'POST':
             form = AddRecordForm(request.POST, instance=record)
@@ -236,7 +249,7 @@ def update_record(request, pk):
 def add_battery(request):
     form1 = AddSportForm(request.POST, prefix='form1')
     form2 = AddPositionForm(request.POST, prefix='form2')
-    if request.user.is_authenticated:
+    if request.user.is_staff:
         if request.method == "POST":
             if form1.is_valid():
                 add_sport = form1.save()

@@ -7,12 +7,12 @@
     </div>
     <div class="card-body">
       <h5 class="card-title">{{ individual_record.profile.user.first_name }} {{ individual_record.profile.user.last_name }}</h5>
-      <p class="list-group-item">{{ individual_record.profile.sport }} / {{ individual_record.profile.position }} <br/>Test ID #{{ individual_record.id }}</p>
+      <p class="list-group-item">Age {{individual_record.age}}<br/>{{ individual_record.profile.sport }} / {{ individual_record.profile.position }} <br/>Test ID #{{ individual_record.id }}</p>
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">This test was performed on {{ individual_record.created_at }}. </li>
       <li class="list-group-item"><strong>Test: </strong>{{ individual_record.assessment }}</li>
-      <li class="list-group-item"><strong>Result: </strong>{{ individual_record.assessment_result }} {{ individual_record.assessment_units }}</li>
+      <li class="list-group-item"><strong>Result: </strong>{{ individual_record.assessment_result }} {{ individual_record.assessment.units }}</li>
       <li class="list-group-item"><strong>Note: </strong>{{ individual_record.assessment_notes }}</li>
     </ul>
   </div>

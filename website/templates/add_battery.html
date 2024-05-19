@@ -4,7 +4,7 @@
     <div class="mainContent">
         <br/>
         <h2>Add a New Sport to the Database</h2>
-        <form method="POST" action="{% url 'add_sport_position' %}">
+        <form method="POST" action="{% url 'add_battery' %}">
             {% csrf_token %}
             {{ form1.as_p }}
         <br/>
@@ -12,7 +12,7 @@
         </form>
         <br/><br/>
         <h2>Add a New Position to the Database</h2>
-        <form method="POST" action="{% url 'add_sport_position' %}">
+        <form method="POST" action="{% url 'add_battery' %}">
             {% csrf_token %}
             {{ form2.as_p }}
         <br/>

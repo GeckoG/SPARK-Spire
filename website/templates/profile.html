@@ -132,7 +132,7 @@
         <div id="card">
         <h1><center>{{ profile.user.first_name }} {{ profile.user.last_name }}</center></h1>
         <h6><center>{{ profile.user.username }}</center></h6>
-        <img src="https://bearcatsports.com/images/2023/8/17/Matt_Goeckel.jpg"/>
+        <img src="{{ profile.picture }}"/>
         <p>{{ profile.bio }}</p>
         <!-- <span class="left bottom">Sport: {{ profile.sport }}</span> -->
         <span class="right bottom">{{ profile.sport }} / {{ profile.position }}</span>
@@ -222,7 +222,7 @@
         <div class="columns-container">
             <div class="column" style="flex: 2;">
                 <!-- Content for the first column -->
-                <h2>Bigger Colunm</h2>
+                <h2>Habit Tracking</h2>
             </div>
             <div class="column">
                 <!-- Content for the second column -->
