@@ -287,3 +287,19 @@ def add_sport_position(request):
     else:
         messages.success(request, "You do not have permission to do that")
         return redirect('home')
+    
+def update_profile(request, username):
+    user = User.objects.get(username=username)
+    profile = user.profile
+    if request.user == user:
+        if request.method == 'POST':
+            form = ProfileForm(request.POST, instance=profile)
+            if form.is_valid():
+                form.save()
+                return redirect('/profile/'+str(username))
+        else:
+            form = ProfileForm(instance=profile)
+            return render(request, 'update_profile.html', {'form':form})
+    else:
+        messages.success(request, "You cannot update another user's profile.")
+        return redirect('home')
