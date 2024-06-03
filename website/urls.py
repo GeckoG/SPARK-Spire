@@ -18,4 +18,5 @@ urlpatterns = [
     path('get_usernames/', views.get_usernames, name='get_usernames'),
     path('get_assessment_units/', views.GetAssessmentUnitsView.as_view(), name='get_assessment_units'),
     path('update_profile/<str:username>/', views.update_profile, name='update_profile'),
+    path('add_staff/', views.add_staff, name='add_staff'),
 ]

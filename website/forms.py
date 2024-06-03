@@ -32,14 +32,16 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'	
 
 class ProfileForm(forms.ModelForm):
+    GENDER_CHOICES = [('M', 'Male'), ('F', 'Female'), ('N', 'Prefer not to say')]
     sport = forms.ModelChoiceField(required=True, queryset=Sport.objects.all(), widget=forms.Select(attrs={"hx-get": "/load_positions/", "hx-target": "#id_position"}))
     position = forms.ModelChoiceField(required=False, queryset=Position.objects.none())
     bio = forms.CharField(label="", max_length=500, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Bio'}))
     birthdate = forms.DateField(label="Birthdate", widget=forms.DateInput(attrs={'class':'form-control', 'type':'date'},format='%Y-%m-%d'))
+    sex = forms.ChoiceField(choices=GENDER_CHOICES, widget=forms.Select(attrs={'class':'form-control'}))
 
     class Meta:
         model = UserProfile
-        fields = ('bio', 'sport', 'position', 'birthdate')
+        fields = ('bio', 'sport', 'position', 'birthdate', 'sex')
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -133,3 +135,39 @@ class AddBatteryForm(forms.ModelForm):
         if commit:
             instance.save()
         return instance
+    
+class AddStaffForm(forms.Form):
+    username = forms.CharField()
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            raise forms.ValidationError("User with this username does not exist.")
+        return username
+
+    def save(self):
+        username = self.cleaned_data.get('username')
+        user = User.objects.get(username=username)
+        user.is_staff = 1
+        user.save()
+        return user
+    
+class RemoveStaffForm(forms.Form):
+    username = forms.CharField()
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            raise forms.ValidationError("User with this username does not exist.")
+        return username
+
+    def save(self):
+        username = self.cleaned_data.get('username')
+        user = User.objects.get(username=username)
+        user.is_staff = 0
+        user.save()
+        return user

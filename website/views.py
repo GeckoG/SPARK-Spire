@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .forms import SignUpForm, AddRecordForm, AddSportForm, AddPositionForm, ProfileForm
+from .forms import SignUpForm, AddRecordForm, AddSportForm, AddPositionForm, ProfileForm, AddStaffForm, RemoveStaffForm
 from .models import Record, Position, UserProfile, Assessment
 from django.http import JsonResponse
 from django.contrib.auth.models import User
@@ -247,19 +247,19 @@ def update_record(request, pk):
         return redirect('home')
 
 def add_battery(request):
-    form1 = AddSportForm(request.POST, prefix='form1')
-    form2 = AddPositionForm(request.POST, prefix='form2')
+    form1 = AddRecordForm(request.POST, prefix='form1')
+    form2 = AddSportForm(request.POST, prefix='form2')
     if request.user.is_staff:
         if request.method == "POST":
             if form1.is_valid():
-                add_sport = form1.save()
+                add_form1 = form1.save()
                 messages.success(request, "Sport Added")
-                return redirect('add_sport_position')
+                return redirect('home')
             if form2.is_valid():
-                add_position = form2.save()
+                add_form2 = form2.save()
                 messages.success(request, "Position Added")
-                return redirect('add_sport_position')
-        return render(request, 'add_sport_position.html', {'form1':form1, 'form2':form2})
+                return redirect('home')
+        return render(request, 'add_battery.html', {'form1':form1, 'form2':form2})
     else:
         messages.success(request, "You do not have permission to do that")
         return redirect('home')
@@ -273,7 +273,7 @@ def load_positions(request):
 def add_sport_position(request):
     form1 = AddSportForm(request.POST, prefix='form1')
     form2 = AddPositionForm(request.POST, prefix='form2')
-    if request.user.is_authenticated:
+    if request.user.is_staff:
         if request.method == "POST":
             if form1.is_valid():
                 add_sport = form1.save()
@@ -302,4 +302,23 @@ def update_profile(request, username):
             return render(request, 'update_profile.html', {'form':form})
     else:
         messages.success(request, "You cannot update another user's profile.")
+        return redirect('home')
+    
+def add_staff(request):
+    form1 = AddStaffForm(request.POST, prefix='form1')
+    form2 = RemoveStaffForm(request.POST, prefix='form2')
+    staff_usernames = User.objects.filter(is_staff=True).values_list('username', flat=True)
+    if request.user.is_staff:
+        if request.method == "POST":
+            if form1.is_valid():
+                add_staff = form1.save()
+                messages.success(request, "User Added to Staff")
+                return redirect('add_staff')
+            if form2.is_valid():
+                remove_staff = form2.save()
+                messages.success(request, "User Removed from Staff")
+                return redirect('add_staff')
+        return render(request, 'add_staff.html', {'form1':form1, 'form2':form2, 'staff_usernames': staff_usernames})
+    else:
+        messages.success(request, "You do not have permission to do that")
         return redirect('home')

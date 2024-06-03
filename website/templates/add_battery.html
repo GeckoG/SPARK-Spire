@@ -3,20 +3,20 @@
 <div class="col-md-6 offset-md-3">
     <div class="mainContent">
         <br/>
-        <h2>Add a New Sport to the Database</h2>
+        <h2>Test 1</h2>
         <form method="POST" action="{% url 'add_battery' %}">
             {% csrf_token %}
             {{ form1.as_p }}
         <br/>
-            <button class="btn btn-secondary">Add Sport</button>
+            <button class="btn btn-secondary">Submit</button>
         </form>
         <br/><br/>
-        <h2>Add a New Position to the Database</h2>
+        <h2>Test 2</h2>
         <form method="POST" action="{% url 'add_battery' %}">
             {% csrf_token %}
             {{ form2.as_p }}
         <br/>
-            <button class="btn btn-secondary">Add Position</button>
+            <button class="btn btn-secondary">Submit</button>
         </form>
         <br/>
     </div>

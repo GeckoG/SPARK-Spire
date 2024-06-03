@@ -23,6 +23,7 @@ class UserProfile(models.Model):
     sport = models.ForeignKey(Sport, on_delete=models.CASCADE)
     position = models.ForeignKey(Position, on_delete=models.CASCADE, null=True)
     picture = models.CharField(max_length=500)
+    sex = models.CharField(max_length=1)
     
     def __str__(self):
         return self.user.username
