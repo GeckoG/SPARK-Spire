@@ -1,0 +1,7 @@
+#!/bin/bash
+
+#Root Directory of the project
+MAIN_DIR="/home/ubuntu/sparrk-spire"
+
+#Ownership of the root directory
+chown -R ubuntu:www-data ${MAIN_DIR}
