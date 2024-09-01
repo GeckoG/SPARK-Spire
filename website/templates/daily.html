@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .form-field label {
+        color: black; /* Sets the font color of labels to black */
+    }
+    .change-date-form {
+        width: 25%; /* Set the width of the form to 25% of the screen */
+        margin: auto; /* Center the form horizontally */
+    }
+    input[type='date'] {
+        background-color: rgba(194, 174, 60, 0.5);
+        text-align: center;
+    }
+</style>
+<div class="col-md-6 offset-md-3">
+    <div class="mainContent">
+        <div style="display: flex; justify-content: space-between;">
+            <a href="/daily/{{ user.username }}/{{ day_before }}">
+                <img src="/static/prev.png" style="max-width: 100px; height: auto;"/>
+            </a>
+            <h1 style="color: black;">{{ date }}</h1>
+            <a href="/daily/{{ user.username }}/{{ day_after }}">
+                <img src="/static/next.png" style="max-width: 100px; height: auto;"/>
+            </a>
+        </div>
+        
+        <form method="post" class="change-date-form">
+            {% csrf_token %}
+            {{ change_date_form.date }}
+            <button type="submit" name="change_date_submit">Change Date</button>
+        </form><br/>
+        <!-- <p>Username is {{ user }}</p> -->
+        <hr style="color: black;"/>
+        <center><h1 style="color: black; font-weight: bold;">Daily Entry</h1></center>
+        <hr style="color: black;"/>
+        <center><form method="post">
+            {% csrf_token %}
+            <div class="form-flex-container">
+                {% for field in dailyform %}
+                    {% if field.name == "soreness" %}
+                        <div class="section-header">
+                            <h2 style="color: black;">Recovery</h2>
+                        </div>
+                    {% elif field.name == "massage" %}
+                        <div class="section-header"></div>
+                    {% elif field.name == "hydration" %}
+                        <div class="section-header">
+                            <hr/><h2 style="color: black;">Nutrition</h2>
+                        </div>
+                    {% elif field.name == "no_sweets" %}
+                        <div class="section-header"></div>
+                    {% elif field.name == "stress" %}
+                        <div class="section-header">
+                            <hr/><h2 style="color: black;">Mental Training</h2>
+                        </div>
+                    {% elif field.name == "read" %}
+                        <div class="section-header"></div>
+                    {% elif field.name == "stretch" %}
+                        <div class="section-header">
+                            <hr/><h2 style="color: black;">Physical Training</h2>
+                        </div>
+                    {% elif field.name == "notes" %}
+                        <div class="section-header">
+                            <h2 style="color: black;">Notes</h2>
+                        </div>
+                    {% endif %}
+                    <div class="form-field">
+                        {{ field.label_tag }} {{ field }}
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="submit" name="daily_submit">Save Daily Form</button>
+        </form></center><br/>
+        </div>
+          <!-- https://static.coros.com/coros-traininghub-v2/images/training-feeling/1-active.png
+          https://static.coros.com/coros-traininghub-v2/images/training-feeling/2-active.png
+          https://static.coros.com/coros-traininghub-v2/images/training-feeling/3-active.png
+          https://static.coros.com/coros-traininghub-v2/images/training-feeling/4-active.png
+          https://static.coros.com/coros-traininghub-v2/images/training-feeling/5-active.png -->
+    </div>
+</div>
+{% endblock %}
+

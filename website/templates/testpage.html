@@ -1,0 +1,456 @@
+{% extends 'base.html' %}
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.0.2"></script>
+<div class="col-md-6 offset-md-3">
+    <div class="mainContent">
+        <br/>
+        <style>
+            .centered-box-container {
+                display: flex;
+                flex-wrap: wrap; /* Allows items to wrap to the next line if there's not enough room */
+                justify-content: center; /* Centers items horizontally */
+                align-items: center; /* Centers items vertically */
+                gap: 0px; /* Ensures there's no space between the boxes */
+            }
+
+            .background-box {
+                aspect-ratio: 1 / 1; /* Ensures the box is always square */
+                background-color: white;
+                padding: 4px;
+                /* box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); */
+                margin: 0; /* Removes space between boxes */
+                width: 15%;
+                max-width: 120px;
+                min-width: 80px;
+            }
+
+            .percentage-box {
+                display: flex; /* Makes .percentage-box a flex container */
+                justify-content: center; /* Centers children horizontally */
+                align-items: center; /* Centers children vertically */
+                flex-direction: column; /* Stacks children vertically */
+                padding: 5px; 
+                width: 100%;
+                height: 100%;
+                text-align: center; /* Centers text horizontally */
+            }
+        </style>
+        <center><h1 style="color: black;">Physical</h1></center>
+        <div class="centered-box-container">
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox">
+                    <center><h1>{{ percentage }}</h1></center>
+                    <center><h5>{{ label }}</h5></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox2">
+                    <center><h1>{{ percentage2 }}</h1></center>
+                    <center><h5>{{ label2 }}</h5></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox3">
+                    <center><h1>0.77</h1></center>
+                    <center><h6>Coordination</h6></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox4">
+                    <center><h1>0.89</h1></center>
+                    <center><h5>Balance</h5></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox5">
+                    <center><h1>0.34</h1></center>
+                    <center><h5>Speed</h5></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox6">
+                    <center><h1>0.76</h1></center>
+                    <center><h5>Agility</h5></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox7">
+                    <center><h1>0.05</h1></center>
+                    <center><h5>Oxygen</h5></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox8">
+                    <center><h1>{{ percentage2 }}</h1></center>
+                    <center><h5>Strength</h5></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox9">
+                    <center><h1>1.00</h1></center>
+                    <center><h5>Power</h5></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox10">
+                    <center><h1>0.50</h1></center>
+                    <center><h5>Reaction</h5></center>
+                </div>
+            </div>
+        </div>
+        <br/><hr/>
+        <center><h1 style="color: black;">Mental</h1></center>
+        <div class="centered-box-container">
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox11">
+                    <center><h1>{{ percentage }}</h1></center>
+                    <center><h5>Attitude</h5></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox12">
+                    <center><h1>{{ percentage2 }}</h1></center>
+                    <center><h5>Motivation</h5></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox13">
+                    <center><h1>0.77</h1></center>
+                    <center><h6>Read</h6></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox14">
+                    <center><h1>0.89</h1></center>
+                    <center><h5>Compliment</h5></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox15">
+                    <center><h1>0.34</h1></center>
+                    <center><h5>Focus</h5></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox16">
+                    <center><h1>0.76</h1></center>
+                    <center><h5>Visualize</h5></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox17">
+                    <center><h1>0.05</h1></center>
+                    <center><h5>Pray</h5></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox18">
+                    <center><h1>{{ percentage2 }}</h1></center>
+                    <center><h5>Laugh</h5></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox19">
+                    <center><h1>1.00</h1></center>
+                    <center><h5>Relax</h5></center>
+                </div>
+            </div>
+        </div>
+        <br/><hr/>
+        <center><h1 style="color: black;">Recovery</h1></center>
+        <canvas id="sleepChart" width="400" height="200"></canvas>
+        <div class="centered-box-container">
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox20">
+                    <center><h1>61%</h1></center>
+                    <center><h5>Foam Roll</h5></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox21">
+                    <center><h1>77%</h1></center>
+                    <center><h5>NormaTec</h5></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox22">
+                    <center><h1>4%</h1></center>
+                    <center><h6>Ice</h6></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox23">
+                    <center><h1>89%</h1></center>
+                    <center><h5>Altitude</h5></center>
+                </div>
+            </div>
+        </div>
+        <br/><hr/>
+        <center><h1 style="color: black;">Nutrition</h1></center>
+        <canvas id="waterChart" width="400" height="200"></canvas>
+        <div class="centered-box-container">
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox24">
+                    <center><h1>{{ percentage }}</h1></center>
+                    <center><h5>No Sweets</h5></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox25">
+                    <center><h1>{{ percentage2 }}</h1></center>
+                    <center><h5>B Alanine</h5></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox26">
+                    <center><h1>0.77</h1></center>
+                    <center><h6>Vitamin D</h6></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox27">
+                    <center><h1>0.89</h1></center>
+                    <center><h5>Creatine</h5></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox28">
+                    <center><h1>0.34</h1></center>
+                    <center><h5>Anti-Ox</h5></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox29">
+                    <center><h1>0.76</h1></center>
+                    <center><h5>Fruit</h5></center>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox30">
+                    <center><h1>0.05</h1></center>
+                    <center><h5>Veggie</h5></center>
+                </div>
+        </div>
+    </div>
+</div>
+<script>
+    function applyGradientStyles(elementId, percentage) {
+        const startColor = { r: 255, g: 0, b: 0 }; // Light red
+        const middleColor = { r: 255, g: 255, b: 0 }; // Light yellow
+        const endColor = { r: 119, g: 199, b: 136 }; // Light green
+        const startColor2 = { r: 151, g: 0, b: 0 }; // Dark red
+        const middleColor2 = { r: 151, g: 128, b: 0 }; // Dark yellow
+        const endColor2 = { r: 0, g: 151, b: 0 }; // Dark green
+
+        let color;
+        if (percentage <= 0.5) {
+            // Interpolate between startColor and middleColor
+            const factor = percentage * 2;
+            color = {
+                r: Math.round(startColor.r + (middleColor.r - startColor.r) * factor),
+                g: Math.round(startColor.g + (middleColor.g - startColor.g) * factor),
+                b: Math.round(startColor.b + (middleColor.b - startColor.b) * factor),
+            };
+        } else {
+            // Interpolate between middleColor and endColor
+            const factor = (percentage - 0.5) * 2;
+            color = {
+                r: Math.round(middleColor.r + (endColor.r - middleColor.r) * factor),
+                g: Math.round(middleColor.g + (endColor.g - middleColor.g) * factor),
+                b: Math.round(middleColor.b + (endColor.b - middleColor.b) * factor),
+            };
+        }
+
+        let color2;
+        if (percentage <= 0.5) {
+            // Interpolate between startColor and middleColor
+            const factor = percentage * 2;
+            color2 = {
+                r: Math.round(startColor2.r + (middleColor2.r - startColor2.r) * factor),
+                g: Math.round(startColor2.g + (middleColor2.g - startColor2.g) * factor),
+                b: Math.round(startColor2.b + (middleColor2.b - startColor2.b) * factor),
+            };
+        } else {
+            // Interpolate between middleColor and endColor
+            const factor = (percentage - 0.5) * 2;
+            color2 = {
+                r: Math.round(middleColor2.r + (endColor2.r - middleColor2.r) * factor),
+                g: Math.round(middleColor2.g + (endColor2.g - middleColor2.g) * factor),
+                b: Math.round(middleColor2.b + (endColor2.b - middleColor2.b) * factor),
+            };
+        }
+
+        const rgbaColor = `rgba(${color.r}, ${color.g}, ${color.b}, 0.33)`; // For background with transparency
+        const rgbColor = `rgb(${color2.r}, ${color2.g}, ${color2.b})`; // For text, border, and shadow
+
+        const box = document.getElementById(elementId);
+        box.style.backgroundColor = rgbaColor;
+        box.style.color = rgbColor; // Set text color
+        box.style.borderColor = rgbColor; // Set border color
+        box.style.boxShadow = `0px 0px 5px ${rgbColor}`; // Set shadow
+    }
+
+    // Apply to specific elements
+    applyGradientStyles('percentageBox', {{ percentage }});
+    applyGradientStyles('percentageBox2', {{ percentage2 }});
+    applyGradientStyles('percentageBox3', .77);
+    applyGradientStyles('percentageBox4', .89);
+    applyGradientStyles('percentageBox5', .34);
+    applyGradientStyles('percentageBox6', .76);
+    applyGradientStyles('percentageBox7', .05);
+    applyGradientStyles('percentageBox8', {{ percentage2 }});
+    applyGradientStyles('percentageBox9', 1.0);
+    applyGradientStyles('percentageBox10', .50);
+    applyGradientStyles('percentageBox11', {{ percentage }});
+    applyGradientStyles('percentageBox12', {{ percentage2 }});
+    applyGradientStyles('percentageBox13', .77);
+    applyGradientStyles('percentageBox14', .89);
+    applyGradientStyles('percentageBox15', .34);
+    applyGradientStyles('percentageBox16', .76);
+    applyGradientStyles('percentageBox17', .05);
+    applyGradientStyles('percentageBox18', {{ percentage2 }});
+    applyGradientStyles('percentageBox19', 1.0);
+    applyGradientStyles('percentageBox20', .50);
+    applyGradientStyles('percentageBox21', {{ percentage }});
+    applyGradientStyles('percentageBox22', {{ percentage2 }});
+    applyGradientStyles('percentageBox23', .77);
+    applyGradientStyles('percentageBox24', .89);
+    applyGradientStyles('percentageBox25', .34);
+    applyGradientStyles('percentageBox26', .76);
+    applyGradientStyles('percentageBox27', .05);
+    applyGradientStyles('percentageBox28', {{ percentage2 }});
+    applyGradientStyles('percentageBox29', 1.0);
+    applyGradientStyles('percentageBox30', .50);
+</script>
+
+<script>        // Water Chart
+    const data = {
+        labels: ['2023-04-01', '2023-04-02', '2023-04-03', '2023-04-04', '2023-04-05', '2023-04-06', '2023-04-07'],
+        datasets: [{
+            label: 'Water Intake',
+            data: [120, 119, 83, 85, 112, 103, 90],
+            fill: true,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)' // Adjust for shading
+        }]
+    };
+
+    const config = {
+        type: 'line',
+        data: data,
+        options: {
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'day'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Date'
+                    }
+                },
+                y: {
+                    beginAtZero: false,
+                    min: 25, // Set y scale from 25
+                    max: 175, // to 175
+                    title: {
+                        display: true,
+                        text: 'Ounces'
+                    }
+                }
+            },
+            plugins: {
+                annotation: {
+                    annotations: {
+                        line1: {
+                            type: 'line',
+                            yMin: 100,
+                            yMax: 100,
+                            borderColor: 'rgb(0, 99, 132)',
+                            borderWidth: 2,
+                            borderDash: [10, 5],
+                            label: {
+                                enabled: true,
+                                content: 'Target'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    const waterChart = new Chart(
+        document.getElementById('waterChart'),
+        config
+    );
+</script>
+<script>        // Sleep Chart
+    const sleep_data = {
+        labels: ['2023-04-01', '2023-04-02', '2023-04-03', '2023-04-04', '2023-04-05', '2023-04-06', '2023-04-07'],
+        datasets: [{
+            label: 'Sleep',
+            data: [7, 9.25, 9, 8.5, 9, 8.25, 9],
+            fill: true,
+            borderColor: 'rgb(133, 31, 192)',
+            tension: 0.1,
+            backgroundColor: 'rgba(133, 31, 192, 0.2)' // Adjust for shading
+        }]
+    };
+
+    const sleep_config = {
+        type: 'line',
+        data: sleep_data,
+        options: {
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'day'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Date'
+                    }
+                },
+                y: {
+                    beginAtZero: false,
+                    min: 4, // Set y scale from 4
+                    max: 12, // to 12
+                    title: {
+                        display: true,
+                        text: 'Hours'
+                    }
+                }
+            },
+            plugins: {
+                annotation: {
+                    annotations: {
+                        line1: {
+                            type: 'line',
+                            yMin: 8,
+                            yMax: 8,
+                            borderColor: 'rgb(56, 30, 72)',
+                            borderWidth: 2,
+                            borderDash: [10, 5],
+                            label: {
+                                enabled: true,
+                                content: 'Target'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    const sleepChart = new Chart(
+        document.getElementById('sleepChart'),
+        sleep_config
+    );
+</script>
+{% endblock %}

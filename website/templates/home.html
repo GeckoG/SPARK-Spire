@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load static %}
     <title>SPIRE Assessments</title>
+	<link rel="icon" href="/static/favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/htmx.org@1.9.2"></script>
     <style>
       body {
-          /* background: linear-gradient( rgb(103, 143, 102), rgb(20, 16, 16)); */
           background: #100000;
 		  color: white;
           justify-content: center;
@@ -58,6 +58,10 @@
             rgb(255, 0, 0) 0%,
             rgb(255, 255, 255) 51%,
             rgb(255, 0, 0) 100%
+			/* BACKTRACK COLORS
+			rgb(255, 217, 0) 0%,
+            rgb(255, 255, 255) 51%,
+            rgb(255, 217, 0) 100% */
             );
         }
 
@@ -89,6 +93,9 @@
 		opacity:0;
 		background: -webkit-radial-gradient(center, ellipse, rgba(255, 0, 0, 0.35) 0%, rgba(255, 0, 0, 0) 80%);
 		background: radial-gradient(ellipse at center, rgba(255, 0, 0, 0.35) 0%, rgba(255, 0, 0, 0) 80%);
+		/* BACKTRACK COLORS
+		background: -webkit-radial-gradient(center, ellipse, rgba(255, 217, 0, 0.35) 0%, rgba(255, 217, 0, 0) 80%);
+		background: radial-gradient(ellipse at center, rgba(255, 217, 0, 0.35) 0%, rgba(255, 217, 0, 0) 80%); */
 		/* W3C */
 		transition-duration: 0.3s;
 		transition-property: transform, opacity;
@@ -99,6 +106,7 @@
 		}
 		.hoverable:hover, .hoverable:active {
 	    color: rgb(202, 0, 0);
+		/*color: rgb(202, 172, 0); */
 		}
 
 		.hoverable:hover:before, .hoverable:active:before, .hoverable:focus:before{
@@ -170,6 +178,7 @@
 		/* 7 */
 		.btn-7 {
 			background: linear-gradient(0deg, rgb(192, 15, 3) 0%, rgb(251, 2, 2) 100%);
+			/*background: linear-gradient(0deg, rgb(226, 174, 5) 0%, rgb(233, 199, 3) 100%); */
 			line-height: 42px;
 			padding: 0;
 			border: none;
@@ -187,6 +196,8 @@
 			right: 0;
 			bottom: 0;
 			background: rgb(251, 2, 2);
+			/* BACKTRACK COLORS
+			background: rgb(251, 226, 2); */
 			box-shadow:
 			-7px -7px 20px 0px rgba(255,255,255,.9),
 			-4px -4px 5px 0px rgba(255,255,255,.9),
@@ -204,6 +215,7 @@
 		}
 		.btn-7:hover{
 			color: rgb(251, 2, 2);
+			/* color: rgb(251, 214, 2); */
 			background: transparent;
 		}
 		.btn-7:hover:before {
@@ -219,6 +231,7 @@
 			left: 0;
 			top: 0;
 			background: rgb(251, 2, 2);
+			/* background: rgb(251, 226, 2); */
 			box-shadow:
 			-7px -7px 20px 0px rgba(255,255,255,.9),
 			-4px -4px 5px 0px rgba(255,255,255,.9),

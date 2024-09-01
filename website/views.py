@@ -1,12 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .forms import SignUpForm, AddRecordForm, AddSportForm, AddPositionForm, ProfileForm, AddStaffForm, RemoveStaffForm
-from .models import Record, Position, UserProfile, Assessment
+from .forms import SignUpForm, AddRecordForm, AddSportForm, AddPositionForm, ProfileForm, AddStaffForm, RemoveStaffForm, DailyForm, ChangeDateForm
+from .models import Record, Position, UserProfile, Assessment, Daily
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.views import View
+from datetime import datetime, timedelta
 import json, os
 import scipy.stats as stats
 
@@ -246,24 +247,6 @@ def update_record(request, pk):
         messages.success(request, "You do not have permission to do that")
         return redirect('home')
 
-def add_battery(request):
-    form1 = AddRecordForm(request.POST, prefix='form1')
-    form2 = AddSportForm(request.POST, prefix='form2')
-    if request.user.is_staff:
-        if request.method == "POST":
-            if form1.is_valid():
-                add_form1 = form1.save()
-                messages.success(request, "Sport Added")
-                return redirect('home')
-            if form2.is_valid():
-                add_form2 = form2.save()
-                messages.success(request, "Position Added")
-                return redirect('home')
-        return render(request, 'add_battery.html', {'form1':form1, 'form2':form2})
-    else:
-        messages.success(request, "You do not have permission to do that")
-        return redirect('home')
-
 def load_positions(request):
     sport_id = request.GET.get("sport")
     positions = Position.objects.filter(sport_id=sport_id)
@@ -322,3 +305,63 @@ def add_staff(request):
     else:
         messages.success(request, "You do not have permission to do that")
         return redirect('home')
+    
+def daily(request, username, date):
+    user = User.objects.get(username=username)
+    profile = user.profile
+    # Convert the date string to a date object
+    date_obj = datetime.strptime(date, '%Y-%m-%d').date()  # Adjust the format '%Y-%m-%d' as needed
+    
+    # Calculate the day before and the day after
+    day_before = date_obj - timedelta(days=1)
+    day_after = date_obj + timedelta(days=1)
+    
+    # Convert day_before and day_after back to strings
+    day_before = day_before.strftime('%Y-%m-%d')
+    day_after = day_after.strftime('%Y-%m-%d')
+    
+    daily, created = Daily.objects.get_or_create(profile_id=profile.id, date=date_obj)
+    change_date_form = None
+
+    change_date_form = ChangeDateForm(request.POST or None)
+    dailyform = DailyForm(request.POST or None, instance=daily)
+
+    if request.method == 'POST':
+        if 'change_date_submit' in request.POST:
+            print("Code execution entered the change_date_submit block", flush=True)
+            if change_date_form.is_valid():
+                date = change_date_form.cleaned_data['date']
+                # Construct the URL path and redirect
+                return redirect(f'/daily/{username}/{date.strftime("%Y-%m-%d")}')
+        elif 'daily_submit' in request.POST:
+            print("Code execution reached the placeholder")
+            if dailyform.is_valid():
+                print("Daily form is valid")
+                try:
+                    daily_instance = dailyform.save(commit=False)
+                    daily_instance.profile = profile
+                    daily_instance.date = date_obj
+                    daily_instance.save()
+                    return redirect(f'/daily/{username}/{date.strftime("%Y-%m-%d")}')
+                except Exception as e:
+                    print(f"Error saving daily instance: {e}")
+            else:
+                print(f"Daily form errors: {dailyform.errors}")
+        else:
+            print("Code execution reached the else block")
+
+    # Assuming you want to use these variables in your template or further in your function
+    #daily = Daily.objects.get(profile=profile, date=date_obj)
+    return render(request, 'daily.html', {
+        'dailyform': dailyform, 
+        'day_before': day_before, 
+        'day_after': day_after, 
+        'date': date, 
+        'change_date_form': change_date_form})
+
+def testpage(request):
+    percentage = 0.61
+    percentage2 = 0.04
+    label = "Stretch"
+    label2 = "Mobility"
+    return render(request, 'testpage.html', {'percentage': percentage, 'percentage2': percentage2, 'label': label, 'label2': label2})

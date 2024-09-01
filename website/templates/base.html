@@ -89,12 +89,18 @@
             rgb(255, 0, 0) 0%,
             rgb(255, 255, 255) 51%,
             rgb(255, 0, 0) 100%
+            /* BACKTRACK COLORS
+            rgb(255, 217, 0) 0%,
+            rgb(255, 255, 255) 51%,
+            rgb(255, 217, 0) 100% */
             );
         }
 
         .mainContent {
           /* margin-right: 277px; */
           background-color: rgb(187, 159, 169);
+          /* BACKTRACK COLORS
+          background-color: rgb(187, 179, 159); */
           border: 1px solid rgb(15, 15, 15);
           -webkit-border-radius: 6px;
           -moz-border-radius: 6px;
@@ -106,6 +112,242 @@
           box-shadow: 0 0 12px rgba(0,0,0,.1);
           padding: 0 20px;
         }
+
+        
+      /* The ranger itself */
+      .ranger {
+        -webkit-appearance: none;  /* Override default CSS styles */
+        appearance: none;
+        width: 100%; /* Full-width */
+        height: 25px; /* Specified height */
+        background: #d3d3d3; /* Grey background */
+        outline: none; /* Remove outline */
+        opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+        -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+        transition: opacity .2s;
+      }
+
+      /* Mouse-over effects */
+      .ranger:hover {
+        opacity: 1; /* Fully shown on mouse-over */
+      }
+
+      /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+      .ranger::-webkit-slider-thumb {
+        -webkit-appearance: none; /* Override default look */
+        appearance: none;
+        width: 25px; /* Set a specific slider handle width */
+        height: 25px; /* Slider handle height */
+        background: #04AA6D; /* Green background */
+        cursor: pointer; /* Cursor on hover */
+      }
+
+      .ranger::-moz-range-thumb {
+        width: 25px; /* Set a specific slider handle width */
+        height: 25px; /* Slider handle height */
+        background: #04AA6D; /* Green background */
+        cursor: pointer; /* Cursor on hover */
+      }
+      .tgl {
+        display: none;
+        
+        &,
+        &:after,
+        &:before,
+        & *,
+        & *:after,
+        & *:before,
+        & + .tgl-btn {
+          box-sizing: border-box;
+          &::selection {
+            background: none;
+          }
+        }
+        
+        + .tgl-btn {
+          outline: 0;
+          display: block;
+          width: 4em;
+          height: 2em;
+          position: relative;
+          cursor: pointer;
+          user-select: none;
+          &:after,
+          &:before {
+            position: relative;
+            display: block;
+            content: "";
+            width: 50%;
+            height: 100%;
+          }
+          
+          &:after {
+            left: 0;
+          }
+          
+          &:before {
+            display: none;
+          }
+        }
+        
+        &:checked + .tgl-btn:after {
+          left: 50%;
+        }
+      }
+      .tgl-skewed {
+        + .tgl-btn {
+          overflow: hidden;
+          transform: skew(-10deg);
+          backface-visibility: hidden;
+          transition: all .2s ease;
+          font-family: sans-serif;
+          background: rgb(160, 0, 0);
+          &:after,
+          &:before {
+            transform: skew(10deg);
+            display: inline-block;
+            transition: all .2s ease;
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            line-height: 2em;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 1px 0 rgba(0,0,0,.4);
+          }
+          
+          &:after {
+            left: 100%;
+            content: attr(data-tg-on);
+          }
+          
+          &:before {
+            left: 0;
+            content: attr(data-tg-off);
+          }
+          
+          &:active {
+            background: #888;
+            &:before {
+              left: -10%;
+            }
+          }
+        }
+        
+        &:checked + .tgl-btn {
+          background: rgb(0, 117, 65);
+          &:before {
+            left: -100%;
+          }
+
+          &:after {
+            left: 0;
+          }
+
+          &:active:after {
+            left: 10%;
+          }
+        }
+      }
+
+      .tgl-flat {
+        + .tgl-btn {
+          padding: 2px;
+          transition: all .2s ease;
+          background: #fff;
+          border: 4px solid #f2f2f2;
+          border-radius: 2em;
+          &:after {
+            transition: all .2s ease;
+            background: #f2f2f2;
+            content: "";
+            border-radius: 1em;
+          }
+        }
+        
+        &:checked + .tgl-btn {
+          border: 4px solid #7FC6A6;
+          &:after {
+            left: 50%;
+            background: #7FC6A6;
+          }
+        }
+      }
+
+      .tgl-flip {
+        + .tgl-btn {
+          padding: 2px;
+          transition: all .2s ease;
+          font-family: sans-serif;
+          perspective: 100px;
+          &:after,
+          &:before {
+            display: inline-block;
+            transition: all .4s ease;
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            line-height: 2em;
+            font-weight: bold;
+            color: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            backface-visibility: hidden;
+            border-radius: 4px;
+          }
+          
+          &:after {
+            content: attr(data-tg-on);
+            background: #02C66F;
+            transform: rotateY(-180deg);
+          }
+          
+          &:before {
+            background: #FF3A19;
+            content: attr(data-tg-off);
+          }
+
+          &:active:before {
+            transform: rotateY(-20deg);
+          }
+        }
+        
+        &:checked + .tgl-btn {
+          &:before {
+            transform: rotateY(180deg);
+          }
+          
+          &:after {
+            transform: rotateY(0);
+            left: 0;
+            background: rgb(127, 198, 166);
+          }
+          
+          &:active:after {
+            transform: rotateY(20deg);
+          }
+        }
+      }
+      .form-flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between; /* Adjust as needed */
+      }
+
+      .form-field {
+        flex: 1 1 200px; /* Adjust basis to your preference, allows fields to grow and shrink */
+        margin: 10px; /* Spacing between fields */
+      }
+      .section-header {
+        width: 100%; /* Ensures the header takes up the full width */
+        margin: 20px 0; /* Adds some space above and below the header */
+      }
+      input[type='number'] {
+        background-color: rgba(127, 198, 166, 0.5); /* Light blue with transparency */
+        text-align: center;
+      }
+      
   </style>
   </head>
   <body>

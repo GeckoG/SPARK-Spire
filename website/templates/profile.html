@@ -5,7 +5,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Profile</title>
+    <title>Profile - {{ profile.user.username }}</title>
+    <link rel="icon" href="/static/favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@latest"></script>
@@ -36,11 +37,8 @@
     
     #gradient {
         background: #999955;
-        /* background-image: linear-gradient(#dad7cd 20%, #a3b18a 20%, #a3b18a 40%, #588157 40%, #588157 60%, #3a5a40 60%, #3a5a40 80%, #344e41 80%); */
-        /* background-image: linear-gradient(#9F917D 20%, #7E8569 20%, #7E8569 40%, #5D7855 40%, #5D7855 60%, #3B6C41 60%, #3B6C41 80%, #1A5F2D 80%); */
-        /* background-image: linear-gradient(#A87F4D 20%, #7D8235 20%, #7D8235 40%, #537147 40%, #537147 60%, #264027 60%, #264027 80%, #0D1F22 80%); */
-        /* background-image: linear-gradient(#E8CFCF 20%, #EC9E9E 20%, #EC9E9E 40%, #EF6E6E 40%, #EF6E6E 60%, #F33D3D 60%, #F33D3D 80%, #F60C0C 80%); */
         background-image: linear-gradient(#E8CFCF 20%, #E09B9B 20%, #E09B9B 40%, #D86868 40%, #D86868 60%, #CF3434 60%, #CF3434 80%, #C70000 80%);
+        /* background-image: linear-gradient(#D69D25 20%, #C29549 20%, #C29549 40%, #B69C68 40%, #B69C68 60%, #9E926E 60%, #9E926E 80%, #5e594a 80%); */
         margin: 0 auto;
         margin-top: 100px;
         width: 100%;
@@ -103,14 +101,16 @@
     .columns-container {
     display: flex;
     justify-content: space-between;
-    width: 80%; /* Adjust this value as needed */
+    width: 80%;
     margin: 0 auto;
     }
 
     .column {
         flex: 1;
-        background-color: #E8CFCF; /* This will make the background of each column white */
-        border: 1px solid red; /* This will add a blue border around each column */
+        background-color: #E8CFCF;
+        border: 1px solid red;
+        /* background-color: #E9E2D0;
+        border: 1px solid rgb(218, 185, 0); */
     }
   </style>
   </head>
@@ -137,103 +137,102 @@
         <!-- <span class="left bottom">Sport: {{ profile.sport }}</span> -->
         <span class="right bottom">{{ profile.sport }} / {{ profile.position }}</span>
         </div>
-<br/><br/><br/><br/>
+        <br/><br/><br/><br/>
         <div class="columns-container">
+            <div class="column" style="flex: 2;">
+                <!-- Content for the first column -->
+                <h2>Habit Tracking</h2>
+                <p>Coming Soon</p>
+            </div>
             <div class="column">
-                <div class="content">
-                    <!-- Content for the first column -->
-                    <center><h2>Teams</h2>
+                <!-- Content for the second column -->
+                <center><h2>Teams</h2>
                     <br/>
                     <!-- <img src="https://upload.wikimedia.org/wikipedia/en/4/4d/Council_Grove_High_Mascot.png" width="150" height="150" style="margin: 5px;"/> -->
                     <!-- <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/fa/Northwest_Missouri_State_Bearcats_logo.svg/1200px-Northwest_Missouri_State_Bearcats_logo.svg.png" width="150" height="150" style="margin: 5px;"/> -->
                     <!-- <img src="/static/Tallgrass.png" width="150" height="150" style="margin: 5px;"/> -->
                     <img src="https://swimswam.com/wp-content/uploads/2018/02/new.png" width="150" height="150" style="margin: 5px;"/>
                     </center>
-                </div>
-            </div>
-            <div class="column">
-                <div class="content">
-                    <!-- Content for the second column -->
-                    <center><h2>Test Results</h2></center>
-                    <table class="table table-striped table-hover table-bordered">
-                        <thead class="table-dark">
-                          <tr>
-                            <th scope="col">Assessment</th>
-                            <th scope="col">Baseline</th>
-                            <th scope="col">Current</th>
-                            <th scope="col">Best</th>
-                            <th scope="col">Target</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            {% if records %}
-                                {% for record in records %}
-                                <tr>
-                                    <td>{{ record.type }} <br/>
-                                         ({{ record.units }})</td>
-                                    <td><center><a href="{% url 'record' record.oldest.id%}">{{ record.oldest.assessment_result }}</a></center></td>
-                                    <td><center><a href="{% url 'record' record.newest.id%}">{{ record.newest.assessment_result }}</a></center></td>
-                                    <td><center><a href="{% url 'record' record.extreme.id%}">{{ record.extreme.assessment_result }}</a></center></td>
-                                    <td><center>TBD</center></td>
-                                </tr>
-                                {% endfor %}
-                            {% endif %}
-                        </tbody>
-                    </table>
-                    <br/><br/><br/>
-                </div>
-            </div>
-            <div class="column">
-                <div class="content">
-                    <!-- Content for the third column -->
-                    <center><h2>Skill Stats</h2></center>
-                    <canvas id="myChart" width="400" height="400"></canvas>
-                    <script>
-                        var ctx = document.getElementById('myChart').getContext('2d');
-                        var myChart = new Chart(ctx, {
-                            type: 'radar',
-                            data: {
-                                labels:['Strength','Flexibility','Power','Speed','Endurance','Agility'],
-                                datasets:[{
-                                    label: 'Current Score',
-                                    data: {{ spirescore_current }},
-                                    backgroundColor: ['rgba(255, 99, 132, 0.2)'],
-                                    borderColor: ['rgba(255, 99, 132, 1)'],
-                                    borderWidth: 1
-                                },
-                                {
-                                    label: 'Baseline Score',
-                                    data: {{ spirescore_baseline }},
-                                    backgroundColor: ['rgba(54, 162, 235, 0.2)'],
-                                    borderColor: ['rgba(54, 162, 235, 1)'],
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                scales: {
-                                    r: {
-                                        beginAtZero: true,
-                                    }
-                                }
-                            }
-                        });
-                    </script>
-                </div>
-            </div>
-        </div>
-        <div class="columns-container">
-            <div class="column" style="flex: 2;">
-                <!-- Content for the first column -->
-                <h2>Habit Tracking</h2>
-            </div>
-            <div class="column">
-                <!-- Content for the second column -->
-                <h2>More Stats</h2>
                 <br/><br/><br/>
             </div>
-        </div>
-    {% endblock %}
-    </div>
-    {% include 'footer.html' %}
-</body>
-</html>
+        </div>        
+        <div class="columns-container">
+                    
+                    <div class="column">
+                        <div class="content">
+                            <!-- Content for the second column -->
+                            <center><h2>Test Results</h2></center>
+                            <table class="table table-striped table-hover table-bordered">
+                                <thead class="table-dark">
+                                  <tr>
+                                    <th scope="col">Assessment</th>
+                                    <th scope="col"><center>Baseline</center></th>
+                                    <th scope="col"><center>Current</center></th>
+                                    <th scope="col"><center>Best</center></th>
+                                    <th scope="col"><center>Target</center></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    {% if records %}
+                                        {% for record in records %}
+                                        <tr>
+                                            <td><span style="font-size: 15pt;">{{ record.type }}</span> <br/>
+                                                <span style="font-size: 8pt;">{{ record.units }}</span></td>
+                                            <td><center><a href="{% url 'record' record.oldest.id%}">{{ record.oldest.assessment_result }}</a></center></td>
+                                            <td><center><a href="{% url 'record' record.newest.id%}">{{ record.newest.assessment_result }}</a></center></td>
+                                            <td><center><a href="{% url 'record' record.extreme.id%}">{{ record.extreme.assessment_result }}</a></center></td>
+                                            <td><center>TBD</center></td>
+                                        </tr>
+                                        {% endfor %}
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                            <br/><br/><br/>
+                        </div>
+                    </div>
+                    
+                    <div class="column">
+                        <div class="content">
+                            <!-- Content for the third column -->
+                            <center><h2>Skill Stats</h2></center>
+                            <canvas id="myChart"></canvas>
+                            <script>
+                                var ctx = document.getElementById('myChart').getContext('2d');
+                                var myChart = new Chart(ctx, {
+                                    type: 'radar',
+                                    data: {
+                                        labels:['Strength','Flexibility','Power','Speed','Endurance','Agility'],
+                                        datasets:[{
+                                            label: 'Current Score',
+                                            data: {{ spirescore_current }},
+                                            backgroundColor: ['rgba(214, 157, 37, 0.2)'],
+                                            borderColor: ['rgba(214, 157, 37, 1)'],
+                                            borderWidth: 1
+                                        },
+                                        {
+                                            label: 'Baseline Score',
+                                            data: {{ spirescore_baseline }},
+                                            backgroundColor: ['rgba(10, 28, 18, 0.2)'],
+                                            borderColor: ['rgba(10, 28, 18, 1)'],
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        scales: {
+                                            r: {
+                                                beginAtZero: true,
+                                            }
+                                        }
+                                    }
+                                });
+                            </script>
+                        </div>
+                    </div>
+        
+                </div>
+                
+            {% endblock %}
+            </div>
+            {% include 'footer.html' %}
+        </body>
+        </html>
