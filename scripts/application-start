@@ -1,0 +1,10 @@
+#!/bin/bash
+
+
+# shellcheck disable=SC1091
+source /home/ubuntu/.bashrc
+
+
+# start nginx webserver
+sudo systemctl start nginx.service
+

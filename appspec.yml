@@ -1,0 +1,24 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/sparrk-spire
+    overwrite: true
+file_exists_behavior: OVERWRITE
+hooks:
+  ApplicationStop:
+    - location: scripts/application-stop
+      timeout: 100
+      runas: root
+  BeforeInstall:
+    - location: scripts/before-install
+      timeout: 100
+      runas: root
+  AfterInstall:
+    - location: scripts/after-install
+      timeout: 1000
+      runas: ubuntu
+  ApplicationStart:
+    - location: scripts/application-start
+      timeout: 100
+      runas: ubuntu

@@ -1,0 +1,34 @@
+#!/bin/bash
+
+
+# direct all logs to after-install.log
+# exec 3>&1 4>&2
+# trap 'exec 2>&4 1>&3' 0 1 2 3
+# exec 1>/home/ubuntu/pipelinelogs/backend/after-install.log 2>&1
+
+# curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+
+MAIN_DIR="/home/ubuntu/sparrk-spire"
+
+# change directory to audit-app-backend
+cd ${MAIN_DIR} || exit
+
+# set up the ownership permissions of the directory
+sudo chown -R ubuntu:www-data ${MAIN_DIR}
+
+# change file permissions to -rw-r--r--
+sudo find ${MAIN_DIR} -type f -exec chmod -R 644 {} \;
+
+# change directory permissions to drwxr-xr-x
+sudo find ${MAIN_DIR} -type d -exec chmod -R 755 {} \;
+
+# change directory ownership to ubuntu:www-data
+sudo find ${MAIN_DIR} -type d -exec chown -R ubuntu:www-data {} \;
+
+# change files ownership to ubuntu:www-data
+sudo find ${MAIN_DIR} -type f -exec chown -R ubuntu:www-data {} \;
+
+# # install all necessary packages
+
+
+sudo systemctl restart nginx.service

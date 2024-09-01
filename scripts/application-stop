@@ -1,0 +1,5 @@
+#!/bin/bash
+
+
+# stop nginx webserver
+systemctl stop nginx.service
