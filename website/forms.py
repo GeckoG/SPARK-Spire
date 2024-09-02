@@ -97,7 +97,7 @@ class AddRecordForm(forms.ModelForm):
             # Create and save a Normative instance
             normative_instance = Normative(
                 assessment=instance.assessment,
-                result=instance.assessment_result,
+                assessment_result=instance.assessment_result,
                 age=instance.age
             )
             normative_instance.save()

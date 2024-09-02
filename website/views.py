@@ -76,8 +76,10 @@ def profile(request, username):
         distributions = json.load(file)
 
     spirescore_current = []
+    # Average the grip strength and IMTP scores
+    # Add the rest of the values
     for assessment in assessments:
-        if assessment['id'] not in [1, 2, 5, 7]:
+        if assessment['id'] == 3:
             # Extract average and standard deviation for the assessment distribution
             average = distributions[assessment["name"]]["average"]
             stdev = distributions[assessment["name"]]["stdev"]
@@ -95,11 +97,54 @@ def profile(request, username):
 
             # Calculate percentile using CDF
             percentile = stats.norm.cdf(z_score) * 100
+            if percentile < 0.05:
+                percentile = 0
+            grip_strength = percentile
+
+        if assessment['id'] == 7:
+            average = distributions[assessment["name"]]["average"]
+            stdev = distributions[assessment["name"]]["stdev"]
+            current_value = 0
+            for item in data:
+                if item['type'] == assessment["name"]:
+                    current_value = item['newest'].assessment_result
+                    current_value = float(current_value)
+                    break
+            z_score = (current_value - average) / stdev
+            percentile = stats.norm.cdf(z_score) * 100
+            if percentile < 0.05:
+                percentile = 0
+            imtp = percentile
+            if grip_strength != 0:
+                if imtp == 0:
+                    spirescore_current.append(grip_strength)
+                else:
+                    average = (grip_strength + imtp) / 2
+                    spirescore_current.append(average)
+            else:
+                spirescore_current.append(imtp)
+            
+        if assessment['id'] in [4, 6, 8, 9, 10]:
+            average = distributions[assessment["name"]]["average"]
+            stdev = distributions[assessment["name"]]["stdev"]
+            current_value = 0
+            for item in data:
+                if item['type'] == assessment["name"]:
+                    current_value = item['newest'].assessment_result
+                    current_value = float(current_value)
+                    break
+            z_score = (current_value - average) / stdev
+            percentile = stats.norm.cdf(z_score) * 100
+            if current_value == 0:
+                percentile = 0
             spirescore_current.append(percentile)
 
+    print(spirescore_current)
     spirescore_baseline = []
     for assessment in assessments:
-        if assessment['id'] not in [1, 2, 5, 7]:
+        grip_strength = 0
+        imtp = 0
+        if assessment['id'] == 3:
             # Extract average and standard deviation for the assessment distribution
             average = distributions[assessment["name"]]["average"]
             stdev = distributions[assessment["name"]]["stdev"]
@@ -117,6 +162,49 @@ def profile(request, username):
 
             # Calculate percentile using CDF
             percentile = stats.norm.cdf(z_score) * 100
+            if percentile < 0.05:
+                percentile = 0
+            grip_strength = percentile
+
+        if assessment['id'] == 7:
+            average = distributions[assessment["name"]]["average"]
+            stdev = distributions[assessment["name"]]["stdev"]
+            baseline_value = 0
+            for item in data:
+                if item['type'] == assessment["name"]:
+                    baseline_value = item['oldest'].assessment_result
+                    baseline_value = float(baseline_value)
+                    break
+            z_score = (baseline_value - average) / stdev
+            percentile = stats.norm.cdf(z_score) * 100
+            if percentile < 0.05:
+                percentile = 0
+            imtp = percentile
+            if grip_strength != 0:
+                if imtp == 0:
+                    spirescore_baseline.append(grip_strength)
+                else:
+                    average = (grip_strength + imtp) / 2
+                    spirescore_baseline.append(average)
+            else:
+                spirescore_baseline.append(imtp)
+
+        if assessment['id'] in [4, 6, 8, 9, 10]:
+            average = distributions[assessment["name"]]["average"]
+            stdev = distributions[assessment["name"]]["stdev"]
+
+            baseline_value = 0
+            for item in data:
+                if item['type'] == assessment["name"]:
+                    baseline_value = item['oldest'].assessment_result
+                    baseline_value = float(baseline_value)
+                    break
+
+            z_score = (baseline_value - average) / stdev
+
+            percentile = stats.norm.cdf(z_score) * 100
+            if baseline_value == 0:
+                percentile = 0
             spirescore_baseline.append(percentile)
 
     return render(request, 'profile.html', {'profile': profile, 'records': data, 'spirescore_current': spirescore_current, 'spirescore_baseline': spirescore_baseline})
