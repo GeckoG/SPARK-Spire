@@ -72,7 +72,7 @@ class Migration(migrations.Migration):
                 ('read', models.BooleanField(default=False)),
                 ('medidate', models.BooleanField(default=False)),
                 ('visualize', models.BooleanField(default=False)),
-                ('pray', models.BooleanField(default=False)),
+                ('focus', models.BooleanField(default=False)),
                 ('kindness', models.BooleanField(default=False)),
                 ('be_social', models.BooleanField(default=False)),
                 ('stretch', models.BooleanField(default=False)),

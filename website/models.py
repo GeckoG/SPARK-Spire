@@ -107,7 +107,7 @@ class Daily(models.Model):
     read = models.BooleanField(default=False) # Manual
     medidate = models.BooleanField(default=False) # Manual
     visualize = models.BooleanField(default=False) # Manual
-    pray = models.BooleanField(default=False) # Manual
+    focus = models.BooleanField(default=False) # Manual
     kindness = models.BooleanField(default=False) # Manual
     be_social = models.BooleanField(default=False) # Manual
     # Physical Training

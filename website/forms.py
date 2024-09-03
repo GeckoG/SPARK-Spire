@@ -247,7 +247,7 @@ class DailyForm(forms.ModelForm):
     read = forms.BooleanField(widget=SwitchWidget(), required=False)
     medidate = forms.BooleanField(widget=SwitchWidget(), required=False)
     visualize = forms.BooleanField(widget=SwitchWidget(), required=False)
-    pray = forms.BooleanField(widget=SwitchWidget(), required=False)
+    focus = forms.BooleanField(widget=SwitchWidget(), required=False)
     kindness = forms.BooleanField(widget=SwitchWidget(), required=False)
     be_social = forms.BooleanField(widget=SwitchWidget(), required=False)
     # Physical Training
@@ -267,6 +267,6 @@ class DailyForm(forms.ModelForm):
 
     class Meta:
         model = Daily
-        fields = ('soreness', 'fatigue', 'injury', 'illness', 'massage', 'ice', 'altitude', 'norma_plus', 'hydration', 'fruit', 'vegetable', 'weight', 'no_sweets', 'no_alcohol', 'beta_alanine', 'creatine', 'vitamin_d', 'stress', 'motivation', 'read', 'medidate', 'visualize', 'pray', 'kindness', 'be_social', 'stretch', 'mobility', 'arms', 'coordination', 'balance', 'speed', 'agility', 'strength', 'power', 'reaction', 'breathwork', 'notes')
+        fields = ('soreness', 'fatigue', 'injury', 'illness', 'massage', 'ice', 'altitude', 'norma_plus', 'hydration', 'fruit', 'vegetable', 'weight', 'no_sweets', 'no_alcohol', 'beta_alanine', 'creatine', 'vitamin_d', 'stress', 'motivation', 'read', 'medidate', 'visualize', 'focus', 'kindness', 'be_social', 'stretch', 'mobility', 'arms', 'coordination', 'balance', 'speed', 'agility', 'strength', 'power', 'reaction', 'breathwork', 'notes')
         exclude = ('date', 'profile', 'sleep', 'sleep_score', 'bed_time', 'wake_time', 'hrv', 'rhr', 'calories_in', 'calories_out', 'carb', 'sugar', 'fiber', 'protein', 'fat', 'sat_fat', 'unsat_fat', 'omega3', 'cholesterol', 'sodium', 'potassium', 'calcium', 'iron', 'vitamin_a', 'vitamin_c', 'macro_ratio')
 
