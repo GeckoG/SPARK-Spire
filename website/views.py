@@ -447,9 +447,9 @@ def daily(request, username, date):
         'date': date, 
         'change_date_form': change_date_form})
 
-def testpage(request):
+def habits(request, username):
     percentage = 0.61
     percentage2 = 0.04
     label = "Stretch"
     label2 = "Mobility"
-    return render(request, 'testpage.html', {'percentage': percentage, 'percentage2': percentage2, 'label': label, 'label2': label2})
+    return render(request, 'habits.html', {'percentage': percentage, 'percentage2': percentage2, 'label': label, 'label2': label2})

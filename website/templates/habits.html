@@ -9,6 +9,7 @@
         <style>
             .centered-box-container {
                 display: flex;
+                flex-direction: column;
                 flex-wrap: wrap; /* Allows items to wrap to the next line if there's not enough room */
                 justify-content: center; /* Centers items horizontally */
                 align-items: center; /* Centers items vertically */
@@ -16,16 +17,13 @@
             }
 
             .background-box {
-                aspect-ratio: 1 / 1; /* Ensures the box is always square */
                 background-color: white;
                 padding: 4px;
-                /* box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); */
+                box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
                 margin: 0; /* Removes space between boxes */
-                width: 15%;
-                max-width: 120px;
-                min-width: 80px;
+                width: 100%;
+                overflow: hidden; /* Ensures the pseudo-element doesn't overflow */
             }
-
             .percentage-box {
                 display: flex; /* Makes .percentage-box a flex container */
                 justify-content: center; /* Centers children horizontally */
@@ -36,19 +34,148 @@
                 height: 100%;
                 text-align: center; /* Centers text horizontally */
             }
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            }
+
+            .modal-content {
+                background-color: #312d38;
+                margin: 15% auto; /* 15% from the top and centered */
+                padding: 20px;
+                border: 1px solid #888;
+                width: 50%; /* Adjusted width */
+                max-width: 600px; /* Optional: set a maximum width */
+                position: relative;
+            }
+
+            .close {
+                color: #ff0000;
+                font-size: 28px;
+                font-weight: bold;
+                cursor: pointer;
+                position: absolute; /* Position the close button */
+                top: 10px; /* Adjust as needed */
+                right: 20px; /* Adjust as needed */
+            }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            .horizontal-container {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            .horizontal-container > div {
+                flex: 1;
+                text-align: center;
+            }
+            /* Responsive text scaling */
+            .percentage-box h1 {
+                font-size: 6vw; /* Adjust as needed */
+            }
+
+            .percentage-box h5, .percentage-box h6 {
+                font-size: 3vw; /* Adjust as needed */
+            }
+
+            /* Media query for larger screens */
+            @media (min-width: 768px) {
+                .percentage-box h1 {
+                    font-size: 2em; /* Adjust as needed */
+                }
+
+                .percentage-box h5, .percentage-box h6 {
+                    font-size: 1em; /* Adjust as needed */
+                }
+            }
+
+            .labelbox {
+                flex: 1;
+                text-align: center;
+            }
+            .calendar-grid {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                grid-template-rows: repeat(6, 1fr);
+                gap: 5px; /* Adjust the gap between squares as needed */
+            }
+
+            .square {
+                width: 40px; /* Adjust the size of the squares as needed */
+                height: 40px;
+                background-color: #ddd; /* Adjust the background color as needed */
+                border: 1px solid #ccc; /* Optional: Add a border to the squares */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: black; /* Set text color to black */
+            }
+            .scroll-button {
+                display: block;
+                margin: 10px auto;
+                padding: 10px;
+                font-size: 20px;
+                cursor: pointer;
+            }
         </style>
         <center><h1 style="color: black;">Physical</h1></center>
         <div class="centered-box-container">
             <div class="background-box">
                 <div class="percentage-box" id="percentageBox">
-                    <center><h1>{{ percentage }}</h1></center>
-                    <center><h5>{{ label }}</h5></center>
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox1">
+                            <center><h1>{{ percentage }}</h1></center>
+                            <center><h4>{{ label }}</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>3/5</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>11/30</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>31/60</h1></center>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="background-box">
                 <div class="percentage-box" id="percentageBox2">
-                    <center><h1>{{ percentage2 }}</h1></center>
-                    <center><h5>{{ label2 }}</h5></center>
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox2">
+                            <center><h1>{{ percentage2 }}</h1></center>
+                            <center><h5>{{ label2 }}</h5></center>
+                        </div>
+                        <div>
+                            <center><h1>3/5</h1></center>
+                            <center><h5>Week</h5></center>
+                        </div>
+                        <div>
+                            <center><h1>11/30</h1></center>
+                            <center><h5>6-Week</h5></center>
+                        </div>
+                        <div>
+                            <center><h1>31/60</h1></center>
+                            <center><h5>12-Week</h5></center>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="background-box">
@@ -292,9 +419,67 @@
         box.style.boxShadow = `0px 0px 5px ${rgbColor}`; // Set shadow
     }
 
+    function applyGradientStyles2(elementId, percentage) {
+        const startColor = { r: 255, g: 0, b: 0 }; // Light red
+        const middleColor = { r: 255, g: 255, b: 0 }; // Light yellow
+        const endColor = { r: 119, g: 199, b: 136 }; // Light green
+        const startColor2 = { r: 151, g: 0, b: 0 }; // Dark red
+        const middleColor2 = { r: 151, g: 128, b: 0 }; // Dark yellow
+        const endColor2 = { r: 0, g: 151, b: 0 }; // Dark green
+
+        let color;
+        if (percentage <= 0.5) {
+            // Interpolate between startColor and middleColor
+            const factor = percentage * 2;
+            color = {
+                r: Math.round(startColor.r + (middleColor.r - startColor.r) * factor),
+                g: Math.round(startColor.g + (middleColor.g - startColor.g) * factor),
+                b: Math.round(startColor.b + (middleColor.b - startColor.b) * factor),
+            };
+        } else {
+            // Interpolate between middleColor and endColor
+            const factor = (percentage - 0.5) * 2;
+            color = {
+                r: Math.round(middleColor.r + (endColor.r - middleColor.r) * factor),
+                g: Math.round(middleColor.g + (endColor.g - middleColor.g) * factor),
+                b: Math.round(middleColor.b + (endColor.b - middleColor.b) * factor),
+            };
+        }
+
+        let color2;
+        if (percentage <= 0.5) {
+            // Interpolate between startColor and middleColor
+            const factor = percentage * 2;
+            color2 = {
+                r: Math.round(startColor2.r + (middleColor2.r - startColor2.r) * factor),
+                g: Math.round(startColor2.g + (middleColor2.g - startColor2.g) * factor),
+                b: Math.round(startColor2.b + (middleColor2.b - startColor2.b) * factor),
+            };
+        } else {
+            // Interpolate between middleColor and endColor
+            const factor = (percentage - 0.5) * 2;
+            color2 = {
+                r: Math.round(middleColor2.r + (endColor2.r - middleColor2.r) * factor),
+                g: Math.round(middleColor2.g + (endColor2.g - middleColor2.g) * factor),
+                b: Math.round(middleColor2.b + (endColor2.b - middleColor2.b) * factor),
+            };
+        }
+
+        const rgbaColor = `rgba(${color2.r}, ${color2.g}, ${color2.b}, 0.33)`; // For background with transparency
+        const rgbColor = `rgb(${color2.r}, ${color2.g}, ${color2.b})`; // For text, border, and shadow
+
+        const box = document.getElementById(elementId);
+        box.style.backgroundColor = rgbaColor;
+        box.style.color = rgbColor; // Set text color
+        box.style.borderColor = rgbColor; // Set border color
+        box.style.boxShadow = `0px 0px 5px ${rgbColor}`; // Set shadow
+    }
+
     // Apply to specific elements
     applyGradientStyles('percentageBox', {{ percentage }});
+    applyGradientStyles2('labelbox1', {{ percentage }});
     applyGradientStyles('percentageBox2', {{ percentage2 }});
+    applyGradientStyles2('labelbox2', {{ percentage2 }});
     applyGradientStyles('percentageBox3', .77);
     applyGradientStyles('percentageBox4', .89);
     applyGradientStyles('percentageBox5', .34);
@@ -453,4 +638,105 @@
         sleep_config
     );
 </script>
+    <!-- Modal Box -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Habit History for Stretch</p>
+            <button id="scrollUp" class="scroll-button">↑</button>
+            <div class="calendar-grid">
+                <!-- Squares will be generated by JavaScript -->
+            </div>
+            <button id="scrollDown" class="scroll-button">↓</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('percentageBox').onclick = function() {
+            document.getElementById('myModal').style.display = "block";
+        }
+
+        document.getElementsByClassName('close')[0].onclick = function() {
+            document.getElementById('myModal').style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('myModal')) {
+                document.getElementById('myModal').style.display = "none";
+            }
+        }
+    </script>
+    <script>
+        document.getElementById('scrollUp').addEventListener('click', function() {
+            const grid = document.getElementById('calendarGrid');
+            grid.scrollBy(0, -40); // Adjust the scroll amount as needed
+        });
+    
+        document.getElementById('scrollDown').addEventListener('click', function() {
+            const grid = document.getElementById('calendarGrid');
+            grid.scrollBy(0, 40); // Adjust the scroll amount as needed
+        });
+    </script>
+    <script>
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+        let offset = 0;
+
+        // Function to generate dates
+        function generateCalendar(month, year, offset) {
+            const calendarGrid = document.querySelector('.calendar-grid');
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+            // Clear existing squares
+            calendarGrid.innerHTML = '';
+
+            // Fill the squares with dates
+            for (let i = 0; i < 42; i++) {
+                const square = document.createElement('div');
+                square.classList.add('square');
+
+                const dateIndex = i - firstDay + 1 + offset * 7;
+
+                if (dateIndex < 1) {
+                    // Dates from the previous month
+                    const prevMonthDate = new Date(year, month - 1, daysInPrevMonth + dateIndex);
+                    square.textContent = prevMonthDate.getDate() === 1 ? prevMonthDate.toLocaleString('default', { month: 'short' }) : prevMonthDate.getDate();
+                } else if (dateIndex > daysInMonth) {
+                    // Dates from the next month
+                    const nextMonthDate = new Date(year, month + 1, dateIndex - daysInMonth);
+                    square.textContent = nextMonthDate.getDate() === 1 ? nextMonthDate.toLocaleString('default', { month: 'short' }) : nextMonthDate.getDate();
+                } else {
+                    // Dates from the current month
+                    square.textContent = dateIndex === 1 ? new Date(year, month).toLocaleString('default', { month: 'short' }) : dateIndex;
+                }
+
+                calendarGrid.appendChild(square);
+            }
+        }
+
+        // Call the function to generate the calendar for the current month
+        generateCalendar(currentMonth, currentYear, offset);
+
+        document.getElementById('scrollUp').addEventListener('click', function() {
+            offset -= 1;
+            generateCalendar(currentMonth, currentYear, offset);
+        });
+
+        document.getElementById('scrollDown').addEventListener('click', function() {
+            offset += 1;
+            generateCalendar(currentMonth, currentYear, offset);
+        });
+
+        document.getElementsByClassName('close')[0].onclick = function() {
+            document.getElementById('myModal').style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('myModal')) {
+                document.getElementById('myModal').style.display = "none";
+            }
+        }
+    </script>
 {% endblock %}
