@@ -677,66 +677,74 @@
             grid.scrollBy(0, 40); // Adjust the scroll amount as needed
         });
     </script>
-    <script>
-        let currentMonth = new Date().getMonth();
-        let currentYear = new Date().getFullYear();
-        let offset = 0;
+<script>
+    let currentMonth = new Date().getMonth();
+    let currentYear = new Date().getFullYear();
+    let offset = 0;
 
-        // Function to generate dates
-        function generateCalendar(month, year, offset) {
-            const calendarGrid = document.querySelector('.calendar-grid');
-            const firstDay = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            const daysInPrevMonth = new Date(year, month, 0).getDate();
+    function generateCalendar(month, year, offset) {
+        const calendarGrid = document.querySelector('.calendar-grid');
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const daysInPrevMonth = new Date(year, month, 0).getDate();
 
-            // Clear existing squares
-            calendarGrid.innerHTML = '';
+        // Clear existing squares
+        calendarGrid.innerHTML = '';
 
-            // Fill the squares with dates
-            for (let i = 0; i < 42; i++) {
-                const square = document.createElement('div');
-                square.classList.add('square');
+        // Fill the squares with dates
+        for (let i = 0; i < 42; i++) {
+            const square = document.createElement('div');
+            square.classList.add('square');
 
-                const dateIndex = i - firstDay + 1 + offset * 7;
+            const dateIndex = i - firstDay + 1 + offset * 7;
 
-                if (dateIndex < 1) {
-                    // Dates from the previous month
-                    const prevMonthDate = new Date(year, month - 1, daysInPrevMonth + dateIndex);
-                    square.textContent = prevMonthDate.getDate() === 1 ? prevMonthDate.toLocaleString('default', { month: 'short' }) : prevMonthDate.getDate();
-                } else if (dateIndex > daysInMonth) {
-                    // Dates from the next month
-                    const nextMonthDate = new Date(year, month + 1, dateIndex - daysInMonth);
-                    square.textContent = nextMonthDate.getDate() === 1 ? nextMonthDate.toLocaleString('default', { month: 'short' }) : nextMonthDate.getDate();
-                } else {
-                    // Dates from the current month
-                    square.textContent = dateIndex === 1 ? new Date(year, month).toLocaleString('default', { month: 'short' }) : dateIndex;
-                }
-
-                calendarGrid.appendChild(square);
+            if (dateIndex < 1) {
+                // Dates from the previous month
+                const prevMonthDate = new Date(year, month - 1, daysInPrevMonth + dateIndex);
+                square.textContent = prevMonthDate.getDate() === 1 ? prevMonthDate.toLocaleString('default', { month: 'short' }) : prevMonthDate.getDate();
+            } else if (dateIndex > daysInMonth) {
+                // Dates from the next month
+                const nextMonthDate = new Date(year, month + 1, dateIndex - daysInMonth);
+                square.textContent = nextMonthDate.getDate() === 1 ? nextMonthDate.toLocaleString('default', { month: 'short' }) : nextMonthDate.getDate();
+            } else {
+                // Dates from the current month
+                square.textContent = dateIndex === 1 ? new Date(year, month).toLocaleString('default', { month: 'short' }) : dateIndex;
             }
+
+            calendarGrid.appendChild(square);
         }
 
-        // Call the function to generate the calendar for the current month
+        // Fetch stretch statuses and update colors
+        const startDate = new Date(year, month, 1);
+        const endDate = new Date(year, month + 1, 0);
+        fetch(`/get_stretch_statuses/{{ username }}/${startDate.toISOString().split('T')[0]}/${endDate.toISOString().split('T')[0]}/`)
+            .then(response => response.json())
+            .then(data => {
+                const squares = document.querySelectorAll('.square');
+                squares.forEach((square, index) => {
+                    const date = new Date(year, month, index - firstDay + 1 + offset * 7).toISOString().split('T')[0];
+                    if (data[date] === true) {
+                        square.style.backgroundColor = 'green';
+                    } else if (data[date] === false) {
+                        square.style.backgroundColor = 'red';
+                    } else {
+                        square.style.backgroundColor = 'yellow';
+                    }
+                });
+            });
+    }
+
+    document.getElementById('scrollUp').addEventListener('click', function() {
+        offset -= 1;
         generateCalendar(currentMonth, currentYear, offset);
+    });
 
-        document.getElementById('scrollUp').addEventListener('click', function() {
-            offset -= 1;
-            generateCalendar(currentMonth, currentYear, offset);
-        });
+    document.getElementById('scrollDown').addEventListener('click', function() {
+        offset += 1;
+        generateCalendar(currentMonth, currentYear, offset);
+    });
 
-        document.getElementById('scrollDown').addEventListener('click', function() {
-            offset += 1;
-            generateCalendar(currentMonth, currentYear, offset);
-        });
-
-        document.getElementsByClassName('close')[0].onclick = function() {
-            document.getElementById('myModal').style.display = "none";
-        }
-
-        window.onclick = function(event) {
-            if (event.target == document.getElementById('myModal')) {
-                document.getElementById('myModal').style.display = "none";
-            }
-        }
-    </script>
+    // Initial calendar generation
+    generateCalendar(currentMonth, currentYear, offset);
+</script>
 {% endblock %}

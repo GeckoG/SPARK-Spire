@@ -453,3 +453,18 @@ def habits(request, username):
     label = "Stretch"
     label2 = "Mobility"
     return render(request, 'habits.html', {'percentage': percentage, 'percentage2': percentage2, 'label': label, 'label2': label2})
+
+def get_stretch_statuses(request, username, start_date, end_date):
+    start_date = datetime.strptime(start_date, '%Y-%m-%d')
+    end_date = datetime.strptime(end_date, '%Y-%m-%d')
+    date_range = [start_date + timedelta(days=x) for x in range((end_date - start_date).days + 1)]
+    stretch_statuses = {}
+
+    for date in date_range:
+        try:
+            daily_record = Daily.objects.get(profile__user__username=username, date=date)
+            stretch_statuses[date.strftime('%Y-%m-%d')] = daily_record.stretch
+        except Daily.DoesNotExist:
+            stretch_statuses[date.strftime('%Y-%m-%d')] = None
+
+    return JsonResponse(stretch_statuses)

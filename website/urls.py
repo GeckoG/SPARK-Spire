@@ -20,5 +20,6 @@ urlpatterns = [
     path('add_staff/', views.add_staff, name='add_staff'),
     path('daily/<str:username>/<str:date>', views.daily, name='daily'),
     path('habits/<str:username>/', views.habits, name='habits'),
+    path('get_stretch_statuses/<str:username>/<str:start_date>/<str:end_date>/', views.get_stretch_statuses, name='get_stretch_statuses'),
     #path('profile/<str:habit>', views.habit, name='habit'),
 ]
