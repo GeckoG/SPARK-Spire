@@ -139,19 +139,19 @@
                     <div class="horizontal-container">
                         <div class="labelbox" id="labelbox1">
                             <center><h1>{{ stretch_pct }}</h1></center>
-                            <center><h4>{{ label }}</h4></center>
+                            <center><h4>{{ stretch_label }}</h4></center>
                         </div>
                         <div>
                             <center><h5>Week</h5></center>
-                            <center><h1>{{ true_stretch7 }}/5</h1></center>
+                            <center><h1>{{ true_stretch7 }}/{{ stretch_limit }}</h1></center>
                         </div>
                         <div>
                             <center><h5>6-Week</h5></center>
-                            <center><h1>{{ true_stretch42 }}/30</h1></center>
+                            <center><h1>{{ true_stretch42 }}/{{ stretch_limit42 }}</h1></center>
                         </div>
                         <div>
                             <center><h5>12-Week</h5></center>
-                            <center><h1>{{ true_stretch84 }}/60</h1></center>
+                            <center><h1>{{ true_stretch84 }}/{{ stretch_limit84 }}</h1></center>
                         </div>
                     </div>
                 </div>
@@ -160,73 +160,200 @@
                 <div class="percentage-box" id="percentageBox2">
                     <div class="horizontal-container">
                         <div class="labelbox" id="labelbox2">
-                            <center><h1>{{ percentage2 }}</h1></center>
-                            <center><h5>{{ label2 }}</h5></center>
+                            <center><h1>{{ mobility_pct }}</h1></center>
+                            <center><h4>{{ mobility_label }}</h4></center>
                         </div>
                         <div>
-                            <center><h1>3/5</h1></center>
                             <center><h5>Week</h5></center>
+                            <center><h1>{{ true_mobility7 }}/{{ mobility_limit }}</h1></center>
                         </div>
                         <div>
-                            <center><h1>11/30</h1></center>
                             <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_mobility42 }}/{{ mobility_limit42 }}</h1></center>
                         </div>
                         <div>
-                            <center><h1>31/60</h1></center>
                             <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_mobility84 }}/{{ mobility_limit84 }}</h1></center>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="background-box">
                 <div class="percentage-box" id="percentageBox3">
-                    <center><h1>0.77</h1></center>
-                    <center><h6>Coordination</h6></center>
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox3">
+                            <center><h1>{{ coordination_pct }}</h1></center>
+                            <center><h4>{{ coordination_label }}</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_coordination7 }}/{{ coordination_limit }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_coordination42 }}/{{ coordination_limit42 }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_coordination84 }}/{{ coordination_limit84 }}</h1></center>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="background-box">
                 <div class="percentage-box" id="percentageBox4">
-                    <center><h1>0.89</h1></center>
-                    <center><h5>Balance</h5></center>
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox4">
+                            <center><h1>{{ balance_pct }}</h1></center>
+                            <center><h4>{{ balance_label }}</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_balance7 }}/{{ balance_limit }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_balance42 }}/{{ balance_limit42 }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_balance84 }}/{{ balance_limit84 }}</h1></center>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="background-box">
                 <div class="percentage-box" id="percentageBox5">
-                    <center><h1>0.34</h1></center>
-                    <center><h5>Speed</h5></center>
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox5">
+                            <center><h1>{{ speed_pct }}</h1></center>
+                            <center><h4>{{ speed_label }}</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_speed7 }}/{{ speed_limit }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_speed42 }}/{{ speed_limit42 }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_speed84 }}/{{ speed_limit84 }}</h1></center>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="background-box">
                 <div class="percentage-box" id="percentageBox6">
-                    <center><h1>0.76</h1></center>
-                    <center><h5>Agility</h5></center>
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox6">
+                            <center><h1>{{ agility_pct }}</h1></center>
+                            <center><h4>{{ agility_label }}</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_agility7 }}/{{ agility_limit }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_agility42 }}/{{ agility_limit42 }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_agility84 }}/{{ agility_limit84 }}</h1></center>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="background-box">
                 <div class="percentage-box" id="percentageBox7">
-                    <center><h1>0.05</h1></center>
-                    <center><h5>Oxygen</h5></center>
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox7">
+                            <center><h1>{{ altitude_pct }}</h1></center>
+                            <center><h4>{{ altitude_label }}</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_altitude7 }}/{{ altitude_limit }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_altitude42 }}/{{ altitude_limit42 }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_altitude84 }}/{{ altitude_limit84 }}</h1></center>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="background-box">
                 <div class="percentage-box" id="percentageBox8">
-                    <center><h1>{{ percentage2 }}</h1></center>
-                    <center><h5>Strength</h5></center>
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox8">
+                            <center><h1>{{ strength_pct }}</h1></center>
+                            <center><h4>{{ strength_label }}</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_strength7 }}/{{ strength_limit }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_strength42 }}/{{ strength_limit42 }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_strength84 }}/{{ strength_limit84 }}</h1></center>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="background-box">
                 <div class="percentage-box" id="percentageBox9">
-                    <center><h1>1.00</h1></center>
-                    <center><h5>Power</h5></center>
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox9">
+                            <center><h1>{{ power_pct }}</h1></center>
+                            <center><h4>{{ power_label }}</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_power7 }}/{{ power_limit }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_power42 }}/{{ power_limit42 }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_power84 }}/{{ power_limit84 }}</h1></center>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="background-box">
                 <div class="percentage-box" id="percentageBox10">
-                    <center><h1>0.50</h1></center>
-                    <center><h5>Reaction</h5></center>
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox10">
+                            <center><h1>{{ reaction_pct }}</h1></center>
+                            <center><h4>{{ reaction_label }}</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_reaction7 }}/{{ reaction_limit }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_reaction42 }}/{{ reaction_limit42 }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_reaction84 }}/{{ reaction_limit84 }}</h1></center>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
         <br/><hr/>
         <center><h1 style="color: black;">Mental</h1></center>
         <div class="centered-box-container">
@@ -238,7 +365,7 @@
             </div>
             <div class="background-box">
                 <div class="percentage-box" id="percentageBox12">
-                    <center><h1>{{ percentage2 }}</h1></center>
+                    <center><h1>{{ mobility_pct }}</h1></center>
                     <center><h5>Motivation</h5></center>
                 </div>
             </div>
@@ -274,7 +401,7 @@
             </div>
             <div class="background-box">
                 <div class="percentage-box" id="percentageBox18">
-                    <center><h1>{{ percentage2 }}</h1></center>
+                    <center><h1>{{ mobility_pct }}</h1></center>
                     <center><h5>Laugh</h5></center>
                 </div>
             </div>
@@ -326,7 +453,7 @@
             </div>
             <div class="background-box">
                 <div class="percentage-box" id="percentageBox25">
-                    <center><h1>{{ percentage2 }}</h1></center>
+                    <center><h1>{{ mobility_pct }}</h1></center>
                     <center><h5>B Alanine</h5></center>
                 </div>
             </div>
@@ -478,36 +605,44 @@
     // Apply to specific elements
     applyGradientStyles('percentageBox', {{ stretch_pct }});
     applyGradientStyles2('labelbox1', {{ stretch_pct }});
-    applyGradientStyles('percentageBox2', {{ percentage2 }});
-    applyGradientStyles2('labelbox2', {{ percentage2 }});
-    applyGradientStyles('percentageBox3', .77);
-    applyGradientStyles('percentageBox4', .89);
-    applyGradientStyles('percentageBox5', .34);
-    applyGradientStyles('percentageBox6', .76);
-    applyGradientStyles('percentageBox7', .05);
-    applyGradientStyles('percentageBox8', {{ percentage2 }});
-    applyGradientStyles('percentageBox9', 1.0);
-    applyGradientStyles('percentageBox10', .50);
-    applyGradientStyles('percentageBox11', {{ stretch_pct }});
-    applyGradientStyles('percentageBox12', {{ percentage2 }});
-    applyGradientStyles('percentageBox13', .77);
-    applyGradientStyles('percentageBox14', .89);
-    applyGradientStyles('percentageBox15', .34);
-    applyGradientStyles('percentageBox16', .76);
-    applyGradientStyles('percentageBox17', .05);
-    applyGradientStyles('percentageBox18', {{ percentage2 }});
-    applyGradientStyles('percentageBox19', 1.0);
-    applyGradientStyles('percentageBox20', .50);
-    applyGradientStyles('percentageBox21', {{ stretch_pct }});
-    applyGradientStyles('percentageBox22', {{ percentage2 }});
-    applyGradientStyles('percentageBox23', .77);
-    applyGradientStyles('percentageBox24', .89);
-    applyGradientStyles('percentageBox25', .34);
-    applyGradientStyles('percentageBox26', .76);
-    applyGradientStyles('percentageBox27', .05);
-    applyGradientStyles('percentageBox28', {{ percentage2 }});
-    applyGradientStyles('percentageBox29', 1.0);
-    applyGradientStyles('percentageBox30', .50);
+    applyGradientStyles('percentageBox2', {{ mobility_pct }});
+    applyGradientStyles2('labelbox2', {{ mobility_pct }});
+    applyGradientStyles('percentageBox3', {{ coordination_pct }});
+    applyGradientStyles2('labelbox3', {{ coordination_pct }});
+    applyGradientStyles('percentageBox4', {{balance_pct}});
+    applyGradientStyles2('labelbox4', {{balance_pct}});
+    applyGradientStyles('percentageBox5', {{ speed_pct }});
+    applyGradientStyles2('labelbox5', {{ speed_pct }});
+    applyGradientStyles('percentageBox6', {{ agility_pct }});
+    applyGradientStyles2('labelbox6', {{ agility_pct }});
+    applyGradientStyles('percentageBox7', {{ altitude_pct }});
+    applyGradientStyles2('labelbox7', {{ altitude_pct }});
+    applyGradientStyles('percentageBox8', {{ strength_pct }});
+    applyGradientStyles2('labelbox8', {{ strength_pct }});
+    applyGradientStyles('percentageBox9', {{ power_pct }});
+    applyGradientStyles2('labelbox9', {{ power_pct }});
+    applyGradientStyles('percentageBox10', {{ reaction_pct }});
+    applyGradientStyles2('labelbox10', {{ reaction_pct }});
+    applyGradientStyles('percentageBox11', 1);
+    applyGradientStyles('percentageBox12', 0.77);
+    applyGradientStyles('percentageBox13', 0.89);
+    applyGradientStyles('percentageBox14', 0.34);
+    applyGradientStyles('percentageBox15', 0.76);
+    applyGradientStyles('percentageBox16', 0.05);
+    applyGradientStyles('percentageBox17', 0.76);
+    applyGradientStyles('percentageBox18', 0.05);
+    applyGradientStyles('percentageBox19', 1);
+    applyGradientStyles('percentageBox20', 0.61);
+    applyGradientStyles('percentageBox21', 0.77);
+    applyGradientStyles('percentageBox22', 0.04);
+    applyGradientStyles('percentageBox23', 0.89);
+    applyGradientStyles('percentageBox24', 0.34);
+    applyGradientStyles('percentageBox25', 0.76);
+    applyGradientStyles('percentageBox26', 0.05);
+    applyGradientStyles('percentageBox27', 0.76);
+    applyGradientStyles('percentageBox28', 0.05);
+    applyGradientStyles('percentageBox29', 1);
+    applyGradientStyles('percentageBox30', 0.77);
 </script>
 
 <script>        // Water Chart
@@ -638,45 +773,48 @@
         sleep_config
     );
 </script>
-    <!-- Modal Box -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Habit History for Stretch</p>
-            <button id="scrollUp" class="scroll-button">↑</button>
-            <div class="calendar-grid">
-                <!-- Squares will be generated by JavaScript -->
-            </div>
-            <button id="scrollDown" class="scroll-button">↓</button>
-        </div>
-    </div>
 
-    <script>
-        document.getElementById('percentageBox').onclick = function() {
+<!-- Modal Box -->
+    <div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+            <p>Habit History for Stretch</p>
+        <button id="scrollUp" class="scroll-button">↑</button>
+            <div class="calendar-grid">
+            <!-- Squares will be generated by JavaScript -->
+        </div>
+        <button id="scrollDown" class="scroll-button">↓</button>
+    </div>
+</div>
+
+<script>
+    document.getElementById('percentageBox').onclick = function() {
             document.getElementById('myModal').style.display = "block";
-        }
+    }
 
         document.getElementsByClassName('close')[0].onclick = function() {
             document.getElementById('myModal').style.display = "none";
-        }
+    }
 
-        window.onclick = function(event) {
+    window.onclick = function(event) {
             if (event.target == document.getElementById('myModal')) {
                 document.getElementById('myModal').style.display = "none";
-            }
         }
-    </script>
-    <script>
-        document.getElementById('scrollUp').addEventListener('click', function() {
-            const grid = document.getElementById('calendarGrid');
-            grid.scrollBy(0, -40); // Adjust the scroll amount as needed
-        });
-    
-        document.getElementById('scrollDown').addEventListener('click', function() {
-            const grid = document.getElementById('calendarGrid');
-            grid.scrollBy(0, 40); // Adjust the scroll amount as needed
-        });
-    </script>
+    }
+</script>
+
+<script>
+    document.getElementById('scrollUp').addEventListener('click', function() {
+        const grid = document.getElementById('calendarGrid');
+        grid.scrollBy(0, -40); // Adjust the scroll amount as needed
+    });
+
+    document.getElementById('scrollDown').addEventListener('click', function() {
+        const grid = document.getElementById('calendarGrid');
+        grid.scrollBy(0, 40); // Adjust the scroll amount as needed
+    });
+</script>
+
 <script>
     let currentMonth = new Date().getMonth();
     let currentYear = new Date().getFullYear();
