@@ -450,19 +450,36 @@ def daily(request, username, date):
 def habits(request, username):
     user = get_object_or_404(User, username=username)
     profile = user.profile
-    twelve_weeks_ago = datetime.now() - timedelta(weeks=12)
-    six_weeks_ago = datetime.now() - timedelta(weeks=6)
     one_week_ago = datetime.now() - timedelta(weeks=1)
+    two_weeks_ago = datetime.now() - timedelta(weeks=2)
+    three_weeks_ago = datetime.now() - timedelta(weeks=3)
+    four_weeks_ago = datetime.now() - timedelta(weeks=4)
+    five_weeks_ago = datetime.now() - timedelta(weeks=5)
+    six_weeks_ago = datetime.now() - timedelta(weeks=6)
+    seven_weeks_ago = datetime.now() - timedelta(weeks=7)
+    eight_weeks_ago = datetime.now() - timedelta(weeks=8)
+    nine_weeks_ago = datetime.now() - timedelta(weeks=9)
+    ten_weeks_ago = datetime.now() - timedelta(weeks=10)
+    eleven_weeks_ago = datetime.now() - timedelta(weeks=11)
+    twelve_weeks_ago = datetime.now() - timedelta(weeks=12)
 
     daily_entries = Daily.objects.filter(profile=profile).values('date', 'stretch')
-    last84_stretch = Daily.objects.filter(profile=profile, date__gte=twelve_weeks_ago).values('date', 'stretch')
-    last42_stretch = Daily.objects.filter(profile=profile, date__gte=six_weeks_ago).values('date', 'stretch')
-    last7_stretch = Daily.objects.filter(profile=profile, date__gte=one_week_ago).values('date', 'stretch')
+    last84_entries = Daily.objects.filter(profile=profile, date__gte=twelve_weeks_ago, date__lt=eleven_weeks_ago).values('date', 'stretch')
+    last77_entries = Daily.objects.filter(profile=profile, date__gte=eleven_weeks_ago, date__lt=ten_weeks_ago).values('date', 'stretch')
+    last70_entries = Daily.objects.filter(profile=profile, date__gte=ten_weeks_ago, date__lt=nine_weeks_ago).values('date', 'stretch')
+    last63_entries = Daily.objects.filter(profile=profile, date__gte=nine_weeks_ago, date__lt=eight_weeks_ago).values('date', 'stretch')
+    last56_entries = Daily.objects.filter(profile=profile, date__gte=eight_weeks_ago, date__lt=seven_weeks_ago).values('date', 'stretch')
+    last49_entries = Daily.objects.filter(profile=profile, date__gte=seven_weeks_ago, date__lt=six_weeks_ago).values('date', 'stretch')
+    last42_entries = Daily.objects.filter(profile=profile, date__gte=six_weeks_ago, date__lt=five_weeks_ago).values('date', 'stretch')
+    last35_entries = Daily.objects.filter(profile=profile, date__gte=five_weeks_ago, date__lt=four_weeks_ago).values('date', 'stretch')
+    last28_entries = Daily.objects.filter(profile=profile, date__gte=four_weeks_ago, date__lt=three_weeks_ago).values('date', 'stretch')
+    last21_entries = Daily.objects.filter(profile=profile, date__gte=three_weeks_ago, date__lt=two_weeks_ago).values('date', 'stretch')
+    last14_entries = Daily.objects.filter(profile=profile, date__gte=two_weeks_ago, date__lt=one_week_ago).values('date', 'stretch')
+    last7_entries = Daily.objects.filter(profile=profile, date__gte=one_week_ago).values('date', 'stretch')
 
-    true_stretch84 = sum(1 for entry in last84_stretch if entry['stretch'])
-    true_stretch42 = sum(1 for entry in last42_stretch if entry['stretch'])
-    true_stretch7 = sum(1 for entry in last7_stretch if entry['stretch'])
-
+    true_stretch84 = (min(sum(1 for entry in last7_entries if entry['stretch']), 5)) + (min(sum(1 for entry in last14_entries if entry['stretch']), 5)) + (min(sum(1 for entry in last21_entries if entry['stretch']), 5)) + (min(sum(1 for entry in last28_entries if entry['stretch']), 5)) + (min(sum(1 for entry in last35_entries if entry['stretch']), 5)) + (min(sum(1 for entry in last42_entries if entry['stretch']), 5)) + (min(sum(1 for entry in last49_entries if entry['stretch']), 5)) + (min(sum(1 for entry in last56_entries if entry['stretch']), 5)) + (min(sum(1 for entry in last63_entries if entry['stretch']), 5)) + (min(sum(1 for entry in last70_entries if entry['stretch']), 5)) + (min(sum(1 for entry in last77_entries if entry['stretch']), 5)) + (min(sum(1 for entry in last84_entries if entry['stretch']), 5))
+    true_stretch42 = (min(sum(1 for entry in last7_entries if entry['stretch']), 5)) + (min(sum(1 for entry in last14_entries if entry['stretch']), 5)) + (min(sum(1 for entry in last21_entries if entry['stretch']), 5)) + (min(sum(1 for entry in last28_entries if entry['stretch']), 5)) + (min(sum(1 for entry in last35_entries if entry['stretch']), 5)) + (min(sum(1 for entry in last42_entries if entry['stretch']), 5))
+    true_stretch7 = min(sum(1 for entry in last7_entries if entry['stretch']), 5)
 
     stretch_pct = round((((true_stretch7 / 7) * 0.1) + ((true_stretch42 / 42) * 0.7) + ((true_stretch84 / 84) * 0.2)), 2)    
     percentage2 = 0.04
@@ -473,7 +490,7 @@ def habits(request, username):
     daily_data = {entry['date'].strftime('%Y-%m-%d'): entry['stretch'] for entry in daily_entries}
 
     return render(request, 'habits.html', {
-        'stretch_pct': stretch_pct,
+        'stretch_pct': stretch_pct, 'true_stretch7': true_stretch7, 'true_stretch42': true_stretch42, 'true_stretch84': true_stretch84,
         'percentage2': percentage2,
         'label': label,
         'label2': label2,
