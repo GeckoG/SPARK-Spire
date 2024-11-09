@@ -138,7 +138,7 @@
                 <div class="percentage-box" id="percentageBox">
                     <div class="horizontal-container">
                         <div class="labelbox" id="labelbox1">
-                            <center><h1>{{ percentage }}</h1></center>
+                            <center><h1>{{ stretch_pct }}</h1></center>
                             <center><h4>{{ label }}</h4></center>
                         </div>
                         <div>
@@ -232,7 +232,7 @@
         <div class="centered-box-container">
             <div class="background-box">
                 <div class="percentage-box" id="percentageBox11">
-                    <center><h1>{{ percentage }}</h1></center>
+                    <center><h1>{{ stretch_pct }}</h1></center>
                     <center><h5>Attitude</h5></center>
                 </div>
             </div>
@@ -320,7 +320,7 @@
         <div class="centered-box-container">
             <div class="background-box">
                 <div class="percentage-box" id="percentageBox24">
-                    <center><h1>{{ percentage }}</h1></center>
+                    <center><h1>{{ stretch_pct }}</h1></center>
                     <center><h5>No Sweets</h5></center>
                 </div>
             </div>
@@ -476,8 +476,8 @@
     }
 
     // Apply to specific elements
-    applyGradientStyles('percentageBox', {{ percentage }});
-    applyGradientStyles2('labelbox1', {{ percentage }});
+    applyGradientStyles('percentageBox', {{ stretch_pct }});
+    applyGradientStyles2('labelbox1', {{ stretch_pct }});
     applyGradientStyles('percentageBox2', {{ percentage2 }});
     applyGradientStyles2('labelbox2', {{ percentage2 }});
     applyGradientStyles('percentageBox3', .77);
@@ -488,7 +488,7 @@
     applyGradientStyles('percentageBox8', {{ percentage2 }});
     applyGradientStyles('percentageBox9', 1.0);
     applyGradientStyles('percentageBox10', .50);
-    applyGradientStyles('percentageBox11', {{ percentage }});
+    applyGradientStyles('percentageBox11', {{ stretch_pct }});
     applyGradientStyles('percentageBox12', {{ percentage2 }});
     applyGradientStyles('percentageBox13', .77);
     applyGradientStyles('percentageBox14', .89);
@@ -498,7 +498,7 @@
     applyGradientStyles('percentageBox18', {{ percentage2 }});
     applyGradientStyles('percentageBox19', 1.0);
     applyGradientStyles('percentageBox20', .50);
-    applyGradientStyles('percentageBox21', {{ percentage }});
+    applyGradientStyles('percentageBox21', {{ stretch_pct }});
     applyGradientStyles('percentageBox22', {{ percentage2 }});
     applyGradientStyles('percentageBox23', .77);
     applyGradientStyles('percentageBox24', .89);
@@ -682,6 +682,10 @@
     let currentYear = new Date().getFullYear();
     let offset = 0;
 
+    // Get the daily data from the template context
+    const dailyData = JSON.parse('{{ daily_data|escapejs }}');
+    console.log("Daily Data:", dailyData);
+
     function generateCalendar(month, year, offset) {
         const calendarGrid = document.querySelector('.calendar-grid');
         const firstDay = new Date(year, month, 1).getDay();
@@ -697,41 +701,39 @@
             square.classList.add('square');
 
             const dateIndex = i - firstDay + 1 + offset * 7;
+            let date;
 
             if (dateIndex < 1) {
                 // Dates from the previous month
-                const prevMonthDate = new Date(year, month - 1, daysInPrevMonth + dateIndex);
-                square.textContent = prevMonthDate.getDate() === 1 ? prevMonthDate.toLocaleString('default', { month: 'short' }) : prevMonthDate.getDate();
+                date = new Date(year, month - 1, daysInPrevMonth + dateIndex);
+                square.textContent = date.getDate() === 1 ? date.toLocaleString('default', { month: 'short' }) : date.getDate();
             } else if (dateIndex > daysInMonth) {
                 // Dates from the next month
-                const nextMonthDate = new Date(year, month + 1, dateIndex - daysInMonth);
-                square.textContent = nextMonthDate.getDate() === 1 ? nextMonthDate.toLocaleString('default', { month: 'short' }) : nextMonthDate.getDate();
+                date = new Date(year, month + 1, dateIndex - daysInMonth);
+                square.textContent = date.getDate() === 1 ? date.toLocaleString('default', { month: 'short' }) : date.getDate();
             } else {
                 // Dates from the current month
-                square.textContent = dateIndex === 1 ? new Date(year, month).toLocaleString('default', { month: 'short' }) : dateIndex;
+                date = new Date(year, month, dateIndex);
+                square.textContent = dateIndex === 1 ? date.toLocaleString('default', { month: 'short' }) : dateIndex;
+            }
+
+            // Format the date as a string
+            const dateString = date.toISOString().split('T')[0];
+            console.log("Processing date:", dateString);
+
+            // Check if the date is in the dailyData object
+            if (dailyData.hasOwnProperty(dateString)) {
+                const stretchValue = dailyData[dateString];
+                console.log("Stretch Value:", stretchValue);
+                if (stretchValue === false) {
+                    square.style.backgroundColor = 'red';
+                } else if (stretchValue === true) {
+                    square.style.backgroundColor = 'green';
+                }
             }
 
             calendarGrid.appendChild(square);
         }
-
-        // Fetch stretch statuses and update colors
-        const startDate = new Date(year, month, 1);
-        const endDate = new Date(year, month + 1, 0);
-        fetch(`/get_stretch_statuses/{{ username }}/${startDate.toISOString().split('T')[0]}/${endDate.toISOString().split('T')[0]}/`)
-            .then(response => response.json())
-            .then(data => {
-                const squares = document.querySelectorAll('.square');
-                squares.forEach((square, index) => {
-                    const date = new Date(year, month, index - firstDay + 1 + offset * 7).toISOString().split('T')[0];
-                    if (data[date] === true) {
-                        square.style.backgroundColor = 'green';
-                    } else if (data[date] === false) {
-                        square.style.backgroundColor = 'red';
-                    } else {
-                        square.style.backgroundColor = 'yellow';
-                    }
-                });
-            });
     }
 
     document.getElementById('scrollUp').addEventListener('click', function() {

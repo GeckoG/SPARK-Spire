@@ -448,23 +448,34 @@ def daily(request, username, date):
         'change_date_form': change_date_form})
 
 def habits(request, username):
-    percentage = 0.61
+    user = get_object_or_404(User, username=username)
+    profile = user.profile
+    twelve_weeks_ago = datetime.now() - timedelta(weeks=12)
+    six_weeks_ago = datetime.now() - timedelta(weeks=6)
+    one_week_ago = datetime.now() - timedelta(weeks=1)
+
+    daily_entries = Daily.objects.filter(profile=profile).values('date', 'stretch')
+    last84_stretch = Daily.objects.filter(profile=profile, date__gte=twelve_weeks_ago).values('date', 'stretch')
+    last42_stretch = Daily.objects.filter(profile=profile, date__gte=six_weeks_ago).values('date', 'stretch')
+    last7_stretch = Daily.objects.filter(profile=profile, date__gte=one_week_ago).values('date', 'stretch')
+
+    true_stretch84 = sum(1 for entry in last84_stretch if entry['stretch'])
+    true_stretch42 = sum(1 for entry in last42_stretch if entry['stretch'])
+    true_stretch7 = sum(1 for entry in last7_stretch if entry['stretch'])
+
+
+    stretch_pct = round((((true_stretch7 / 7) * 0.1) + ((true_stretch42 / 42) * 0.7) + ((true_stretch84 / 84) * 0.2)), 2)    
     percentage2 = 0.04
     label = "Stretch"
     label2 = "Mobility"
-    return render(request, 'habits.html', {'percentage': percentage, 'percentage2': percentage2, 'label': label, 'label2': label2})
 
-def get_stretch_statuses(request, username, start_date, end_date):
-    start_date = datetime.strptime(start_date, '%Y-%m-%d')
-    end_date = datetime.strptime(end_date, '%Y-%m-%d')
-    date_range = [start_date + timedelta(days=x) for x in range((end_date - start_date).days + 1)]
-    stretch_statuses = {}
+    # Convert daily_entries to a dictionary with date strings as keys and stretch values as values
+    daily_data = {entry['date'].strftime('%Y-%m-%d'): entry['stretch'] for entry in daily_entries}
 
-    for date in date_range:
-        try:
-            daily_record = Daily.objects.get(profile__user__username=username, date=date)
-            stretch_statuses[date.strftime('%Y-%m-%d')] = daily_record.stretch
-        except Daily.DoesNotExist:
-            stretch_statuses[date.strftime('%Y-%m-%d')] = None
-
-    return JsonResponse(stretch_statuses)
+    return render(request, 'habits.html', {
+        'stretch_pct': stretch_pct,
+        'percentage2': percentage2,
+        'label': label,
+        'label2': label2,
+        'daily_data': json.dumps(daily_data)  # Serialize to JSON so we don't get an error when reading True False with capital letters (javascript needs all-lowercase)
+    })
