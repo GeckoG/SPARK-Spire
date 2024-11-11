@@ -463,19 +463,19 @@ def habits(request, username):
     eleven_weeks_ago = datetime.now() - timedelta(weeks=11)
     twelve_weeks_ago = datetime.now() - timedelta(weeks=12)
 
-    daily_entries = Daily.objects.filter(profile=profile).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction')
-    last84_entries = Daily.objects.filter(profile=profile, date__gte=twelve_weeks_ago, date__lt=eleven_weeks_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction')
-    last77_entries = Daily.objects.filter(profile=profile, date__gte=eleven_weeks_ago, date__lt=ten_weeks_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction')
-    last70_entries = Daily.objects.filter(profile=profile, date__gte=ten_weeks_ago, date__lt=nine_weeks_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction')
-    last63_entries = Daily.objects.filter(profile=profile, date__gte=nine_weeks_ago, date__lt=eight_weeks_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction')
-    last56_entries = Daily.objects.filter(profile=profile, date__gte=eight_weeks_ago, date__lt=seven_weeks_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction')
-    last49_entries = Daily.objects.filter(profile=profile, date__gte=seven_weeks_ago, date__lt=six_weeks_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction')
-    last42_entries = Daily.objects.filter(profile=profile, date__gte=six_weeks_ago, date__lt=five_weeks_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction')
-    last35_entries = Daily.objects.filter(profile=profile, date__gte=five_weeks_ago, date__lt=four_weeks_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction')
-    last28_entries = Daily.objects.filter(profile=profile, date__gte=four_weeks_ago, date__lt=three_weeks_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction')
-    last21_entries = Daily.objects.filter(profile=profile, date__gte=three_weeks_ago, date__lt=two_weeks_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction')
-    last14_entries = Daily.objects.filter(profile=profile, date__gte=two_weeks_ago, date__lt=one_week_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction')
-    last7_entries = Daily.objects.filter(profile=profile, date__gte=one_week_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction')
+    daily_entries = Daily.objects.filter(profile=profile).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction', 'stress', 'motivation', 'read', 'medidate', 'visualize', 'focus', 'kindness', 'be_social')
+    last84_entries = Daily.objects.filter(profile=profile, date__gte=twelve_weeks_ago, date__lt=eleven_weeks_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction', 'stress', 'motivation', 'read', 'medidate', 'visualize', 'focus', 'kindness', 'be_social')
+    last77_entries = Daily.objects.filter(profile=profile, date__gte=eleven_weeks_ago, date__lt=ten_weeks_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction', 'stress', 'motivation', 'read', 'medidate', 'visualize', 'focus', 'kindness', 'be_social')
+    last70_entries = Daily.objects.filter(profile=profile, date__gte=ten_weeks_ago, date__lt=nine_weeks_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction', 'stress', 'motivation', 'read', 'medidate', 'visualize', 'focus', 'kindness', 'be_social')
+    last63_entries = Daily.objects.filter(profile=profile, date__gte=nine_weeks_ago, date__lt=eight_weeks_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction', 'stress', 'motivation', 'read', 'medidate', 'visualize', 'focus', 'kindness', 'be_social')
+    last56_entries = Daily.objects.filter(profile=profile, date__gte=eight_weeks_ago, date__lt=seven_weeks_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction', 'stress', 'motivation', 'read', 'medidate', 'visualize', 'focus', 'kindness', 'be_social')
+    last49_entries = Daily.objects.filter(profile=profile, date__gte=seven_weeks_ago, date__lt=six_weeks_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction', 'stress', 'motivation', 'read', 'medidate', 'visualize', 'focus', 'kindness', 'be_social')
+    last42_entries = Daily.objects.filter(profile=profile, date__gte=six_weeks_ago, date__lt=five_weeks_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction', 'stress', 'motivation', 'read', 'medidate', 'visualize', 'focus', 'kindness', 'be_social')
+    last35_entries = Daily.objects.filter(profile=profile, date__gte=five_weeks_ago, date__lt=four_weeks_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction', 'stress', 'motivation', 'read', 'medidate', 'visualize', 'focus', 'kindness', 'be_social')
+    last28_entries = Daily.objects.filter(profile=profile, date__gte=four_weeks_ago, date__lt=three_weeks_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction', 'stress', 'motivation', 'read', 'medidate', 'visualize', 'focus', 'kindness', 'be_social')
+    last21_entries = Daily.objects.filter(profile=profile, date__gte=three_weeks_ago, date__lt=two_weeks_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction', 'stress', 'motivation', 'read', 'medidate', 'visualize', 'focus', 'kindness', 'be_social')
+    last14_entries = Daily.objects.filter(profile=profile, date__gte=two_weeks_ago, date__lt=one_week_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction', 'stress', 'motivation', 'read', 'medidate', 'visualize', 'focus', 'kindness', 'be_social')
+    last7_entries = Daily.objects.filter(profile=profile, date__gte=one_week_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'altitude', 'strength', 'power', 'reaction', 'stress', 'motivation', 'read', 'medidate', 'visualize', 'focus', 'kindness', 'be_social')
 
     stretch_limit = 5
     true_stretch84 = (min(sum(1 for entry in last7_entries if entry['stretch']), stretch_limit)) + (min(sum(1 for entry in last14_entries if entry['stretch']), stretch_limit)) + (min(sum(1 for entry in last21_entries if entry['stretch']), stretch_limit)) + (min(sum(1 for entry in last28_entries if entry['stretch']), stretch_limit)) + (min(sum(1 for entry in last35_entries if entry['stretch']), stretch_limit)) + (min(sum(1 for entry in last42_entries if entry['stretch']), stretch_limit)) + (min(sum(1 for entry in last49_entries if entry['stretch']), stretch_limit)) + (min(sum(1 for entry in last56_entries if entry['stretch']), stretch_limit)) + (min(sum(1 for entry in last63_entries if entry['stretch']), stretch_limit)) + (min(sum(1 for entry in last70_entries if entry['stretch']), stretch_limit)) + (min(sum(1 for entry in last77_entries if entry['stretch']), stretch_limit)) + (min(sum(1 for entry in last84_entries if entry['stretch']), stretch_limit))
@@ -497,7 +497,7 @@ def habits(request, username):
     true_balance42 = (min(sum(1 for entry in last7_entries if entry['balance']), balance_limit)) + (min(sum(1 for entry in last14_entries if entry['balance']), balance_limit)) + (min(sum(1 for entry in last21_entries if entry['balance']), balance_limit)) + (min(sum(1 for entry in last28_entries if entry['balance']), balance_limit)) + (min(sum(1 for entry in last35_entries if entry['balance']), balance_limit)) + (min(sum(1 for entry in last42_entries if entry['balance']), balance_limit))
     true_balance7 = min(sum(1 for entry in last7_entries if entry['balance']), balance_limit)
 
-    speed_limit = 6
+    speed_limit = 1
     true_speed84 = (min(sum(1 for entry in last7_entries if entry['speed']), speed_limit)) + (min(sum(1 for entry in last14_entries if entry['speed']), speed_limit)) + (min(sum(1 for entry in last21_entries if entry['speed']), speed_limit)) + (min(sum(1 for entry in last28_entries if entry['speed']), speed_limit)) + (min(sum(1 for entry in last35_entries if entry['speed']), speed_limit)) + (min(sum(1 for entry in last42_entries if entry['speed']), speed_limit)) + (min(sum(1 for entry in last49_entries if entry['speed']), speed_limit)) + (min(sum(1 for entry in last56_entries if entry['speed']), speed_limit)) + (min(sum(1 for entry in last63_entries if entry['speed']), speed_limit)) + (min(sum(1 for entry in last70_entries if entry['speed']), speed_limit)) + (min(sum(1 for entry in last77_entries if entry['speed']), speed_limit)) + (min(sum(1 for entry in last84_entries if entry['speed']), speed_limit))
     true_speed42 = (min(sum(1 for entry in last7_entries if entry['speed']), speed_limit)) + (min(sum(1 for entry in last14_entries if entry['speed']), speed_limit)) + (min(sum(1 for entry in last21_entries if entry['speed']), speed_limit)) + (min(sum(1 for entry in last28_entries if entry['speed']), speed_limit)) + (min(sum(1 for entry in last35_entries if entry['speed']), speed_limit)) + (min(sum(1 for entry in last42_entries if entry['speed']), speed_limit))
     true_speed7 = min(sum(1 for entry in last7_entries if entry['speed']), speed_limit)
@@ -527,6 +527,36 @@ def habits(request, username):
     true_reaction42 = (min(sum(1 for entry in last7_entries if entry['reaction']), reaction_limit)) + (min(sum(1 for entry in last14_entries if entry['reaction']), reaction_limit)) + (min(sum(1 for entry in last21_entries if entry['reaction']), reaction_limit)) + (min(sum(1 for entry in last28_entries if entry['reaction']), reaction_limit)) + (min(sum(1 for entry in last35_entries if entry['reaction']), reaction_limit)) + (min(sum(1 for entry in last42_entries if entry['reaction']), reaction_limit))
     true_reaction7 = min(sum(1 for entry in last7_entries if entry['reaction']), reaction_limit)
 
+    read_limit = 4
+    true_read84 = (min(sum(1 for entry in last7_entries if entry['read']), read_limit)) + (min(sum(1 for entry in last14_entries if entry['read']), read_limit)) + (min(sum(1 for entry in last21_entries if entry['read']), read_limit)) + (min(sum(1 for entry in last28_entries if entry['read']), read_limit)) + (min(sum(1 for entry in last35_entries if entry['read']), read_limit)) + (min(sum(1 for entry in last42_entries if entry['read']), read_limit)) + (min(sum(1 for entry in last49_entries if entry['read']), read_limit)) + (min(sum(1 for entry in last56_entries if entry['read']), read_limit)) + (min(sum(1 for entry in last63_entries if entry['read']), read_limit)) + (min(sum(1 for entry in last70_entries if entry['read']), read_limit)) + (min(sum(1 for entry in last77_entries if entry['read']), read_limit)) + (min(sum(1 for entry in last84_entries if entry['read']), read_limit))
+    true_read42 = (min(sum(1 for entry in last7_entries if entry['read']), read_limit)) + (min(sum(1 for entry in last14_entries if entry['read']), read_limit)) + (min(sum(1 for entry in last21_entries if entry['read']), read_limit)) + (min(sum(1 for entry in last28_entries if entry['read']), read_limit)) + (min(sum(1 for entry in last35_entries if entry['read']), read_limit)) + (min(sum(1 for entry in last42_entries if entry['read']), read_limit))
+    true_read7 = min(sum(1 for entry in last7_entries if entry['read']), read_limit)
+
+    medidate_limit = 2
+    true_medidate84 = (min(sum(1 for entry in last7_entries if entry['medidate']), medidate_limit)) + (min(sum(1 for entry in last14_entries if entry['medidate']), medidate_limit)) + (min(sum(1 for entry in last21_entries if entry['medidate']), medidate_limit)) + (min(sum(1 for entry in last28_entries if entry['medidate']), medidate_limit)) + (min(sum(1 for entry in last35_entries if entry['medidate']), medidate_limit)) + (min(sum(1 for entry in last42_entries if entry['medidate']), medidate_limit)) + (min(sum(1 for entry in last49_entries if entry['medidate']), medidate_limit)) + (min(sum(1 for entry in last56_entries if entry['medidate']), medidate_limit)) + (min(sum(1 for entry in last63_entries if entry['medidate']), medidate_limit)) + (min(sum(1 for entry in last70_entries if entry['medidate']), medidate_limit)) + (min(sum(1 for entry in last77_entries if entry['medidate']), medidate_limit)) + (min(sum(1 for entry in last84_entries if entry['medidate']), medidate_limit))
+    true_medidate42 = (min(sum(1 for entry in last7_entries if entry['medidate']), medidate_limit)) + (min(sum(1 for entry in last14_entries if entry['medidate']), medidate_limit)) + (min(sum(1 for entry in last21_entries if entry['medidate']), medidate_limit)) + (min(sum(1 for entry in last28_entries if entry['medidate']), medidate_limit)) + (min(sum(1 for entry in last35_entries if entry['medidate']), medidate_limit)) + (min(sum(1 for entry in last42_entries if entry['medidate']), medidate_limit))
+    true_medidate7 = min(sum(1 for entry in last7_entries if entry['medidate']), medidate_limit)
+
+    visualize_limit = 2
+    true_visualize84 = (min(sum(1 for entry in last7_entries if entry['visualize']), visualize_limit)) + (min(sum(1 for entry in last14_entries if entry['visualize']), visualize_limit)) + (min(sum(1 for entry in last21_entries if entry['visualize']), visualize_limit)) + (min(sum(1 for entry in last28_entries if entry['visualize']), visualize_limit)) + (min(sum(1 for entry in last35_entries if entry['visualize']), visualize_limit)) + (min(sum(1 for entry in last42_entries if entry['visualize']), visualize_limit)) + (min(sum(1 for entry in last49_entries if entry['visualize']), visualize_limit)) + (min(sum(1 for entry in last56_entries if entry['visualize']), visualize_limit)) + (min(sum(1 for entry in last63_entries if entry['visualize']), visualize_limit)) + (min(sum(1 for entry in last70_entries if entry['visualize']), visualize_limit)) + (min(sum(1 for entry in last77_entries if entry['visualize']), visualize_limit)) + (min(sum(1 for entry in last84_entries if entry['visualize']), visualize_limit))
+    true_visualize42 = (min(sum(1 for entry in last7_entries if entry['visualize']), visualize_limit)) + (min(sum(1 for entry in last14_entries if entry['visualize']), visualize_limit)) + (min(sum(1 for entry in last21_entries if entry['visualize']), visualize_limit)) + (min(sum(1 for entry in last28_entries if entry['visualize']), visualize_limit)) + (min(sum(1 for entry in last35_entries if entry['visualize']), visualize_limit)) + (min(sum(1 for entry in last42_entries if entry['visualize']), visualize_limit))
+    true_visualize7 = min(sum(1 for entry in last7_entries if entry['visualize']), visualize_limit)
+
+    focus_limit = 2
+    true_focus84 = (min(sum(1 for entry in last7_entries if entry['focus']), focus_limit)) + (min(sum(1 for entry in last14_entries if entry['focus']), focus_limit)) + (min(sum(1 for entry in last21_entries if entry['focus']), focus_limit)) + (min(sum(1 for entry in last28_entries if entry['focus']), focus_limit)) + (min(sum(1 for entry in last35_entries if entry['focus']), focus_limit)) + (min(sum(1 for entry in last42_entries if entry['focus']), focus_limit)) + (min(sum(1 for entry in last49_entries if entry['focus']), focus_limit)) + (min(sum(1 for entry in last56_entries if entry['focus']), focus_limit)) + (min(sum(1 for entry in last63_entries if entry['focus']), focus_limit)) + (min(sum(1 for entry in last70_entries if entry['focus']), focus_limit)) + (min(sum(1 for entry in last77_entries if entry['focus']), focus_limit)) + (min(sum(1 for entry in last84_entries if entry['focus']), focus_limit))
+    true_focus42 = (min(sum(1 for entry in last7_entries if entry['focus']), focus_limit)) + (min(sum(1 for entry in last14_entries if entry['focus']), focus_limit)) + (min(sum(1 for entry in last21_entries if entry['focus']), focus_limit)) + (min(sum(1 for entry in last28_entries if entry['focus']), focus_limit)) + (min(sum(1 for entry in last35_entries if entry['focus']), focus_limit)) + (min(sum(1 for entry in last42_entries if entry['focus']), focus_limit))
+    true_focus7 = min(sum(1 for entry in last7_entries if entry['focus']), focus_limit)
+
+    kindness_limit = 5
+    true_kindness84 = (min(sum(1 for entry in last7_entries if entry['kindness']), kindness_limit)) + (min(sum(1 for entry in last14_entries if entry['kindness']), kindness_limit)) + (min(sum(1 for entry in last21_entries if entry['kindness']), kindness_limit)) + (min(sum(1 for entry in last28_entries if entry['kindness']), kindness_limit)) + (min(sum(1 for entry in last35_entries if entry['kindness']), kindness_limit)) + (min(sum(1 for entry in last42_entries if entry['kindness']), kindness_limit)) + (min(sum(1 for entry in last49_entries if entry['kindness']), kindness_limit)) + (min(sum(1 for entry in last56_entries if entry['kindness']), kindness_limit)) + (min(sum(1 for entry in last63_entries if entry['kindness']), kindness_limit)) + (min(sum(1 for entry in last70_entries if entry['kindness']), kindness_limit)) + (min(sum(1 for entry in last77_entries if entry['kindness']), kindness_limit)) + (min(sum(1 for entry in last84_entries if entry['kindness']), kindness_limit))
+    true_kindness42 = (min(sum(1 for entry in last7_entries if entry['kindness']), kindness_limit)) + (min(sum(1 for entry in last14_entries if entry['kindness']), kindness_limit)) + (min(sum(1 for entry in last21_entries if entry['kindness']), kindness_limit)) + (min(sum(1 for entry in last28_entries if entry['kindness']), kindness_limit)) + (min(sum(1 for entry in last35_entries if entry['kindness']), kindness_limit)) + (min(sum(1 for entry in last42_entries if entry['kindness']), kindness_limit))
+    true_kindness7 = min(sum(1 for entry in last7_entries if entry['kindness']), kindness_limit)
+
+    be_social_limit = 5
+    true_be_social84 = (min(sum(1 for entry in last7_entries if entry['be_social']), be_social_limit)) + (min(sum(1 for entry in last14_entries if entry['be_social']), be_social_limit)) + (min(sum(1 for entry in last21_entries if entry['be_social']), be_social_limit)) + (min(sum(1 for entry in last28_entries if entry['be_social']), be_social_limit)) + (min(sum(1 for entry in last35_entries if entry['be_social']), be_social_limit)) + (min(sum(1 for entry in last42_entries if entry['be_social']), be_social_limit)) + (min(sum(1 for entry in last49_entries if entry['be_social']), be_social_limit)) + (min(sum(1 for entry in last56_entries if entry['be_social']), be_social_limit)) + (min(sum(1 for entry in last63_entries if entry['be_social']), be_social_limit)) + (min(sum(1 for entry in last70_entries if entry['be_social']), be_social_limit)) + (min(sum(1 for entry in last77_entries if entry['be_social']), be_social_limit)) + (min(sum(1 for entry in last84_entries if entry['be_social']), be_social_limit))
+    true_be_social42 = (min(sum(1 for entry in last7_entries if entry['be_social']), be_social_limit)) + (min(sum(1 for entry in last14_entries if entry['be_social']), be_social_limit)) + (min(sum(1 for entry in last21_entries if entry['be_social']), be_social_limit)) + (min(sum(1 for entry in last28_entries if entry['be_social']), be_social_limit)) + (min(sum(1 for entry in last35_entries if entry['be_social']), be_social_limit)) + (min(sum(1 for entry in last42_entries if entry['be_social']), be_social_limit))
+    true_be_social7 = min(sum(1 for entry in last7_entries if entry['be_social']), be_social_limit)
+
     stretch_limit42 = stretch_limit * 6
     stretch_limit84 = stretch_limit * 12
     mobility_limit42 = mobility_limit * 6
@@ -547,6 +577,18 @@ def habits(request, username):
     power_limit84 = power_limit * 12
     reaction_limit42 = reaction_limit * 6
     reaction_limit84 = reaction_limit * 12
+    read_limit42 = read_limit * 6
+    read_limit84 = read_limit * 12
+    medidate_limit42 = medidate_limit * 6
+    medidate_limit84 = medidate_limit * 12
+    visualize_limit42 = visualize_limit * 6
+    visualize_limit84 = visualize_limit * 12
+    focus_limit42 = focus_limit * 6
+    focus_limit84 = focus_limit * 12
+    kindness_limit42 = kindness_limit * 6
+    kindness_limit84 = kindness_limit * 12
+    be_social_limit42 = be_social_limit * 6
+    be_social_limit84 = be_social_limit * 12
 
     stretch_pct = round((((true_stretch7 / stretch_limit) * 0.1) + ((true_stretch42 / stretch_limit42) * 0.7) + ((true_stretch84 / stretch_limit84) * 0.2)), 2)    
     mobility_pct = round((((true_mobility7 / mobility_limit) * 0.1) + ((true_mobility42 / mobility_limit42) * 0.7) + ((true_mobility84 / mobility_limit84) * 0.2)), 2)
@@ -558,9 +600,35 @@ def habits(request, username):
     strength_pct = round((((true_strength7 / strength_limit) * 0.1) + ((true_strength42 / strength_limit42) * 0.7) + ((true_strength84 / strength_limit84) * 0.2)), 2)
     power_pct = round((((true_power7 / power_limit) * 0.1) + ((true_power42 / power_limit42) * 0.7) + ((true_power84 / power_limit84) * 0.2)), 2)
     reaction_pct = round((((true_reaction7 / reaction_limit) * 0.1) + ((true_reaction42 / reaction_limit42) * 0.7) + ((true_reaction84 / reaction_limit84) * 0.2)), 2)
+    read_pct = round((((true_read7 / read_limit) * 0.1) + ((true_read42 / read_limit42) * 0.7) + ((true_read84 / read_limit84) * 0.2)), 2)
+    medidate_pct = round((((true_medidate7 / medidate_limit) * 0.1) + ((true_medidate42 / medidate_limit42) * 0.7) + ((true_medidate84 / medidate_limit84) * 0.2)), 2)
+    visualize_pct = round((((true_visualize7 / visualize_limit) * 0.1) + ((true_visualize42 / visualize_limit42) * 0.7) + ((true_visualize84 / visualize_limit84) * 0.2)), 2)
+    focus_pct = round((((true_focus7 / focus_limit) * 0.1) + ((true_focus42 / focus_limit42) * 0.7) + ((true_focus84 / focus_limit84) * 0.2)), 2)
+    kindness_pct = round((((true_kindness7 / kindness_limit) * 0.1) + ((true_kindness42 / kindness_limit42) * 0.7) + ((true_kindness84 / kindness_limit84) * 0.2)), 2)
+    be_social_pct = round((((true_be_social7 / be_social_limit) * 0.1) + ((true_be_social42 / be_social_limit42) * 0.7) + ((true_be_social84 / be_social_limit84) * 0.2)), 2)
 
     # Convert daily_entries to a dictionary with date strings as keys and stretch values as values
-    daily_data = {entry['date'].strftime('%Y-%m-%d'): entry['stretch'] for entry in daily_entries}
+    daily_data = {}
+    for entry in daily_entries:
+        date_str = entry['date'].strftime('%Y-%m-%d')
+        daily_data[date_str] = {
+            'stretch': entry['stretch'],
+            'mobility': entry['mobility'],
+            'coordination': entry['coordination'],
+            'balance': entry['balance'],
+            'speed': entry['speed'],
+            'agility': entry['agility'],
+            'altitude': entry['altitude'],
+            'strength': entry['strength'],
+            'power': entry['power'],
+            'reaction': entry['reaction'],
+            'read': entry['read'],
+            'medidate': entry['medidate'],
+            'visualize': entry['visualize'],
+            'focus': entry['focus'],
+            'kindness': entry['kindness'],
+            'be_social': entry['be_social']
+        }
 
     return render(request, 'habits.html', {
         'stretch_pct': stretch_pct, 'stretch_limit': stretch_limit, 'stretch_limit42': stretch_limit42, 'stretch_limit84': stretch_limit84, 'true_stretch7': true_stretch7, 'true_stretch42': true_stretch42, 'true_stretch84': true_stretch84, 'stretch_label': "Stretch",
@@ -573,5 +641,11 @@ def habits(request, username):
         'strength_pct': strength_pct, 'strength_limit': strength_limit, 'strength_limit42': strength_limit42, 'strength_limit84': strength_limit84, 'true_strength7': true_strength7, 'true_strength42': true_strength42, 'true_strength84': true_strength84, 'strength_label': "Strength",
         'power_pct': power_pct, 'power_limit': power_limit, 'power_limit42': power_limit42, 'power_limit84': power_limit84, 'true_power7': true_power7, 'true_power42': true_power42, 'true_power84': true_power84, 'power_label': "Power",
         'reaction_pct': reaction_pct, 'reaction_limit': reaction_limit, 'reaction_limit42': reaction_limit42, 'reaction_limit84': reaction_limit84, 'true_reaction7': true_reaction7, 'true_reaction42': true_reaction42, 'true_reaction84': true_reaction84, 'reaction_label': "Reaction",
+        'read_pct': read_pct, 'read_limit': read_limit, 'read_limit42': read_limit42, 'read_limit84': read_limit84, 'true_read7': true_read7, 'true_read42': true_read42, 'true_read84': true_read84, 'read_label': "Read",
+        'medidate_pct': medidate_pct, 'medidate_limit': medidate_limit, 'medidate_limit42': medidate_limit42, 'medidate_limit84': medidate_limit84, 'true_medidate7': true_medidate7, 'true_medidate42': true_medidate42, 'true_medidate84': true_medidate84, 'medidate_label': "Meditate",
+        'visualize_pct': visualize_pct, 'visualize_limit': visualize_limit, 'visualize_limit42': visualize_limit42, 'visualize_limit84': visualize_limit84, 'true_visualize7': true_visualize7, 'true_visualize42': true_visualize42, 'true_visualize84': true_visualize84, 'visualize_label': "Visualize",
+        'focus_pct': focus_pct, 'focus_limit': focus_limit, 'focus_limit42': focus_limit42, 'focus_limit84': focus_limit84, 'true_focus7': true_focus7, 'true_focus42': true_focus42, 'true_focus84': true_focus84, 'focus_label': "Focus",
+        'kindness_pct': kindness_pct, 'kindness_limit': kindness_limit, 'kindness_limit42': kindness_limit42, 'kindness_limit84': kindness_limit84, 'true_kindness7': true_kindness7, 'true_kindness42': true_kindness42, 'true_kindness84': true_kindness84, 'kindness_label': "Kindness",
+        'be_social_pct': be_social_pct, 'be_social_limit': be_social_limit, 'be_social_limit42': be_social_limit42, 'be_social_limit84': be_social_limit84, 'true_be_social7': true_be_social7, 'true_be_social42': true_be_social42, 'true_be_social84': true_be_social84, 'be_social_label': "Socialize",
         'daily_data': json.dumps(daily_data)  # Serialize to JSON so we don't get an error when reading True False with capital letters (javascript needs all-lowercase)
     })

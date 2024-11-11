@@ -253,7 +253,6 @@ class DailyForm(forms.ModelForm):
     # Physical Training
     stretch = forms.BooleanField(widget=SwitchWidget(), required=False)
     mobility = forms.BooleanField(widget=SwitchWidget(), required=False)
-    arms = forms.BooleanField(widget=SwitchWidget(), required=False)
     coordination = forms.BooleanField(widget=SwitchWidget(), required=False)
     balance = forms.BooleanField(widget=SwitchWidget(), required=False)
     speed = forms.BooleanField(widget=SwitchWidget(), required=False)
@@ -267,6 +266,6 @@ class DailyForm(forms.ModelForm):
 
     class Meta:
         model = Daily
-        fields = ('soreness', 'fatigue', 'injury', 'illness', 'massage', 'ice', 'altitude', 'norma_plus', 'hydration', 'fruit', 'vegetable', 'weight', 'no_sweets', 'no_alcohol', 'beta_alanine', 'creatine', 'vitamin_d', 'stress', 'motivation', 'read', 'medidate', 'visualize', 'focus', 'kindness', 'be_social', 'stretch', 'mobility', 'arms', 'coordination', 'balance', 'speed', 'agility', 'strength', 'power', 'reaction', 'breathwork', 'notes')
-        exclude = ('date', 'profile', 'sleep', 'sleep_score', 'bed_time', 'wake_time', 'hrv', 'rhr', 'calories_in', 'calories_out', 'carb', 'sugar', 'fiber', 'protein', 'fat', 'sat_fat', 'unsat_fat', 'omega3', 'cholesterol', 'sodium', 'potassium', 'calcium', 'iron', 'vitamin_a', 'vitamin_c', 'macro_ratio')
+        fields = ('soreness', 'fatigue', 'injury', 'illness', 'massage', 'ice', 'altitude', 'norma_plus', 'hydration', 'fruit', 'vegetable', 'weight', 'no_sweets', 'no_alcohol', 'beta_alanine', 'creatine', 'vitamin_d', 'stress', 'motivation', 'read', 'medidate', 'visualize', 'focus', 'kindness', 'be_social', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'strength', 'power', 'reaction', 'breathwork', 'notes')
+        exclude = ('date', 'profile', 'sleep', 'sleep_score', 'bed_time', 'wake_time', 'hrv', 'rhr', 'calories_in', 'calories_out', 'carb', 'sugar', 'fiber', 'protein', 'fat', 'sat_fat', 'unsat_fat', 'omega3', 'cholesterol', 'sodium', 'potassium', 'calcium', 'iron', 'vitamin_a', 'vitamin_c', 'macro_ratio', 'arms')
 
