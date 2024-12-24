@@ -1055,7 +1055,122 @@
         box.style.borderColor = rgbColor; // Set border color
         box.style.boxShadow = `0px 0px 5px ${rgbColor}`; // Set shadow
         box.style.borderRadius = '5px'; // Add rounded corners
+    }
 
+    function applyReversedGradientStyles(elementId, value) {
+        const startColor = { r: 119, g: 199, b: 136 }; // Light green
+        const middleColor = { r: 255, g: 255, b: 0 }; // Light yellow
+        const endColor = { r: 255, g: 0, b: 0 }; // Light red
+        const startColor2 = { r: 0, g: 151, b: 0 }; // Dark green
+        const middleColor2 = { r: 151, g: 128, b: 0 }; // Dark yellow
+        const endColor2 = { r: 151, g: 0, b: 0 }; // Dark red
+
+        const percentage = value / 3; // Convert value to a percentage between 0 and 1
+
+        let color;
+        if (percentage <= 0.5) {
+            // Interpolate between startColor and middleColor
+            const factor = percentage * 2;
+            color = {
+                r: Math.round(startColor.r + (middleColor.r - startColor.r) * factor),
+                g: Math.round(startColor.g + (middleColor.g - startColor.g) * factor),
+                b: Math.round(startColor.b + (middleColor.b - startColor.b) * factor),
+            };
+        } else {
+            // Interpolate between middleColor and endColor
+            const factor = (percentage - 0.5) * 2;
+            color = {
+                r: Math.round(middleColor.r + (endColor.r - middleColor.r) * factor),
+                g: Math.round(middleColor.g + (endColor.g - middleColor.g) * factor),
+                b: Math.round(middleColor.b + (endColor.b - middleColor.b) * factor),
+            };
+        }
+
+        let color2;
+        if (percentage <= 0.5) {
+            // Interpolate between startColor2 and middleColor2
+            const factor = percentage * 2;
+            color2 = {
+                r: Math.round(startColor2.r + (middleColor2.r - startColor2.r) * factor),
+                g: Math.round(startColor2.g + (middleColor2.g - startColor2.g) * factor),
+                b: Math.round(startColor2.b + (middleColor2.b - startColor2.b) * factor),
+            };
+        } else {
+            // Interpolate between middleColor2 and endColor2
+            const factor = (percentage - 0.5) * 2;
+            color2 = {
+                r: Math.round(middleColor2.r + (endColor2.r - middleColor2.r) * factor),
+                g: Math.round(middleColor2.g + (endColor2.g - middleColor2.g) * factor),
+                b: Math.round(middleColor2.b + (endColor2.b - middleColor2.b) * factor),
+            };
+        }
+
+        const rgbaColor = `rgba(${color.r}, ${color.g}, ${color.b}, 0.33)`; // For background with transparency
+        const rgbColor = `rgb(${color2.r}, ${color2.g}, ${color2.b})`; // For text, border, and shadow
+
+        const box = document.getElementById(elementId);
+        box.style.backgroundColor = rgbaColor;
+        box.style.color = rgbColor; // Set text color
+        box.style.borderColor = rgbColor; // Set border color
+        box.style.boxShadow = `0px 0px 5px ${rgbColor}`; // Set shadow
+    }
+
+    function applyReversedGradientStyles2(elementId, value) {
+        const startColor = { r: 119, g: 199, b: 136 }; // Light green
+        const middleColor = { r: 255, g: 255, b: 0 }; // Light yellow
+        const endColor = { r: 255, g: 0, b: 0 }; // Light red
+        const startColor2 = { r: 0, g: 151, b: 0 }; // Dark green
+        const middleColor2 = { r: 151, g: 128, b: 0 }; // Dark yellow
+        const endColor2 = { r: 151, g: 0, b: 0 }; // Dark red
+
+        const percentage = value / 3; // Convert value to a percentage between 0 and 1
+
+        let color;
+        if (percentage <= 0.5) {
+            // Interpolate between startColor and middleColor
+            const factor = percentage * 2;
+            color = {
+                r: Math.round(startColor.r + (middleColor.r - startColor.r) * factor),
+                g: Math.round(startColor.g + (middleColor.g - startColor.g) * factor),
+                b: Math.round(startColor.b + (middleColor.b - startColor.b) * factor),
+            };
+        } else {
+            // Interpolate between middleColor and endColor
+            const factor = (percentage - 0.5) * 2;
+            color = {
+                r: Math.round(middleColor.r + (endColor.r - middleColor.r) * factor),
+                g: Math.round(middleColor.g + (endColor.g - middleColor.g) * factor),
+                b: Math.round(middleColor.b + (endColor.b - middleColor.b) * factor),
+            };
+        }
+
+        let color2;
+        if (percentage <= 0.5) {
+            // Interpolate between startColor2 and middleColor2
+            const factor = percentage * 2;
+            color2 = {
+                r: Math.round(startColor2.r + (middleColor2.r - startColor2.r) * factor),
+                g: Math.round(startColor2.g + (middleColor2.g - startColor2.g) * factor),
+                b: Math.round(startColor2.b + (middleColor2.b - startColor2.b) * factor),
+            };
+        } else {
+            // Interpolate between middleColor2 and endColor2
+            const factor = (percentage - 0.5) * 2;
+            color2 = {
+                r: Math.round(middleColor2.r + (endColor2.r - middleColor2.r) * factor),
+                g: Math.round(middleColor2.g + (endColor2.g - middleColor2.g) * factor),
+                b: Math.round(middleColor2.b + (endColor2.b - middleColor2.b) * factor),
+            };
+        }
+
+        const rgbaColor = `rgba(${color.r}, ${color.g}, ${color.b}, 0.33)`; // For background with transparency
+        const rgbColor = `rgb(${color2.r}, ${color2.g}, ${color2.b})`; // For text, border, and shadow
+
+        const box = document.getElementById(elementId);
+        box.style.backgroundColor = rgbaColor;
+        box.style.color = rgbColor; // Set text color
+        box.style.borderColor = rgbColor; // Set border color
+        box.style.boxShadow = `0px 0px 5px ${rgbColor}`; // Set shadow
     }
 
     // Apply to specific elements
@@ -1105,14 +1220,14 @@
     applyNeutralStyle2('labelbox22');
     applyNeutralStyle('percentageBox23');
     applyNeutralStyle2('labelbox23');
-    applyGradientStyles('percentageBox24', 0.34);
-    applyGradientStyles2('labelbox24', 0.34);
-    applyGradientStyles('percentageBox25', 0.76);
-    applyGradientStyles2('labelbox25', 0.76);
-    applyGradientStyles('percentageBox26', 0.5);
-    applyGradientStyles2('labelbox26', 0.5);
-    applyGradientStyles('percentageBox27', 0.76);
-    applyGradientStyles2('labelbox27', 0.76);
+    applyReversedGradientStyles('percentageBox24', {{ soreness_pct }});
+    applyReversedGradientStyles2('labelbox24', {{ soreness_pct }});
+    applyReversedGradientStyles('percentageBox25', {{ fatigue_pct }});
+    applyReversedGradientStyles2('labelbox25', {{ fatigue_pct }});
+    applyReversedGradientStyles('percentageBox26', {{ illness_pct }});
+    applyReversedGradientStyles2('labelbox26', {{ illness_pct }});
+    applyReversedGradientStyles('percentageBox27', {{ injury_pct }});
+    applyReversedGradientStyles2('labelbox27', {{ injury_pct }});
     applyGradientStyles('percentageBox28', {{ hydration_pct }});
     applyGradientStyles2('labelbox28', {{ hydration_pct }});
     applyGradientStyles('percentageBox29', {{ no_sweets_pct }});

@@ -422,7 +422,7 @@ def daily(request, username, date):
                 # Construct the URL path and redirect
                 return redirect(f'/daily/{username}/{date.strftime("%Y-%m-%d")}')
         elif 'daily_submit' in request.POST:
-            print("Code execution reached the placeholder")
+            print("Code execution reached the submission point")
             if dailyform.is_valid():
                 print("Daily form is valid")
                 try:
@@ -450,6 +450,7 @@ def daily(request, username, date):
 def habits(request, username):
     user = get_object_or_404(User, username=username)
     profile = user.profile
+    today = datetime.now()
     one_week_ago = datetime.now() - timedelta(weeks=1)
     two_weeks_ago = datetime.now() - timedelta(weeks=2)
     three_weeks_ago = datetime.now() - timedelta(weeks=3)
@@ -476,6 +477,7 @@ def habits(request, username):
     last21_entries = Daily.objects.filter(profile=profile, date__gte=three_weeks_ago, date__lt=two_weeks_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'breathwork', 'strength', 'power', 'reaction', 'stress', 'motivation', 'read', 'medidate', 'visualize', 'focus', 'kindness', 'be_social', 'sleep', 'massage', 'norma_plus', 'ice', 'altitude', 'soreness', 'fatigue', 'injury', 'illness', 'hydration', 'no_sweets', 'beta_alanine', 'creatine', 'vitamin_d', 'fruit', 'vegetable')
     last14_entries = Daily.objects.filter(profile=profile, date__gte=two_weeks_ago, date__lt=one_week_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'breathwork', 'strength', 'power', 'reaction', 'stress', 'motivation', 'read', 'medidate', 'visualize', 'focus', 'kindness', 'be_social', 'sleep', 'massage', 'norma_plus', 'ice', 'altitude', 'soreness', 'fatigue', 'injury', 'illness', 'hydration', 'no_sweets', 'beta_alanine', 'creatine', 'vitamin_d', 'fruit', 'vegetable')
     last7_entries = Daily.objects.filter(profile=profile, date__gte=one_week_ago).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'breathwork', 'strength', 'power', 'reaction', 'stress', 'motivation', 'read', 'medidate', 'visualize', 'focus', 'kindness', 'be_social', 'sleep', 'massage', 'norma_plus', 'ice', 'altitude', 'soreness', 'fatigue', 'injury', 'illness', 'hydration', 'no_sweets', 'beta_alanine', 'creatine', 'vitamin_d', 'fruit', 'vegetable')
+    today_entries = Daily.objects.filter(profile=profile, date=today).values('date', 'stretch', 'mobility', 'coordination', 'balance', 'speed', 'agility', 'breathwork', 'strength', 'power', 'reaction', 'stress', 'motivation', 'read', 'medidate', 'visualize', 'focus', 'kindness', 'be_social', 'sleep', 'massage', 'norma_plus', 'ice', 'altitude', 'soreness', 'fatigue', 'injury', 'illness', 'hydration', 'no_sweets', 'beta_alanine', 'creatine', 'vitamin_d', 'fruit', 'vegetable')
 
     stretch_limit = 5
     true_stretch84 = (min(sum(1 for entry in last7_entries if entry['stretch']), stretch_limit)) + (min(sum(1 for entry in last14_entries if entry['stretch']), stretch_limit)) + (min(sum(1 for entry in last21_entries if entry['stretch']), stretch_limit)) + (min(sum(1 for entry in last28_entries if entry['stretch']), stretch_limit)) + (min(sum(1 for entry in last35_entries if entry['stretch']), stretch_limit)) + (min(sum(1 for entry in last42_entries if entry['stretch']), stretch_limit)) + (min(sum(1 for entry in last49_entries if entry['stretch']), stretch_limit)) + (min(sum(1 for entry in last56_entries if entry['stretch']), stretch_limit)) + (min(sum(1 for entry in last63_entries if entry['stretch']), stretch_limit)) + (min(sum(1 for entry in last70_entries if entry['stretch']), stretch_limit)) + (min(sum(1 for entry in last77_entries if entry['stretch']), stretch_limit)) + (min(sum(1 for entry in last84_entries if entry['stretch']), stretch_limit))
@@ -683,6 +685,10 @@ def habits(request, username):
     beta_alanine_pct = round((((true_beta_alanine7 / 7) * 0.1) + ((true_beta_alanine42 / 42) * 0.7) + ((true_beta_alanine84 / 84) * 0.2)), 2)
     creatine_pct = round((((true_creatine7 / 7) * 0.1) + ((true_creatine42 / 42) * 0.7) + ((true_creatine84 / 84) * 0.2)), 2)
     vitamin_d_pct = round((((true_vitamin_d7 / 7) * 0.1) + ((true_vitamin_d42 / 42) * 0.7) + ((true_vitamin_d84 / 84) * 0.2)), 2)
+    soreness_pct = today_entries[0]['soreness'] or 0
+    fatigue_pct = today_entries[0]['fatigue'] or 0
+    illness_pct = today_entries[0]['illness'] or 0
+    injury_pct = today_entries[0]['injury'] or 0
 
     # Convert daily_entries to a dictionary with date strings as keys and habit values as values
     daily_data = {}
@@ -747,6 +753,7 @@ def habits(request, username):
         'true_norma_plus7': true_norma_plus7, 'true_norma_plus42': true_norma_plus42, 'true_norma_plus84': true_norma_plus84, 'norma_plus_label': "Norma Plus",
         'true_ice7': true_ice7, 'true_ice42': true_ice42, 'true_ice84': true_ice84, 'ice_label': "Ice",
         'true_altitude7': true_altitude7, 'true_altitude42': true_altitude42, 'true_altitude84': true_altitude84, 'altitude_label': "Altitude",
+        'soreness_pct': soreness_pct, 'fatigue_pct': fatigue_pct, 'illness_pct': illness_pct, 'injury_pct': injury_pct,
         
         'hydration_pct': hydration_pct, 'true_hydration7': true_hydration7, 'true_hydration42': true_hydration42, 'true_hydration84': true_hydration84, 'hydration_label': "Hydration",
         'no_sweets_pct': no_sweets_pct, 'true_no_sweets7': true_no_sweets7, 'true_no_sweets42': true_no_sweets42, 'true_no_sweets84': true_no_sweets84, 'no_sweets_label': "No Sweets",

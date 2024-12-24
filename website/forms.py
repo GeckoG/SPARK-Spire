@@ -223,8 +223,8 @@ class Range3SliderWidget(forms.widgets.Input):
 
 class DailyForm(forms.ModelForm):
     # Recovery
-    soreness = forms.IntegerField(widget=RangeSliderWidget(attrs={'id': 'myRange', 'list': 'tickmarks'}), min_value=1, max_value=5, required=False)
-    fatigue = forms.IntegerField(widget=RangeSliderWidget(attrs={'id': 'myRange', 'list': 'tickmarks'}), min_value=1, max_value=5, required=False)
+    soreness = forms.IntegerField(widget=Range3SliderWidget(attrs={'id': 'myRange', 'list': 'tickmarks'}), min_value=0, max_value=3, required=False)
+    fatigue = forms.IntegerField(widget=Range3SliderWidget(attrs={'id': 'myRange', 'list': 'tickmarks'}), min_value=0, max_value=3, required=False)
     injury = forms.IntegerField(widget=Range3SliderWidget(attrs={'id': 'myRange', 'list': 'tickmarks'}), min_value=0, max_value=3, required=False)
     illness = forms.IntegerField(widget=Range3SliderWidget(attrs={'id': 'myRange', 'list': 'tickmarks'}), min_value=0, max_value=3, required=False)
     massage = forms.BooleanField(widget=SwitchWidget(), required=False)
