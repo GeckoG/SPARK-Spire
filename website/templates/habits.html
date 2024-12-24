@@ -270,20 +270,20 @@
                 <div class="percentage-box" id="percentageBox7">
                     <div class="horizontal-container">
                         <div class="labelbox" id="labelbox7">
-                            <center><h1>{{ altitude_pct }}</h1></center>
-                            <center><h4>{{ altitude_label }}</h4></center>
+                            <center><h1>{{ breathwork_pct }}</h1></center>
+                            <center><h4>{{ breathwork_label }}</h4></center>
                         </div>
                         <div>
                             <center><h5>Week</h5></center>
-                            <center><h1>{{ true_altitude7 }}/{{ altitude_limit }}</h1></center>
+                            <center><h1>{{ true_breathwork7 }}/{{ breathwork_limit }}</h1></center>
                         </div>
                         <div>
                             <center><h5>6-Week</h5></center>
-                            <center><h1>{{ true_altitude42 }}/{{ altitude_limit42 }}</h1></center>
+                            <center><h1>{{ true_breathwork42 }}/{{ breathwork_limit42 }}</h1></center>
                         </div>
                         <div>
                             <center><h5>12-Week</h5></center>
-                            <center><h1>{{ true_altitude84 }}/{{ altitude_limit84 }}</h1></center>
+                            <center><h1>{{ true_breathwork84 }}/{{ breathwork_limit84 }}</h1></center>
                         </div>
                     </div>
                 </div>
@@ -537,78 +537,388 @@
         </div>
         <br/><hr/>
         <center><h1 style="color: black;">Recovery</h1></center>
-        <canvas id="sleepChart" width="400" height="200"></canvas>
+        <!-- <canvas id="sleepChart" width="400" height="200"></canvas> -->
         <div class="centered-box-container">
             <div class="background-box">
                 <div class="percentage-box" id="percentageBox19">
-                    <center><h1>61%</h1></center>
-                    <center><h5>Foam Roll</h5></center>
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox19">
+                            <center><h1>{{ sleep_pct }}</h1></center>
+                            <center><h4>{{ sleep_label }}</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_sleep7 }}/7</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_sleep42 }}/42</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_sleep84 }}/84</h1></center>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="background-box">
                 <div class="percentage-box" id="percentageBox20">
-                    <center><h1>77%</h1></center>
-                    <center><h5>NormaTec</h5></center>
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox20">
+                            <center><h1>{{ massage_pct }}</h1></center>
+                            <center><h4>{{ massage_label }}</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_massage7 }}/{{ massage_limit }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_massage42 }}/{{ massage_limit42 }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_massage84 }}/{{ massage_limit84 }}</h1></center>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="background-box">
                 <div class="percentage-box" id="percentageBox21">
-                    <center><h1>4%</h1></center>
-                    <center><h6>Ice</h6></center>
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox21">
+                            <center><h1>{{ massage_pct }}</h1></center>
+                            <center><h4>Normatec+</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_massage7 }}/{{ massage_limit }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_massage42 }}/{{ massage_limit42 }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_massage84 }}/{{ massage_limit84 }}</h1></center>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="background-box">
                 <div class="percentage-box" id="percentageBox22">
-                    <center><h1>89%</h1></center>
-                    <center><h5>Altitude</h5></center>
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox22">
+                            <center><h1>{{ massage_pct }}</h1></center>
+                            <center><h4>Ice</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_massage7 }}/{{ massage_limit }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_massage42 }}/{{ massage_limit42 }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_massage84 }}/{{ massage_limit84 }}</h1></center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox23">
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox23">
+                            <center><h1>{{ massage_pct }}</h1></center>
+                            <center><h4>Altitude</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_massage7 }}/{{ massage_limit }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_massage42 }}/{{ massage_limit42 }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_massage84 }}/{{ massage_limit84 }}</h1></center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox24">
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox24">
+                            <center><h1>{{ massage_pct }}</h1></center>
+                            <center><h4>Soreness</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_massage7 }}/{{ massage_limit }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_massage42 }}/{{ massage_limit42 }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_massage84 }}/{{ massage_limit84 }}</h1></center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox25">
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox25">
+                            <center><h1>{{ massage_pct }}</h1></center>
+                            <center><h4>Fatigue</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_massage7 }}/{{ massage_limit }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_massage42 }}/{{ massage_limit42 }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_massage84 }}/{{ massage_limit84 }}</h1></center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox26">
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox26">
+                            <center><h1>{{ massage_pct }}</h1></center>
+                            <center><h4>Illness</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_massage7 }}/{{ massage_limit }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_massage42 }}/{{ massage_limit42 }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_massage84 }}/{{ massage_limit84 }}</h1></center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox27">
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox27">
+                            <center><h1>{{ massage_pct }}</h1></center>
+                            <center><h4>Injury</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_massage7 }}/{{ massage_limit }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_massage42 }}/{{ massage_limit42 }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_massage84 }}/{{ massage_limit84 }}</h1></center>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <br/><hr/>
         <center><h1 style="color: black;">Nutrition</h1></center>
-        <canvas id="waterChart" width="400" height="200"></canvas>
+        <!-- <canvas id="waterChart" width="400" height="200"></canvas> -->
         <div class="centered-box-container">
             <div class="background-box">
-                <div class="percentage-box" id="percentageBox23">
-                    <center><h1>{{ stretch_pct }}</h1></center>
-                    <center><h5>No Sweets</h5></center>
-                </div>
-            </div>
-            <div class="background-box">
-                <div class="percentage-box" id="percentageBox24">
-                    <center><h1>{{ mobility_pct }}</h1></center>
-                    <center><h5>B Alanine</h5></center>
-                </div>
-            </div>
-            <div class="background-box">
-                <div class="percentage-box" id="percentageBox25">
-                    <center><h1>0.77</h1></center>
-                    <center><h6>Vitamin D</h6></center>
-                </div>
-            </div>
-            <div class="background-box">
-                <div class="percentage-box" id="percentageBox26">
-                    <center><h1>0.89</h1></center>
-                    <center><h5>Creatine</h5></center>
-                </div>
-            </div>
-            <div class="background-box">
-                <div class="percentage-box" id="percentageBox27">
-                    <center><h1>0.34</h1></center>
-                    <center><h5>Anti-Ox</h5></center>
-                </div>
-            </div>
-            <div class="background-box">
                 <div class="percentage-box" id="percentageBox28">
-                    <center><h1>0.76</h1></center>
-                    <center><h5>Fruit</h5></center>
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox28">
+                            <center><h1>{{ hydration_pct }}</h1></center>
+                            <center><h4>{{ hydration_label }}</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_hydration7 }}/7</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_hydration42 }}/42</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_hydration84 }}/84</h1></center>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="background-box">
                 <div class="percentage-box" id="percentageBox29">
-                    <center><h1>0.05</h1></center>
-                    <center><h5>Veggie</h5></center>
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox29">
+                            <center><h1>{{ no_sweets_pct }}</h1></center>
+                            <center><h4>{{ no_sweets_label }}</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_no_sweets7 }}/7</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_no_sweets42 }}/42</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_no_sweets84 }}/84</h1></center>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox30">
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox30">
+                            <center><h1>{{ beta_alanine_pct }}</h1></center>
+                            <center><h4>{{ beta_alanine_label }}</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_beta_alanine7 }}/7</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_beta_alanine42 }}/42</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_beta_alanine84 }}/84</h1></center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox31">
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox31">
+                            <center><h1>{{ creatine_pct }}</h1></center>
+                            <center><h4>{{ creatine_label }}</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_creatine7 }}/7</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_creatine42 }}/42</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_creatine84 }}/84</h1></center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox32">
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox32">
+                            <center><h1>{{ vitamin_d_pct }}</h1></center>
+                            <center><h4>{{ vitamin_d_label }}</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_vitamin_d7 }}/7</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_vitamin_d42 }}/42</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_vitamin_d84 }}/84</h1></center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="background-box">
+                <div class="percentage-box" id="percentageBox33">
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox33">
+                            <center><h1>{{ massage_pct }}</h1></center>
+                            <center><h4>Anti Ox</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_massage7 }}/{{ massage_limit }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_massage42 }}/{{ massage_limit42 }}</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_massage84 }}/{{ massage_limit84 }}</h1></center>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <div class="background-box">
+                <div class="percentage-box" id="percentageBox34">
+                    <div class="horizontal-container">
+                        <div class="labelbox" id="labelbox34">
+                            <center><h1>{{ fruit_pct }}</h1></center>
+                            <center><h4>{{ fruit_label }}</h4></center>
+                        </div>
+                        <div>
+                            <center><h5>Week</h5></center>
+                            <center><h1>{{ true_fruit7 }}/7</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>6-Week</h5></center>
+                            <center><h1>{{ true_fruit42 }}/42</h1></center>
+                        </div>
+                        <div>
+                            <center><h5>12-Week</h5></center>
+                            <center><h1>{{ true_fruit84 }}/84</h1></center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="background-box">
+                    <div class="percentage-box" id="percentageBox35">
+                        <div class="horizontal-container">
+                            <div class="labelbox" id="labelbox35">
+                                <center><h1>{{ vegetable_pct }}</h1></center>
+                                <center><h4>{{ vegetable_label }}</h4></center>
+                            </div>
+                            <div>
+                                <center><h5>Week</h5></center>
+                                <center><h1>{{ true_vegetable7 }}/7</h1></center>
+                            </div>
+                            <div>
+                                <center><h5>6-Week</h5></center>
+                                <center><h1>{{ true_vegetable42 }}/42</h1></center>
+                            </div>
+                            <div>
+                                <center><h5>12-Week</h5></center>
+                                <center><h1>{{ true_vegetable84 }}/84</h1></center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -725,6 +1035,29 @@
         box.style.boxShadow = `0px 0px 5px ${rgbColor}`; // Set shadow
     }
 
+    function applyNeutralStyle(elementId) {
+        const rgbaColor = 'rgba(124, 0, 161, 0.33)'; // Light gray
+        const rgbColor = 'rgb(100, 0, 100)'; // Black
+        const box = document.getElementById(elementId);
+        box.style.backgroundColor = rgbaColor;
+        box.style.color = rgbColor; // Set text color
+        box.style.borderColor = rgbColor; // Set border color
+        box.style.boxShadow = `0px 0px 5px ${rgbColor}`; // Set shadow
+        box.style.borderRadius = '5px'; // Add rounded corners
+
+    }
+    function applyNeutralStyle2(elementId) {
+        const rgbaColor = 'rgba(124, 0, 161, 0.33)'; // Light gray
+        const rgbColor = 'rgb(100, 0, 100)'; // Black
+        const box = document.getElementById(elementId);
+        box.style.backgroundColor = rgbaColor;
+        box.style.color = rgbColor; // Set text color
+        box.style.borderColor = rgbColor; // Set border color
+        box.style.boxShadow = `0px 0px 5px ${rgbColor}`; // Set shadow
+        box.style.borderRadius = '5px'; // Add rounded corners
+
+    }
+
     // Apply to specific elements
     applyGradientStyles('percentageBox', {{ stretch_pct }});
     applyGradientStyles2('labelbox1', {{ stretch_pct }});
@@ -738,18 +1071,18 @@
     applyGradientStyles2('labelbox5', {{ speed_pct }});
     applyGradientStyles('percentageBox6', {{ agility_pct }});
     applyGradientStyles2('labelbox6', {{ agility_pct }});
-    applyGradientStyles('percentageBox7', {{ altitude_pct }});
-    applyGradientStyles2('labelbox7', {{ altitude_pct }});
+    applyGradientStyles('percentageBox7', {{ breathwork_pct }});
+    applyGradientStyles2('labelbox7', {{ breathwork_pct }});
     applyGradientStyles('percentageBox8', {{ strength_pct }});
     applyGradientStyles2('labelbox8', {{ strength_pct }});
     applyGradientStyles('percentageBox9', {{ power_pct }});
     applyGradientStyles2('labelbox9', {{ power_pct }});
     applyGradientStyles('percentageBox10', {{ reaction_pct }});
     applyGradientStyles2('labelbox10', {{ reaction_pct }});
-    applyGradientStyles('percentageBox11', 1);
-    applyGradientStyles2('labelbox11', 1);
-    applyGradientStyles('percentageBox12', 1);
-    applyGradientStyles2('labelbox12', 1);
+    applyNeutralStyle('percentageBox11');
+    applyNeutralStyle2('labelbox11');
+    applyNeutralStyle('percentageBox12');
+    applyNeutralStyle2('labelbox12');
     applyGradientStyles('percentageBox13', {{ read_pct }});
     applyGradientStyles2('labelbox13', {{ read_pct }});
     applyGradientStyles('percentageBox14', {{ kindness_pct }});
@@ -762,17 +1095,40 @@
     applyGradientStyles2('labelbox17', {{ focus_pct }});
     applyGradientStyles('percentageBox18', {{ be_social_pct }});
     applyGradientStyles2('labelbox18', {{ be_social_pct }});
-    applyGradientStyles('percentageBox19', 1);
-    applyGradientStyles('percentageBox20', 0.61);
-    applyGradientStyles('percentageBox21', 0.77);
-    applyGradientStyles('percentageBox22', 0.04);
-    applyGradientStyles('percentageBox23', 0.89);
+    applyGradientStyles('percentageBox19', {{ sleep_pct }});
+    applyGradientStyles2('labelbox19', {{ sleep_pct }});
+    applyGradientStyles('percentageBox20', {{ massage_pct }});
+    applyGradientStyles2('labelbox20', {{ massage_pct }});
+    applyNeutralStyle('percentageBox21');
+    applyNeutralStyle2('labelbox21');
+    applyNeutralStyle('percentageBox22');
+    applyNeutralStyle2('labelbox22');
+    applyNeutralStyle('percentageBox23');
+    applyNeutralStyle2('labelbox23');
     applyGradientStyles('percentageBox24', 0.34);
+    applyGradientStyles2('labelbox24', 0.34);
     applyGradientStyles('percentageBox25', 0.76);
-    applyGradientStyles('percentageBox26', 0.05);
+    applyGradientStyles2('labelbox25', 0.76);
+    applyGradientStyles('percentageBox26', 0.5);
+    applyGradientStyles2('labelbox26', 0.5);
     applyGradientStyles('percentageBox27', 0.76);
-    applyGradientStyles('percentageBox28', 0.05);
-    applyGradientStyles('percentageBox29', 1);
+    applyGradientStyles2('labelbox27', 0.76);
+    applyGradientStyles('percentageBox28', {{ hydration_pct }});
+    applyGradientStyles2('labelbox28', {{ hydration_pct }});
+    applyGradientStyles('percentageBox29', {{ no_sweets_pct }});
+    applyGradientStyles2('labelbox29', {{ no_sweets_pct }});
+    applyGradientStyles('percentageBox30', {{ beta_alanine_pct }});
+    applyGradientStyles2('labelbox30', {{ beta_alanine_pct }});
+    applyGradientStyles('percentageBox31', {{ creatine_pct }});
+    applyGradientStyles2('labelbox31', {{ creatine_pct }});
+    applyGradientStyles('percentageBox32', {{ vitamin_d_pct }});
+    applyGradientStyles2('labelbox32', {{ vitamin_d_pct }});
+    // applyGradientStyles('percentageBox33', 1);
+    // applyGradientStyles2('labelbox33', 1);
+    applyGradientStyles('percentageBox34', {{ fruit_pct }});
+    applyGradientStyles2('labelbox34', {{ fruit_pct }});
+    applyGradientStyles('percentageBox35', {{ vegetable_pct }});
+    applyGradientStyles2('labelbox35', {{ vegetable_pct }});
 </script>
 
 <script>        // Water Chart
@@ -954,30 +1310,35 @@
             { id: 'percentageBox4', label: 'Balance', key: 'balance' },
             { id: 'percentageBox5', label: 'Speed', key: 'speed' },
             { id: 'percentageBox6', label: 'Agility', key: 'agility' },
-            { id: 'percentageBox7', label: 'Altitude', key: 'altitude' },
+            { id: 'percentageBox7', label: 'Breathwork', key: 'breathwork' },
             { id: 'percentageBox8', label: 'Strength', key: 'strength' },
             { id: 'percentageBox9', label: 'Power', key: 'power' },
             { id: 'percentageBox10', label: 'Reaction', key: 'reaction' },
-            //{ id: 'percentagebox11', label: 'Read', key: 'read' },
-            //{ id: 'percentageBox12', label: 'Motivation', key: 'motivation' },
+            { id: 'percentageBox11', label: 'Stress', key: 'stress' },
+            { id: 'percentageBox12', label: 'Motivation', key: 'motivation' },
             { id: 'percentageBox13', label: 'Read', key: 'read' },
             { id: 'percentageBox14', label: 'Kindness', key: 'kindness' },
             { id: 'percentageBox15', label: 'Visualize', key: 'visualize' },
-            { id: 'percentageBox16', label: 'Meditate', key: 'meditate' },
+            { id: 'percentageBox16', label: 'Meditate', key: 'medidate' },
             { id: 'percentageBox17', label: 'Focus', key: 'focus' },
             { id: 'percentageBox18', label: 'Socialize', key: 'be_social' },
-            //{ id: 'percentageBox19', label: 'Sleep', key: 'sleep' },
-            { id: 'percentageBox20', label: 'Foam Roll', key: 'foam_roll' },
-            { id: 'percentageBox21', label: 'NormaTec', key: 'normatec' },
+            { id: 'percentageBox19', label: 'Sleep', key: 'sleep' },
+            { id: 'percentageBox20', label: 'Massage', key: 'massage' },
+            { id: 'percentageBox21', label: 'NormaTec+', key: 'normatec_plus' },
             { id: 'percentageBox22', label: 'Ice', key: 'ice' },
             { id: 'percentageBox23', label: 'Altitude', key: 'altitude' },
-            { id: 'percentageBox24', label: 'No Sweets', key: 'no_sweets' },
-            { id: 'percentageBox25', label: 'B Alanine', key: 'b_alanine' },
-            { id: 'percentageBox26', label: 'Vitamin D', key: 'vitamin_d' },
-            { id: 'percentageBox27', label: 'Creatine', key: 'creatine' },
-            { id: 'percentageBox28', label: 'Anti-Ox', key: 'anti_ox' },
-            { id: 'percentageBox29', label: 'Fruit', key: 'fruit' },
-            { id: 'percentageBox30', label: 'Veggie', key: 'veggie' }
+            { id: 'percentageBox24', label: 'Soreness', key: 'soreness' },
+            { id: 'percentageBox25', label: 'Fatigue', key: 'fatigue' },
+            { id: 'percentageBox26', label: 'Illness', key: 'illness' },
+            { id: 'percentageBox27', label: 'Injury', key: 'injury' },
+            { id: 'percentageBox28', label: 'Hydration', key: 'hydration' },
+            { id: 'percentageBox29', label: 'No Sweets', key: 'no_sweets' },
+            { id: 'percentageBox30', label: 'B Alanine', key: 'b_alanine' },
+            { id: 'percentageBox31', label: 'Creatine', key: 'creatine' },
+            { id: 'percentageBox32', label: 'Vitamin D', key: 'vitamin_d' },
+            { id: 'percentageBox33', label: 'Anti-Ox', key: 'anti_ox' },
+            { id: 'percentageBox34', label: 'Fruit', key: 'fruit' },
+            { id: 'percentageBox35', label: 'Veggie', key: 'veggie' }
         ];
 
         let currentMonth = new Date().getMonth();

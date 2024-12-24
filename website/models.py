@@ -75,9 +75,9 @@ class Daily(models.Model):
     norma_plus = models.BooleanField(default=False) # Manual
     # Nutrition
     hydration = models.IntegerField(null=True) # Manual
-    fruit = models.DecimalField(null=True, max_digits=3, decimal_places=1) # Manual
-    vegetable = models.DecimalField(null=True, max_digits=3, decimal_places=1) # Manual
-    weight = models.DecimalField(null=True, max_digits=4, decimal_places=1) # Manual
+    fruit = models.FloatField(null=True) # Manual
+    vegetable = models.FloatField(null=True) # Manual
+    weight = models.FloatField(null=True) # Manual
     calories_in = models.IntegerField(null=True)
     calories_out = models.IntegerField(null=True)
     carb = models.IntegerField(null=True)
@@ -146,7 +146,7 @@ class Workout(models.Model):
     total_time = models.IntegerField(null=True)
     distance = models.IntegerField(null=True)
     cadence = models.IntegerField(null=True)
-    stride_length = models.DecimalField(max_digits=3, decimal_places=2)
+    stride_length = models.FloatField(null=True)
     altitude = models.IntegerField(null=True)
     elevation_gain = models.IntegerField(null=True)
     # Zones
