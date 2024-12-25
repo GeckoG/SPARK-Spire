@@ -726,6 +726,8 @@ def habits(request, username):
             'strength': entry['strength'],
             'power': entry['power'],
             'reaction': entry['reaction'],
+            'stress': entry['stress'],
+            'motivation': entry['motivation'],
             'read': entry['read'],
             'medidate': entry['medidate'],
             'visualize': entry['visualize'],
