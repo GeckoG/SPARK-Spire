@@ -1376,68 +1376,114 @@
     }
 </script>
 
-<script>        // Sleep Chart
-    const sleep_data = {
-        labels: ['2023-04-01', '2023-04-02', '2023-04-03', '2023-04-04', '2023-04-05', '2023-04-06', '2023-04-07'],
-        datasets: [{
-            label: 'Sleep',
-            data: [7, 9.25, 9, 8.5, 9, 8.25, 9],
-            fill: true,
-            borderColor: 'rgb(133, 31, 192)',
-            tension: 0.1,
-            backgroundColor: 'rgba(133, 31, 192, 0.2)' // Adjust for shading
-        }]
-    };
+<!-- Sleep Modal Box -->
+<div id="sleepModal" class="modal">
+    <div class="modal-content">
+        <p id="sleepModalTitle">Sleep History</p>
+        <div class="modal-buttons">
+            <button id="leftArrowSleep" class="arrow-button">&larr;</button>
+            <button id="rightArrowSleep" class="arrow-button">&rarr;</button>
+        </div>
+        <canvas id="sleepChart"></canvas>
+    </div>
+</div>
+<script>
+    document.getElementById('percentageBox19').onclick = function() {
+        document.getElementById('sleepModal').style.display = "block";
+        buildSleepChart();
+    }
 
-    const sleep_config = {
-        type: 'line',
-        data: sleep_data,
-        options: {
-            scales: {
-                x: {
-                    type: 'time',
-                    time: {
-                        unit: 'day'
+    let sleepStartDate = new Date();
+    sleepStartDate.setDate(sleepStartDate.getDate() - 42); // Start date 6 weeks ago
+    let sleepChart; // Reference to the chart instance
+
+    function buildSleepChart() {
+        const dailyData = JSON.parse('{{ daily_data|escapejs }}');
+        console.log('dailyData:', dailyData);
+
+        // Filter the dailyData to include only entries within the date range
+        const filteredData = Object.entries(dailyData).filter(([dateString, _]) => {
+            const date = new Date(dateString);
+            return date >= sleepStartDate && date <= new Date();
+        });
+
+        // Sort the filtered data by date
+        filteredData.sort((a, b) => new Date(a[0]) - new Date(b[0]));
+
+        // Extract dates and sleep values
+        const dates = filteredData.map(entry => entry[0]);
+        const sleepValues = filteredData.map(entry => entry[1].sleep);
+
+        const data = {
+            labels: dates,
+            datasets: [{
+                label: 'Sleep',
+                data: sleepValues,
+                fill: true,
+                borderColor: 'rgb(133, 31, 192)',
+                tension: 0.1,
+                backgroundColor: 'rgba(133, 31, 192, 0.2)' // Adjust for shading
+            }]
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'day'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
                     },
-                    title: {
-                        display: true,
-                        text: 'Date'
+                    y: {
+                        beginAtZero: false,
+                        min: 4, // Set y scale from 4
+                        max: 12, // to 12
+                        title: {
+                            display: true,
+                            text: 'Hours'
+                        }
                     }
                 },
-                y: {
-                    beginAtZero: false,
-                    min: 4, // Set y scale from 4
-                    max: 12, // to 12
-                    title: {
-                        display: true,
-                        text: 'Hours'
-                    }
-                }
-            },
-            plugins: {
-                annotation: {
-                    annotations: {
-                        line1: {
-                            type: 'line',
-                            yMin: 8,
-                            yMax: 8,
-                            borderColor: 'rgb(56, 30, 72)',
-                            borderWidth: 2,
-                            borderDash: [10, 5],
-                            label: {
-                                enabled: true,
+                plugins: {
+                    annotation: {
+                        annotations: {
+                            line1: {
+                                type: 'line',
+                                yMin: 8,
+                                yMax: 8,
+                                borderColor: 'rgb(56, 30, 72)',
+                                borderWidth: 2,
+                                borderDash: [10, 5],
                             }
                         }
                     }
                 }
             }
-        }
-    };
+        };
 
-    const sleepChart = new Chart(
-        document.getElementById('sleepChart'),
-        sleep_config
-    );
+        const ctx = document.getElementById('sleepChart').getContext('2d');
+        if (sleepChart) {
+            sleepChart.destroy(); // Destroy the existing chart instance
+        }
+        sleepChart = new Chart(ctx, config); // Create a new chart instance
+    }
+
+    document.getElementById('leftArrowSleep').onclick = function() {
+        sleepStartDate.setDate(sleepStartDate.getDate() - 7);
+        buildSleepChart();
+    }
+
+    document.getElementById('rightArrowSleep').onclick = function() {
+        sleepStartDate.setDate(sleepStartDate.getDate() + 7);
+        buildSleepChart();
+    }
 </script>
 
 <!-- Modal Box -->
@@ -1469,6 +1515,9 @@
         if (event.target == document.getElementById('hydrationModal')) {
             document.getElementById('hydrationModal').style.display = "none";
         }
+        if (event.target == document.getElementById('sleepModal')) {
+            document.getElementById('sleepModal').style.display = "none";
+        }
     }
 </script>
 
@@ -1483,6 +1532,142 @@
         grid.scrollBy(0, 40); // Adjust the scroll amount as needed
     });
 </script>
+
+<!-- Fruits and Veggies Modal Box -->
+<div id="fruitsVeggiesModal" class="modal">
+    <div class="modal-content">
+        <p id="fruitsVeggiesModalTitle">Fruits and Veggies History</p>
+        <div class="modal-buttons">
+            <button id="leftArrowFruitsVeggies" class="arrow-button">&larr;</button>
+            <button id="rightArrowFruitsVeggies" class="arrow-button">&rarr;</button>
+        </div>
+        <canvas id="fruitsVeggiesChart"></canvas>
+    </div>
+</div>
+<script>
+    let fruitsVeggiesStartDate = new Date();
+    fruitsVeggiesStartDate.setDate(fruitsVeggiesStartDate.getDate() - 42); // Start date 6 weeks ago
+    let fruitsVeggiesChart; // Reference to the chart instance
+    let currentType = 'fruit'; // Default type
+
+    function buildFruitsVeggiesChart(type) {
+        if (type == "fruit" || type == "vegetable") {
+            currentType = type; // Update the current type
+        }
+        else {
+            type = currentType; // Use the current type
+        }
+        const dailyData = JSON.parse('{{ daily_data|escapejs }}');
+        console.log('dailyData:', dailyData);
+
+        // Filter the dailyData to include only entries within the date range
+        const filteredData = Object.entries(dailyData).filter(([dateString, _]) => {
+            const date = new Date(dateString);
+            return date >= fruitsVeggiesStartDate && date <= new Date();
+        });
+
+        // Sort the filtered data by date
+        filteredData.sort((a, b) => new Date(a[0]) - new Date(b[0]));
+
+        // Extract dates and values based on the type (fruit or vegetable)
+        const dates = filteredData.map(entry => entry[0]);
+        const values = filteredData.map(entry => entry[1][type]);
+
+        const data = {
+            labels: dates,
+            datasets: [{
+                label: type.charAt(0).toUpperCase() + type.slice(1),
+                data: values,
+                fill: true,
+                borderColor: type === 'fruit' ? 'rgb(255, 50, 50)' : 'rgb(50, 200, 50)',
+                tension: 0.1,
+                backgroundColor: type === 'fruit' ? 'rgba(255, 50, 50, 0.2)' : 'rgba(50, 200, 50, 0.2)' // Adjust for shading
+            }]
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'day'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true, // Always start y-axis at zero
+                        min: 0, // Ensure y-axis starts at zero
+                        max: 14, // Set max value for y-axis
+                        title: {
+                            display: true,
+                            text: 'Servings'
+                        }
+                    }
+                },
+                plugins: {
+                    annotation: {
+                        annotations: {
+                            line1: {
+                                type: 'line',
+                                yMin: 5,
+                                yMax: 5,
+                                borderColor: 'rgb(220, 220, 220)',
+                                borderWidth: 2,
+                                borderDash: [10, 5],
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        const ctx = document.getElementById('fruitsVeggiesChart').getContext('2d');
+        if (fruitsVeggiesChart) {
+            fruitsVeggiesChart.destroy(); // Destroy the existing chart instance
+        }
+        fruitsVeggiesChart = new Chart(ctx, config); // Create a new chart instance
+    }
+
+    document.getElementById('percentageBox34').onclick = function() {
+        document.getElementById('fruitsVeggiesModal').style.display = "block";
+        buildFruitsVeggiesChart('fruit');
+    }
+
+    document.getElementById('percentageBox35').onclick = function() {
+        document.getElementById('fruitsVeggiesModal').style.display = "block";
+        buildFruitsVeggiesChart('vegetable');
+    }
+
+    document.getElementById('leftArrowFruitsVeggies').onclick = function() {
+        fruitsVeggiesStartDate.setDate(fruitsVeggiesStartDate.getDate() - 7);
+        buildFruitsVeggiesChart(document.getElementById('fruitsVeggiesModalTitle').innerText.toLowerCase());
+    }
+
+    document.getElementById('rightArrowFruitsVeggies').onclick = function() {
+        fruitsVeggiesStartDate.setDate(fruitsVeggiesStartDate.getDate() + 7);
+        buildFruitsVeggiesChart(document.getElementById('fruitsVeggiesModalTitle').innerText.toLowerCase());
+    }
+
+    document.getElementsByClassName('close')[0].onclick = function() {
+        document.getElementById('fruitsVeggiesModal').style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('fruitsVeggiesModal')) {
+            document.getElementById('fruitsVeggiesModal').style.display = "none";
+        }
+    }
+</script>
+
+
+
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
