@@ -115,7 +115,105 @@
 
     .formatted-text {
     white-space: pre;
-  }
+    }
+
+    .custom-btn {
+			width: 130px;
+			height: 40px;
+			color: #fff;
+			border-radius: 5px;
+			padding: 10px 25px;
+			font-family: 'Lato', sans-serif;
+			font-weight: 500;
+			background: transparent;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			position: relative;
+			display: inline-block;
+			box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+			7px 7px 20px 0px rgba(0,0,0,.1),
+			4px 4px 5px 0px rgba(0,0,0,.1);
+			outline: none;
+		}
+
+    /* 7 */
+    .btn-7 {
+        background: linear-gradient(0deg, rgb(192, 15, 3) 0%, rgb(251, 2, 2) 100%);
+        /*background: linear-gradient(0deg, rgb(226, 174, 5) 0%, rgb(233, 199, 3) 100%); */
+        line-height: 42px;
+        padding: 0;
+        border: none;
+    }
+    .btn-7 span {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    .btn-7:before,
+    .btn-7:after {
+        position: absolute;
+        content: "";
+        right: 0;
+        bottom: 0;
+        background: rgb(251, 2, 2);
+        /* BACKTRACK COLORS
+        background: rgb(251, 226, 2); */
+        box-shadow:
+        -7px -7px 20px 0px rgba(255,255,255,.9),
+        -4px -4px 5px 0px rgba(255,255,255,.9),
+        7px 7px 20px 0px rgba(0,0,0,.2),
+        4px 4px 5px 0px rgba(0,0,0,.3);
+        transition: all 0.3s ease;
+    }
+    .btn-7:before{
+        height: 0%;
+        width: 2px;
+    }
+    .btn-7:after {
+        width: 0%;
+        height: 2px;
+    }
+    .btn-7:hover{
+        color: rgb(251, 2, 2);
+        /* color: rgb(251, 214, 2); */
+        background: transparent;
+    }
+    .btn-7:hover:before {
+        height: 100%;
+    }
+    .btn-7:hover:after {
+    width: 100%;
+    }
+    .btn-7 span:before,
+    .btn-7 span:after {
+        position: absolute;
+        content: "";
+        left: 0;
+        top: 0;
+        background: rgb(251, 2, 2);
+        /* background: rgb(251, 226, 2); */
+        box-shadow:
+        -7px -7px 20px 0px rgba(255,255,255,.9),
+        -4px -4px 5px 0px rgba(255,255,255,.9),
+        7px 7px 20px 0px rgba(0,0,0,.2),
+        4px 4px 5px 0px rgba(0,0,0,.3);
+        transition: all 0.3s ease;
+    }
+    .btn-7 span:before {
+        width: 2px;
+        height: 0%;
+    }
+    .btn-7 span:after {
+        height: 2px;
+        width: 0%;
+    }
+    .btn-7 span:hover:before {
+        height: 100%;
+    }
+    .btn-7 span:hover:after {
+        width: 100%;
+    }
   </style>
   </head>
   <body>
@@ -134,19 +232,19 @@
     {% block content %}
         <div id="gradient"></div>
         <div id="card">
-        <h1><center>{{ profile.user.first_name }} {{ profile.user.last_name }}</center></h1>
-        <h6><center>{{ profile.user.username }}</center></h6>
-        <img src="{{ profile.picture }}"/>
-        <p>{{ profile.bio }}</p>
-        <!-- <span class="left bottom">Sport: {{ profile.sport }}</span> -->
-        <span class="right bottom">{{ profile.sport }} / {{ profile.position }}</span>
+            <h1><center>{{ profile.user.first_name }} {{ profile.user.last_name }}</center></h1>
+            <h6><center>{{ profile.user.username }}</center></h6>
+            <img src="{{ profile.picture }}"/>
+            <p>{{ profile.bio }}</p>
+            <span class="right bottom">{{ profile.sport }} / {{ profile.position }}</span>
         </div>
         <br/><br/><br/><br/>
         <div class="columns-container">
             <div class="column" style="flex: 2;">
                 <!-- Content for the first column -->
-                <h2>Habit Tracking</h2>
-                <a href="/habits/{{ profile.user.username }}">Coming Soon</a>
+                <center><h2>Habit Tracking</h2></center>
+                <br/>
+                <center><a href="/habits/{{ profile.user.username }}"><button class="custom-btn btn-7"><span>View Habits</span></button></a></center>
             </div>
             <div class="column">
                 <!-- Content for the second column -->

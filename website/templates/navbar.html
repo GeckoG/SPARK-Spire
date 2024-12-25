@@ -1,11 +1,6 @@
 {% load static %}
 {% load custom_tags %}
 <style>
-		.nav-link {
-			color: lightgrey;
-		}
-
-
 		.hoverable{
 		display:inline-block;
 		backface-visibility: hidden;
@@ -86,6 +81,80 @@
 		animation-name: bounce-animation;
 		animation-duration: 2s;
 		}
+		.navbar-container {
+			display: flex;
+			justify-content: center; /* Center the navbar horizontally */
+			align-items: center; /* Center the navbar vertically */
+			background-color: #0c0000;
+			padding: 10px;
+			}
+
+		.navbar {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			align-items: center;
+			padding: 10px;
+			background-color: #0c0000;
+			}
+
+		.navbar-logo {
+			height: 180px;
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			}
+
+		.nav-links {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			}
+
+		.nav-link {
+			padding: 10px 15px;
+			font-size: 16px;
+			text-decoration: none;
+			color: lightgrey;
+			}
+
+		.nav-link:hover {
+			text-decoration: underline;
+			}
+
+		.nav-toggle {
+			display: none;
+			cursor: pointer;
+			font-size: 24px;
+			}
+
+		@media (max-width: 768px) {
+			.navbar-logo {
+				height: 100px; /* Adjust the height for smaller screens */
+			}
+
+		.nav-links {
+				display: none;
+				flex-direction: column;
+				width: 100%;
+			}
+
+		.nav-link {
+				padding: 10px;
+				text-align: center;
+			}
+
+		.nav-toggle {
+				display: block;
+			}
+			}
+
+		@media (max-width: 480px) {
+			.navbar-logo {
+				height: 80px; /* Adjust the height for even smaller screens */
+			}
+			}
 </style>
 
 
@@ -112,27 +181,39 @@
 </div> -->
 <div>
 	<a class="navbar-brand mx-auto" href="{% url 'home' %}">
-	<img src="{% static 'logo.png' %}" alt="Logo" style="height: 180px; display: block; margin-left: auto; margin-right: auto;">
+		<img src="{% static 'logo.png' %}" alt="Logo" class="navbar-logo">
 	</a>  
-	<div style="display: flex; justify-content: center;">
-	  <div style="display: flex; ">
-		{% if user.is_authenticated %}
-		  <a id="len4" class="nav-link hoverable" href="{% url 'profile' user.username%}" style="margin-right: 20px;margin-top: 10px; margin-bottom: 10px;">My Profile</a>
-		  <a id="len5" class="nav-link hoverable" href="{% url 'update_profile' user.username%}" style="margin-right: 20px;margin-top: 10px; margin-bottom: 10px;">Edit Profile</a>
-		  <a id="len6" class="nav-link hoverable" href="" style="margin-right: 20px;margin-top: 10px; margin-bottom: 10px;">Daily</a>
-		  {% if user.is_staff %}
-		  <a id="len2" class="nav-link hoverable" href="{% url 'add_record' %}" style="margin-right: 20px;margin-top: 10px; margin-bottom: 10px;">Add Record</a>
-		  <a id="len3" class="nav-link hoverable" href="{% url 'add_staff' %}" style="margin-right: 20px;margin-top: 10px; margin-bottom: 10px;">Add Staff</a>
-		  <a id="len3" class="nav-link hoverable" href="{% url 'add_sport_position' %}" style="margin-right: 20px;margin-top: 10px; margin-bottom: 10px;">Add Sport/Position</a>
-		  {% endif %}
-		  <a id="len1" class="nav-link hoverable" href="{% url 'logout' %}" style="margin-right: 20px;margin-top: 10px; margin-bottom: 10px;">Logout</a>
-  
-		{% endif %}
-		
-	  </div>
-	</div>
+</div>
+<div class="navbar-container">
+    <nav class="navbar">
+      <span class="nav-toggle" onclick="toggleNav()">&#9776;</span>
+      <div class="nav-links" id="navLinks">
+        {% if user.is_authenticated %}
+          <a id="len4" class="nav-link hoverable" href="{% url 'profile' user.username%}">My Profile</a>
+          <a id="len5" class="nav-link hoverable" href="{% url 'update_profile' user.username%}">Edit Profile</a>
+          <a id="len6" class="nav-link hoverable" href="">Daily</a>
+          {% if user.is_staff %}
+          <a id="len2" class="nav-link hoverable" href="{% url 'add_record' %}">Add Record</a>
+          <a id="len3" class="nav-link hoverable" href="{% url 'add_staff' %}">Add Staff</a>
+          <a id="len3" class="nav-link hoverable" href="{% url 'add_sport_position' %}">Add Sport/Position</a>
+          {% endif %}
+          <a id="len1" class="nav-link hoverable" href="{% url 'logout' %}">Logout</a>
+        {% else %}
+          <a id="len5" class="nav-link hoverable" href="{% url 'login' %}">Login</a>
+        {% endif %}
+      </div>
+    </nav>
   </div>
-  
+  <script>
+    function toggleNav() {
+      var navLinks = document.getElementById('navLinks');
+      if (navLinks.style.display === 'flex') {
+        navLinks.style.display = 'none';
+      } else {
+        navLinks.style.display = 'flex';
+      }
+    }
+  </script>
   <script>
 	  document.addEventListener('DOMContentLoaded', function() {
 		  var today = new Date();
