@@ -131,7 +131,26 @@
                 font-size: 20px;
                 cursor: pointer;
             }
+
+            .modal-buttons {
+                position: absolute;
+                top: 10px;
+                right: 20px;
+            }
+
+            .arrow-button {
+                background: none;
+                border: none;
+                font-size: 24px;
+                cursor: pointer;
+                margin: 0 5px;
+            }
+
+            .arrow-button:hover {
+                color: #888;
+            }
         </style>
+
         <center><h1 style="color: black;">Physical</h1></center>
         <div class="centered-box-container">
             <div class="background-box">
@@ -362,20 +381,20 @@
                 <div class="percentage-box" id="percentageBox11">
                     <div class="horizontal-container">
                         <div class="labelbox" id="labelbox11">
-                            <center><h1>{{ read_pct }}</h1></center>
+                            <center><h1>{{ stress_pct }}</h1></center>
                             <center><h4>Stress</h4></center>
                         </div>
                         <div>
-                            <center><h5>Week</h5></center>
-                            <center><h1>{{ true_read7 }}/{{ read_limit }}</h1></center>
+                            <center><h5>Low Days (Week)</h5></center>
+                            <center><h1>{{ stress12 }}</h1></center>
                         </div>
                         <div>
-                            <center><h5>6-Week</h5></center>
-                            <center><h1>{{ true_read42 }}/{{ read_limit42 }}</h1></center>
+                            <center><h5>Med Days (Week)</h5></center>
+                            <center><h1>{{ stress3 }}</h1></center>
                         </div>
                         <div>
-                            <center><h5>12-Week</h5></center>
-                            <center><h1>{{ true_read84 }}/{{ read_limit84 }}</h1></center>
+                            <center><h5>High Days (Week)</h5></center>
+                            <center><h1>{{ stress45 }}</h1></center>
                         </div>
                     </div>
                 </div>
@@ -384,20 +403,20 @@
                 <div class="percentage-box" id="percentageBox12">
                     <div class="horizontal-container">
                         <div class="labelbox" id="labelbox12">
-                            <center><h1>{{ read_pct }}</h1></center>
+                            <center><h1>{{ motivation_pct }}</h1></center>
                             <center><h5>Motivation</h5></center>
                         </div>
                         <div>
-                            <center><h5>Week</h5></center>
-                            <center><h1>{{ true_read7 }}/{{ read_limit }}</h1></center>
+                            <center><h5>Low Days (Week)</h5></center>
+                            <center><h1>{{ motivation12 }}</h1></center>
                         </div>
                         <div>
-                            <center><h5>6-Week</h5></center>
-                            <center><h1>{{ true_read42 }}/{{ read_limit42 }}</h1></center>
+                            <center><h5>Neutral Days (Week)</h5></center>
+                            <center><h1>{{ motivation3 }}</h1></center>
                         </div>
                         <div>
-                            <center><h5>12-Week</h5></center>
-                            <center><h1>{{ true_read84 }}/{{ read_limit84 }}</h1></center>
+                            <center><h5>High Days (Week)</h5></center>
+                            <center><h1>{{ motivation45 }}</h1></center>
                         </div>
                     </div>
                 </div>
@@ -653,20 +672,20 @@
                 <div class="percentage-box" id="percentageBox24">
                     <div class="horizontal-container">
                         <div class="labelbox" id="labelbox24">
-                            <center><h1>{{ massage_pct }}</h1></center>
+                            <center><h1>{{ soreness_pct }}</h1></center>
                             <center><h4>Soreness</h4></center>
                         </div>
                         <div>
-                            <center><h5>Week</h5></center>
-                            <center><h1>{{ true_massage7 }}/{{ massage_limit }}</h1></center>
+                            <center><h5>1's This Week</h5></center>
+                            <center><h1>{{ soreness1 }}</h1></center>
                         </div>
                         <div>
-                            <center><h5>6-Week</h5></center>
-                            <center><h1>{{ true_massage42 }}/{{ massage_limit42 }}</h1></center>
+                            <center><h5>2's This Week</h5></center>
+                            <center><h1>{{ soreness2 }}</h1></center>
                         </div>
                         <div>
-                            <center><h5>12-Week</h5></center>
-                            <center><h1>{{ true_massage84 }}/{{ massage_limit84 }}</h1></center>
+                            <center><h5>3's This Week</h5></center>
+                            <center><h1>{{ soreness3 }}</h1></center>
                         </div>
                     </div>
                 </div>
@@ -675,20 +694,20 @@
                 <div class="percentage-box" id="percentageBox25">
                     <div class="horizontal-container">
                         <div class="labelbox" id="labelbox25">
-                            <center><h1>{{ massage_pct }}</h1></center>
+                            <center><h1>{{ fatigue_pct }}</h1></center>
                             <center><h4>Fatigue</h4></center>
                         </div>
                         <div>
-                            <center><h5>Week</h5></center>
-                            <center><h1>{{ true_massage7 }}/{{ massage_limit }}</h1></center>
+                            <center><h5>1's This Week</h5></center>
+                            <center><h1>{{ fatigue1 }}</h1></center>
                         </div>
                         <div>
-                            <center><h5>6-Week</h5></center>
-                            <center><h1>{{ true_massage42 }}/{{ massage_limit42 }}</h1></center>
+                            <center><h5>2's This Week</h5></center>
+                            <center><h1>{{ fatigue2 }}</h1></center>
                         </div>
                         <div>
-                            <center><h5>12-Week</h5></center>
-                            <center><h1>{{ true_massage84 }}/{{ massage_limit84 }}</h1></center>
+                            <center><h5>3's This Week</h5></center>
+                            <center><h1>{{ fatigue3 }}</h1></center>
                         </div>
                     </div>
                 </div>
@@ -697,20 +716,20 @@
                 <div class="percentage-box" id="percentageBox26">
                     <div class="horizontal-container">
                         <div class="labelbox" id="labelbox26">
-                            <center><h1>{{ massage_pct }}</h1></center>
+                            <center><h1>{{ illness_pct }}</h1></center>
                             <center><h4>Illness</h4></center>
                         </div>
                         <div>
-                            <center><h5>Week</h5></center>
-                            <center><h1>{{ true_massage7 }}/{{ massage_limit }}</h1></center>
+                            <center><h5>1's This Week</h5></center>
+                            <center><h1>{{ illness1 }}</h1></center>
                         </div>
                         <div>
-                            <center><h5>6-Week</h5></center>
-                            <center><h1>{{ true_massage42 }}/{{ massage_limit42 }}</h1></center>
+                            <center><h5>2's This Week</h5></center>
+                            <center><h1>{{ illness2 }}</h1></center>
                         </div>
                         <div>
-                            <center><h5>12-Week</h5></center>
-                            <center><h1>{{ true_massage84 }}/{{ massage_limit84 }}</h1></center>
+                            <center><h5>3's This Week</h5></center>
+                            <center><h1>{{ illness3 }}</h1></center>
                         </div>
                     </div>
                 </div>
@@ -719,20 +738,20 @@
                 <div class="percentage-box" id="percentageBox27">
                     <div class="horizontal-container">
                         <div class="labelbox" id="labelbox27">
-                            <center><h1>{{ massage_pct }}</h1></center>
+                            <center><h1>{{ injury_pct }}</h1></center>
                             <center><h4>Injury</h4></center>
                         </div>
                         <div>
-                            <center><h5>Week</h5></center>
-                            <center><h1>{{ true_massage7 }}/{{ massage_limit }}</h1></center>
+                            <center><h5>1's This Week</h5></center>
+                            <center><h1>{{ injury1 }}</h1></center>
                         </div>
                         <div>
-                            <center><h5>6-Week</h5></center>
-                            <center><h1>{{ true_massage42 }}/{{ massage_limit42 }}</h1></center>
+                            <center><h5>2's This Week</h5></center>
+                            <center><h1>{{ injury2 }}</h1></center>
                         </div>
                         <div>
-                            <center><h5>12-Week</h5></center>
-                            <center><h1>{{ true_massage84 }}/{{ massage_limit84 }}</h1></center>
+                            <center><h5>3's This Week</h5></center>
+                            <center><h1>{{ injury3 }}</h1></center>
                         </div>
                     </div>
                 </div>
@@ -1246,70 +1265,117 @@
     applyGradientStyles2('labelbox35', {{ vegetable_pct }});
 </script>
 
-<script>        // Water Chart
-    const data = {
-        labels: ['2023-04-01', '2023-04-02', '2023-04-03', '2023-04-04', '2023-04-05', '2023-04-06', '2023-04-07'],
-        datasets: [{
-            label: 'Water Intake',
-            data: [120, 119, 83, 85, 112, 103, 90],
-            fill: true,
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1,
-            backgroundColor: 'rgba(75, 192, 192, 0.2)' // Adjust for shading
-        }]
-    };
+<!-- Hydration Modal Box -->
+<div id="hydrationModal" class="modal">
+    <div class="modal-content">
+        <p id="hydrationModalTitle">Hydration History</p>
+        <div class="modal-buttons">
+            <button id="leftArrow" class="arrow-button">&larr;</button>
+            <button id="rightArrow" class="arrow-button">&rarr;</button>
+        </div>
+        <canvas id="hydrationChart"></canvas>
+    </div>
+</div>
 
-    const config = {
-        type: 'line',
-        data: data,
-        options: {
-            scales: {
-                x: {
-                    type: 'time',
-                    time: {
-                        unit: 'day'
+<script>
+    document.getElementById('percentageBox28').onclick = function() {
+        document.getElementById('hydrationModal').style.display = "block";
+        buildHydrationChart();
+    }
+
+    let startDate = new Date();
+    startDate.setDate(startDate.getDate() - 42); // Start date 6 weeks ago
+    let hydrationChart; // Reference to the chart instance
+
+    function buildHydrationChart() {
+        const dailyData = JSON.parse('{{ daily_data|escapejs }}');
+        console.log('dailyData:', dailyData);
+
+        // Filter the dailyData to include only entries within the date range
+        const filteredData = Object.entries(dailyData).filter(([dateString, _]) => {
+            const date = new Date(dateString);
+            return date >= startDate && date <= new Date();
+        });
+
+        // Sort the filtered data by date
+        filteredData.sort((a, b) => new Date(a[0]) - new Date(b[0]));
+
+        // Extract dates and hydration values
+        const dates = filteredData.map(entry => entry[0]);
+        const hydrationValues = filteredData.map(entry => entry[1].hydration);
+
+        const data = {
+            labels: dates,
+            datasets: [{
+                label: 'Water Intake',
+                data: hydrationValues,
+                fill: true,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)' // Adjust for shading
+            }]
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'day'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
                     },
-                    title: {
-                        display: true,
-                        text: 'Date'
+                    y: {
+                        beginAtZero: true, // Always start y-axis at zero
+                        min: 0, // Ensure y-axis starts at zero
+                        max: 175, // Set max value for y-axis
+                        title: {
+                            display: true,
+                            text: 'Ounces'
+                        }
                     }
                 },
-                y: {
-                    beginAtZero: false,
-                    min: 25, // Set y scale from 25
-                    max: 175, // to 175
-                    title: {
-                        display: true,
-                        text: 'Ounces'
-                    }
-                }
-            },
-            plugins: {
-                annotation: {
-                    annotations: {
-                        line1: {
-                            type: 'line',
-                            yMin: 100,
-                            yMax: 100,
-                            borderColor: 'rgb(0, 99, 132)',
-                            borderWidth: 2,
-                            borderDash: [10, 5],
-                            label: {
-                                enabled: true,
-                                content: 'Target'
+                plugins: {
+                    annotation: {
+                        annotations: {
+                            line1: {
+                                type: 'line',
+                                yMin: 100,
+                                yMax: 100,
+                                borderColor: 'rgb(0, 99, 132)',
+                                borderWidth: 2,
+                                borderDash: [10, 5],
                             }
                         }
                     }
                 }
             }
-        }
-    };
+        };
 
-    const waterChart = new Chart(
-        document.getElementById('waterChart'),
-        config
-    );
+        const ctx = document.getElementById('hydrationChart').getContext('2d');
+        if (hydrationChart) {
+            hydrationChart.destroy(); // Destroy the existing chart instance
+        }
+        hydrationChart = new Chart(ctx, config); // Create a new chart instance
+    }
+
+    document.getElementById('leftArrow').onclick = function() {
+        startDate.setDate(startDate.getDate() - 7);
+        buildHydrationChart();
+    }
+
+    document.getElementById('rightArrow').onclick = function() {
+        startDate.setDate(startDate.getDate() + 7);
+        buildHydrationChart();
+    }
 </script>
+
 <script>        // Sleep Chart
     const sleep_data = {
         labels: ['2023-04-01', '2023-04-02', '2023-04-03', '2023-04-04', '2023-04-05', '2023-04-06', '2023-04-07'],
@@ -1360,7 +1426,6 @@
                             borderDash: [10, 5],
                             label: {
                                 enabled: true,
-                                content: 'Target'
                             }
                         }
                     }
@@ -1398,8 +1463,11 @@
     }
 
     window.onclick = function(event) {
-            if (event.target == document.getElementById('myModal')) {
-                document.getElementById('myModal').style.display = "none";
+        if (event.target == document.getElementById('myModal')) {
+            document.getElementById('myModal').style.display = "none";
+        }
+        if (event.target == document.getElementById('hydrationModal')) {
+            document.getElementById('hydrationModal').style.display = "none";
         }
     }
 </script>
@@ -1429,31 +1497,31 @@
             { id: 'percentageBox8', label: 'Strength', key: 'strength' },
             { id: 'percentageBox9', label: 'Power', key: 'power' },
             { id: 'percentageBox10', label: 'Reaction', key: 'reaction' },
-            { id: 'percentageBox11', label: 'Stress', key: 'stress' },
-            { id: 'percentageBox12', label: 'Motivation', key: 'motivation' },
+            // { id: 'percentageBox11', label: 'Stress', key: 'stress' },
+            // { id: 'percentageBox12', label: 'Motivation', key: 'motivation' },
             { id: 'percentageBox13', label: 'Read', key: 'read' },
             { id: 'percentageBox14', label: 'Kindness', key: 'kindness' },
             { id: 'percentageBox15', label: 'Visualize', key: 'visualize' },
             { id: 'percentageBox16', label: 'Meditate', key: 'medidate' },
             { id: 'percentageBox17', label: 'Focus', key: 'focus' },
             { id: 'percentageBox18', label: 'Socialize', key: 'be_social' },
-            { id: 'percentageBox19', label: 'Sleep', key: 'sleep' },
+            // { id: 'percentageBox19', label: 'Sleep', key: 'sleep' },
             { id: 'percentageBox20', label: 'Massage', key: 'massage' },
             { id: 'percentageBox21', label: 'NormaTec+', key: 'normatec_plus' },
             { id: 'percentageBox22', label: 'Ice', key: 'ice' },
             { id: 'percentageBox23', label: 'Altitude', key: 'altitude' },
-            { id: 'percentageBox24', label: 'Soreness', key: 'soreness' },
-            { id: 'percentageBox25', label: 'Fatigue', key: 'fatigue' },
-            { id: 'percentageBox26', label: 'Illness', key: 'illness' },
-            { id: 'percentageBox27', label: 'Injury', key: 'injury' },
-            { id: 'percentageBox28', label: 'Hydration', key: 'hydration' },
+            // { id: 'percentageBox24', label: 'Soreness', key: 'soreness' },
+            // { id: 'percentageBox25', label: 'Fatigue', key: 'fatigue' },
+            // { id: 'percentageBox26', label: 'Illness', key: 'illness' },
+            // { id: 'percentageBox27', label: 'Injury', key: 'injury' },
+            // { id: 'percentageBox28', label: 'Hydration', key: 'hydration' },
             { id: 'percentageBox29', label: 'No Sweets', key: 'no_sweets' },
             { id: 'percentageBox30', label: 'B Alanine', key: 'b_alanine' },
             { id: 'percentageBox31', label: 'Creatine', key: 'creatine' },
             { id: 'percentageBox32', label: 'Vitamin D', key: 'vitamin_d' },
             { id: 'percentageBox33', label: 'Anti-Ox', key: 'anti_ox' },
-            { id: 'percentageBox34', label: 'Fruit', key: 'fruit' },
-            { id: 'percentageBox35', label: 'Veggie', key: 'veggie' }
+            // { id: 'percentageBox34', label: 'Fruit', key: 'fruit' },
+            // { id: 'percentageBox35', label: 'Veggie', key: 'veggie' }
         ];
 
         let currentMonth = new Date().getMonth();

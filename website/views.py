@@ -685,10 +685,31 @@ def habits(request, username):
     beta_alanine_pct = round((((true_beta_alanine7 / 7) * 0.1) + ((true_beta_alanine42 / 42) * 0.7) + ((true_beta_alanine84 / 84) * 0.2)), 2)
     creatine_pct = round((((true_creatine7 / 7) * 0.1) + ((true_creatine42 / 42) * 0.7) + ((true_creatine84 / 84) * 0.2)), 2)
     vitamin_d_pct = round((((true_vitamin_d7 / 7) * 0.1) + ((true_vitamin_d42 / 42) * 0.7) + ((true_vitamin_d84 / 84) * 0.2)), 2)
+    
+    soreness1 = sum(1 for entry in last7_entries if entry['soreness'] == 1)
+    soreness2 = sum(1 for entry in last7_entries if entry['soreness'] == 2)
+    soreness3 = sum(1 for entry in last7_entries if entry['soreness'] == 3)
     soreness_pct = today_entries[0]['soreness'] or 0
+    fatigue1 = sum(1 for entry in last7_entries if entry['fatigue'] == 1)
+    fatigue2 = sum(1 for entry in last7_entries if entry['fatigue'] == 2)
+    fatigue3 = sum(1 for entry in last7_entries if entry['fatigue'] == 3)
     fatigue_pct = today_entries[0]['fatigue'] or 0
+    illness1 = sum(1 for entry in last7_entries if entry['illness'] == 1)
+    illness2 = sum(1 for entry in last7_entries if entry['illness'] == 2)
+    illness3 = sum(1 for entry in last7_entries if entry['illness'] == 3)
     illness_pct = today_entries[0]['illness'] or 0
+    injury1 = sum(1 for entry in last7_entries if entry['injury'] == 1)
+    injury2 = sum(1 for entry in last7_entries if entry['injury'] == 2)
+    injury3 = sum(1 for entry in last7_entries if entry['injury'] == 3)
     injury_pct = today_entries[0]['injury'] or 0
+    stress12 = sum(1 for entry in last7_entries if entry['stress'] == 1 or entry['stress'] == 2)
+    stress3 = sum(1 for entry in last7_entries if entry['stress'] == 3)
+    stress45 = sum(1 for entry in last7_entries if entry['stress'] == 4 or entry['stress'] == 5)
+    stress_pct = today_entries[0]['stress'] or 0
+    motivation12 = sum(1 for entry in last7_entries if entry['motivation'] == 1 or entry['motivation'] == 2)
+    motivation3 = sum(1 for entry in last7_entries if entry['motivation'] == 3)
+    motivation45 = sum(1 for entry in last7_entries if entry['motivation'] == 4 or entry['motivation'] == 5)
+    motivation_pct = today_entries[0]['motivation'] or 0
 
     # Convert daily_entries to a dictionary with date strings as keys and habit values as values
     daily_data = {}
@@ -741,6 +762,8 @@ def habits(request, username):
         'power_pct': power_pct, 'power_limit': power_limit, 'power_limit42': power_limit42, 'power_limit84': power_limit84, 'true_power7': true_power7, 'true_power42': true_power42, 'true_power84': true_power84, 'power_label': "Power",
         'reaction_pct': reaction_pct, 'reaction_limit': reaction_limit, 'reaction_limit42': reaction_limit42, 'reaction_limit84': reaction_limit84, 'true_reaction7': true_reaction7, 'true_reaction42': true_reaction42, 'true_reaction84': true_reaction84, 'reaction_label': "Reaction",
         
+        'stress_pct': stress_pct, 'stress12': stress12, 'stress3': stress3, 'stress45': stress45, 'stress_label': "Stress",
+        'motivation_pct': motivation_pct, 'motivation12': motivation12, 'motivation3': motivation3, 'motivation45': motivation45, 'motivation_label': "Motivation",
         'read_pct': read_pct, 'read_limit': read_limit, 'read_limit42': read_limit42, 'read_limit84': read_limit84, 'true_read7': true_read7, 'true_read42': true_read42, 'true_read84': true_read84, 'read_label': "Read",
         'medidate_pct': medidate_pct, 'medidate_limit': medidate_limit, 'medidate_limit42': medidate_limit42, 'medidate_limit84': medidate_limit84, 'true_medidate7': true_medidate7, 'true_medidate42': true_medidate42, 'true_medidate84': true_medidate84, 'medidate_label': "Meditate",
         'visualize_pct': visualize_pct, 'visualize_limit': visualize_limit, 'visualize_limit42': visualize_limit42, 'visualize_limit84': visualize_limit84, 'true_visualize7': true_visualize7, 'true_visualize42': true_visualize42, 'true_visualize84': true_visualize84, 'visualize_label': "Visualize",
@@ -753,7 +776,10 @@ def habits(request, username):
         'true_norma_plus7': true_norma_plus7, 'true_norma_plus42': true_norma_plus42, 'true_norma_plus84': true_norma_plus84, 'norma_plus_label': "Norma Plus",
         'true_ice7': true_ice7, 'true_ice42': true_ice42, 'true_ice84': true_ice84, 'ice_label': "Ice",
         'true_altitude7': true_altitude7, 'true_altitude42': true_altitude42, 'true_altitude84': true_altitude84, 'altitude_label': "Altitude",
-        'soreness_pct': soreness_pct, 'fatigue_pct': fatigue_pct, 'illness_pct': illness_pct, 'injury_pct': injury_pct,
+        'soreness_pct': soreness_pct, 'soreness1': soreness1, 'soreness2': soreness2, 'soreness3': soreness3,
+        'fatigue_pct': fatigue_pct, 'fatigue1': fatigue1, 'fatigue2': fatigue2, 'fatigue3': fatigue3,
+        'illness_pct': illness_pct, 'illness1': illness1, 'illness2': illness2, 'illness3': illness3,
+        'injury_pct': injury_pct, 'injury1': injury1, 'injury2': injury2, 'injury3': injury3,
         
         'hydration_pct': hydration_pct, 'true_hydration7': true_hydration7, 'true_hydration42': true_hydration42, 'true_hydration84': true_hydration84, 'hydration_label': "Hydration",
         'no_sweets_pct': no_sweets_pct, 'true_no_sweets7': true_no_sweets7, 'true_no_sweets42': true_no_sweets42, 'true_no_sweets84': true_no_sweets84, 'no_sweets_label': "No Sweets",
